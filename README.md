@@ -41,4 +41,4 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 
 ---
 
-### 자세한 사용법은 [docs](https://github.com/taegyumin/python_nevada/tree/master/docs) 폴더 내 설명서들을 참고해주시기 바랍니다.
+### 자세한 사용법은 [Docs](https://github.com/taegyumin/python_nevada/tree/master/Docs) 폴더 내 설명서들을 참고해주시기 바랍니다.
