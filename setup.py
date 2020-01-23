@@ -13,13 +13,13 @@ INSTALL_REQUIRES = (['requests','jsonpickle'])
 
 setup(
     name='nevada',
-    version='0.0.5',
+    version='0.0.6',
     description='For those who want to use Naver Search Ad easily.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Taegyu Min',
     author_email='minimax@snu.ac.kr',
-    url='https://github.com/taegyumin/nevada',
+    url='https://github.com/taegyumin/python_nevada',
     license='MIT',
     classifiers=[
         'License :: OSI Approved :: MIT License',
@@ -29,6 +29,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3 :: Only'
     ],
     packages=find_packages(),
