@@ -39,5 +39,5 @@ In your code, change the values of `api_key`, `secret_key`, and `customer_id` to
 	
 ---
 
-### More details of nevada are in [docs](https://github.com/taegyumin/python_nevada/tree/master/docs).
+### More details of nevada are in [Docs](https://github.com/taegyumin/python_nevada/tree/master/Docs).
 
