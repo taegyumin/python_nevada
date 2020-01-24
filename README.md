@@ -2,7 +2,9 @@
 
 ##### Its English version documentation is [here](https://github.com/taegyumin/python_nevada/blob/master/README(english).md).
 
-<img src="https://img.shields.io/pypi/v/0.0.1">
+[<img src="https://img.shields.io/pypi/v/nevada">](https://pypi.org/project/nevada/)
+[<img src="https://img.shields.io/pypi/pyversions/nevada">](https://pypi.org/project/nevada/)
+[<img src="https://img.shields.io/github/license/taegyumin/python_nevada">](https://github.com/taegyumin/python_nevada/blob/master/LICENSE)
 
 ## nevada는?
 nevada는 [네이버의 검색광고 API](https://github.com/naver/searchad-apidoc)를 좀 더 쉽게 사용할 수 있도록 해주는 Python 라이브러리입니다.
@@ -41,4 +43,4 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 
 ---
 
-### 자세한 사용법은 [Docs](https://github.com/taegyumin/python_nevada/tree/master/Docs) 폴더 내 설명서들을 참고해주시기 바랍니다.
+### 자세한 사용법은 [docs](https://github.com/taegyumin/python_nevada/tree/master/docs) 폴더 내 설명서들을 참고해주시기 바랍니다.

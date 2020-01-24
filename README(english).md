@@ -2,7 +2,9 @@
 
 ##### 한국어 문서는 [여기](https://github.com/taegyumin/python_nevada/blob/master/README.md) 있습니다.
 
-<img src="https://img.shields.io/pypi/v/0.0.1">
+[<img src="https://img.shields.io/pypi/v/nevada">](https://pypi.org/project/nevada/)
+[<img src="https://img.shields.io/pypi/pyversions/nevada">](https://pypi.org/project/nevada/)
+[<img src="https://img.shields.io/github/license/taegyumin/python_nevada">](https://github.com/taegyumin/python_nevada/blob/master/LICENSE)
 
 ## What is nevada?
 'nevada' is the Python library for improving the productivity of those who use the [Naver Search Ad API](https://github.com/naver/searchad-apidoc).
@@ -39,5 +41,5 @@ In your code, change the values of `api_key`, `secret_key`, and `customer_id` to
 	
 ---
 
-### More details of nevada are in [Docs](https://github.com/taegyumin/python_nevada/tree/master/Docs).
+### More details of nevada are in [docs](https://github.com/taegyumin/python_nevada/tree/master/docs).
 

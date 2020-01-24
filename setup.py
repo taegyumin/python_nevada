@@ -7,13 +7,11 @@ from os import path
 with open(path.join('./', 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-print(long_description)
-
 INSTALL_REQUIRES = (['requests','jsonpickle'])
 
 setup(
     name='nevada',
-    version='0.0.6',
+    version='0.0.7',
     description='For those who want to use Naver Search Ad easily.',
     long_description=long_description,
     long_description_content_type='text/markdown',
