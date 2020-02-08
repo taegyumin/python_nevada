@@ -8,7 +8,7 @@ with open(path.join('./', 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 INSTALL_REQUIRES = (['requests','jsonpickle'])
-
+#test
 setup(
     name='nevada',
     version='0.0.7',
