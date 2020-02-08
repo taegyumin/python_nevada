@@ -11,11 +11,11 @@ INSTALL_REQUIRES = (['requests','jsonpickle'])
 
 setup(
     name='nevada',
-    version='0.0.7',
+    version='0.1.2',
     description='For those who want to use Naver Search Ad easily.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    author='Taegyu Min',
+    author='Taegyu Min, Junho Song',
     author_email='minimax@snu.ac.kr',
     url='https://github.com/taegyumin/python_nevada',
     license='MIT',
