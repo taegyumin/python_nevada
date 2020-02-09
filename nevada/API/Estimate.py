@@ -32,6 +32,13 @@ class GetPerformanceObject:
         self.key = key
         self.bids = bids
 
+class GetPerformanceBulkObject:
+    def __init__(self, device, keywordplus, keyword, bid):
+        self.device = device
+        self.keywordplus = keywordplus
+        self.keyword = keyword
+        self.bid = bid
+
 class EstimateAvgObject:
     def __init__(self, json_def):
         if type(json_def) is str:
@@ -68,6 +75,17 @@ class EstimatePerformanceObject:
         self.cost = None if 'cost' not in s else s['cost']
         self.impressions = None if 'impressions' not in s else s['impressions']
 
+class EstimatePerformanceBulkObject:
+    def __init__(self, device, keywordplus, keyword, bid, clicks, impressions, cost):
+        self.device = device
+        self.keywordplus = keywordplus
+        self.keyword = keyword
+        self.bid = bid
+        self.clicks = clicks
+        self.impressions = impressions
+        self.cost = cost
+
+
 class Estimate:
     def __init__(self, base_url: str, api_key: str, secret_key: str, customer_id: int):
         self.conn = Connector(base_url, api_key, secret_key, customer_id)
@@ -77,6 +95,7 @@ class Estimate:
     EstimateExposureMiniObjectList = List[EstimateExposureMiniObject]
     EstimatePerformanceObjectList = List[EstimatePerformanceObject]
     GetPerformanceObjectList = List[GetPerformanceObject]
+    GetPerformanceBulkObjectList = List[GetPerformanceBulkObject]
 
     def get_avg_position_bid_json(self, type, device, key_and_position_list):
         temp = []
@@ -137,7 +156,8 @@ class Estimate:
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
-        result = self.conn.post('/estimate/performance/' + type, data_str)
+        query = {'items': data_str}
+        result = self.conn.post('/estimate/performance/' + type, query=query)
         result = result['estimate']
         return result
 
@@ -149,12 +169,23 @@ class Estimate:
             estimate_list.append(estimate)
         return estimate_list
 
-    def get_performance_many_json(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
-        data = jsonpickle.encode(GetPerformanceObjectList, unpicklable=False)
+    # def get_performance_many_json(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
+    #     data = jsonpickle.encode(GetPerformanceObjectList, unpicklable=False)
+    #     data = json.loads(data)
+    #     #data = CommonFunctions.dropna(data)
+    #     data_str = json.dumps(data)
+    #     print('data_str: ',data_str)
+    #     result = self.conn.post('/estimate/performance/' + type, data_str)
+    #     print('result: ',result)
+    #     result = result['estimate']
+    #     return result
+
+    def get_performance_many_json(self, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
+        data = jsonpickle.encode(GetPerformanceBulkObjectList, unpicklable=False)
         data = json.loads(data)
-        data = CommonFunctions.dropna(data)
+        #data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
-        result = self.conn.post('/estimate/performance/' + type, data_str)
+        result = self.conn.post('/estimate/performance-bulk', data_str)
         result = result['estimate']
         return result
 
