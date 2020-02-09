@@ -81,4 +81,16 @@ memo가 'memo를 변경했다'였던 ip주소가 목록에서 삭제된 것을 �
     
     
 ### 광고노출제한 IP 여러 개 한꺼번에 삭제하기
-#### 추후 추가 예정
+#### 코드 예시
+**ipFilterId**의 list를 구성한다.
+		
+	id_array = ['6672662','6672661']
+	ip.delete_ip_exclusion_many(id_array)
+		
+	result = ip.get_ip_exclusion_json()
+	print(result)
+
+#### 결과 예시
+ipFilterId가 6672662인 ip, 6672661인 ip를 각각 삭제하였으므로, <br> 광고노출제한 IP을 다시 조회하면 empty list가 반환된다.
+
+	[]

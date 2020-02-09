@@ -38,8 +38,13 @@ class Connector:
             query_list = []
             for key, value in query.items():
                 if value != None:
-                    q = "{key}={value}".format(key=urllib.parse.quote_plus(key),value=urllib.parse.quote_plus(value))
-                    query_list.append(q)
+                    if len(value)==1:
+                        q = "{key}={value}".format(key=urllib.parse.quote_plus(key),value=urllib.parse.quote_plus(value))
+                        query_list.append(q)
+                    else:
+                        for i in value:
+                            q = "{key}={value}".format(key=urllib.parse.quote_plus(key),value=urllib.parse.quote_plus(i))
+                            query_list.append(q)
             return '&'.join(query_list)
         else:
             return ''
