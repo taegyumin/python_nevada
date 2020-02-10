@@ -96,10 +96,10 @@ class Connector:
 
     def post(self, uri, data, query={}):
         url = "{base_url}{uri}{query}{http_query}".format(
-            base_url = self.base_url,
-            uri = uri,
-            query = '' if query == {} else '?',
-            http_query = self.build_http_query(query))
+            base_url=self.base_url,
+            uri=uri,
+            query='' if query == {} else '?',
+            http_query=self.build_http_query(query))
 
         headers = self.get_header('POST', uri)
 
@@ -163,4 +163,3 @@ class Connector:
             if input_dict[now] != None:
                 real.update({now :input_dict[now]})
         return real
-
