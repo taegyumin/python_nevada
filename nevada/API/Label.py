@@ -4,9 +4,9 @@ import jsonpickle
 import json
 
 class UpdateLabelObject:
-    def __init__(self, nccLabelId):
-        self.color = None
-        self.name = None
+    def __init__(self, color, name, nccLabelId):
+        self.color = color
+        self.name = name
         self.nccLabelId = nccLabelId
 
 class UpdateLabelRefObject:
