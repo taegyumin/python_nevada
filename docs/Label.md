@@ -17,10 +17,13 @@
 
 ### 즐겨찾기 관련 데이터 구하기
 #### 코드 예시
-	result_list = label.get_label_list()
-
-	for result in result_list:
-	    color = result.color  # 즐겨찾기의 색
+    result = label.get_label_json()
+    result_list = label.get_label_list()
+    
+    print(result)
+    
+    for result in result_list:
+        color = result.color  # 즐겨찾기의 색
 	    customer_id = result.customerId  # 고객 ID
 	    name = result.name  # 즐겨찾기의 이름
 	    nccLabelId = result.nccLabelId  # 즐겨찾기의 ID
@@ -28,9 +31,10 @@
 	    editTm = result.editTm  # 즐겨찾기가 수정 된 시간
 	    print(color, customer_id, name, nccLabelId, regTm, editTm)
 
-
 #### 결과 예시
-	#E65050 1839303 PINK lbl-a001-00-000000000106051 2020-02-10T02:51:15.000Z 2020-02-10T03:11:08.000Z
+    [{'nccLabelId': 'lbl-a001-00-000000000106051', 'customerId': 1839303, 'name': 'RED', 'color': '#E65050', 'editTm': '2020-02-10T03:56:14.000Z', 'regTm': '2020-02-10T02:51:15.000Z'}, {'nccLabelId': 'lbl-a001-00-000000000106052', 'customerId': 1839303, 'name': 'ORANGE', 'color': '#E6A050', 'regTm': '2020-02-10T02:51:23.000Z'}, {'nccLabelId': 'LABEL-3', 'customerId': 1839303, 'name': 'label-3', 'color': '#CCCC04'}, {'nccLabelId': 'LABEL-4', 'customerId': 1839303, 'name': 'label-4', 'color': '#5DD47D'}, {'nccLabelId': 'LABEL-5', 'customerId': 1839303, 'name': 'label-5', 'color': '#1ABA3D'}, {'nccLabelId': 'LABEL-6', 'customerId': 1839303, 'name': 'label-6', 'color': '#4887E0'}, {'nccLabelId': 'LABEL-7', 'customerId': 1839303, 'name': 'label-7', 'color': '#6C58C7'}, {'nccLabelId': 'LABEL-8', 'customerId': 1839303, 'name': 'label-8', 'color': '#CF81D6'}, {'nccLabelId': 'LABEL-9', 'customerId': 1839303, 'name': 'label-9', 'color': '#8C8C9D'}, {'nccLabelId': 'LABEL-10', 'customerId': 1839303, 'name': 'label-10', 'color': '#FF5959'}]
+    
+    #E65050 1839303 RED lbl-a001-00-000000000106051 2020-02-10T02:51:15.000Z 2020-02-10T03:56:14.000Z
     #E6A050 1839303 ORANGE lbl-a001-00-000000000106052 2020-02-10T02:51:23.000Z None
     #CCCC04 1839303 label-3 LABEL-3 None None
     #5DD47D 1839303 label-4 LABEL-4 None None
@@ -44,11 +48,9 @@
    
 ### 즐겨찾기 데이터 업데이트
 #### 코드 예시
-    updateLabelObject = UpdateLabelObject(color="#E65050", name="RED", nccLabelId="lbl-a001-00-000000000106051")
-    result = label.update_label(updateLabelObject)
+    result = label.update_label(color="#E65050", name="BLUE", nccLabelId="lbl-a001-00-000000000106051")
     print(result.color, result.customerId, result.name, result.nccLabelId, result.regTm, result.editTm)
     
 #### 결과 예시
-    #E65050 1839303 PINK lbl-a001-00-000000000106051 2020-02-10T02:51:15.000Z 2020-02-10T03:11:08.000Z
-     -> #E65050 1839303 RED lbl-a001-00-000000000106051 2020-02-10T02:51:15.000Z 2020-02-10T03:39:18.000Z
-    
+    #E65050 1839303 RED lbl-a001-00-000000000106051 2020-02-10T02:51:15.000Z 2020-02-10T03:56:14.000Z
+    -> #E65050 1839303 BLUE lbl-a001-00-000000000106051 2020-02-10T02:51:15.000Z 2020-02-10T03:58:26.000Z
