@@ -8,7 +8,20 @@ import urllib.parse
 from datetime import datetime
 
 class CommonFunctions:
-    def dropna(input_dict):
+    def print_all_attr(self, obj: object, temp):
+        for key in obj.__dict__.keys():
+            for i in range(temp):
+                print('     ', end='')
+            print(key, ': ', end='')
+            if (type(obj.__getattribute__(key)) == type('str')) or (type(obj.__getattribute__(key)) == type(0)):
+                print(obj.__getattribute__(key))
+            else:
+                print()
+                temp += 1
+                self.print_all_attr(obj.__getattribute__(key), temp)
+        print()
+
+    def dropna(self, input_dict):
         cleaned_dict = dict()
         for now in input_dict:
             if type(input_dict[now])==type({'j':'son'}):
@@ -21,9 +34,17 @@ class CommonFunctions:
                 cleaned_dict.update({now: input_dict[now]})
         return cleaned_dict
 
-    def print_all_attr(obj: object):
-        for key in obj.__dict__.keys():
-            print(key, ': ', obj.__getattribute__(key))
+    # def print_all_attr(obj: object):
+    #     for key in obj.__dict__.keys():
+    #         print(key, ': ', obj.__getattribute__(key))
+    #     print()
+
+    # def dropna(input_dict):
+    #     cleaned_dict = dict()
+    #     for now in input_dict:
+    #         if input_dict[now] != None:
+    #             cleaned_dict.update({now: input_dict[now]})
+    #     return cleaned_dict
 
 
 class Connector:
