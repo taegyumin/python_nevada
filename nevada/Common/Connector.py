@@ -8,12 +8,12 @@ import urllib.parse
 from datetime import datetime
 
 class CommonFunctions:
-    def print_all_attr(self, obj: object, temp):
+    def print_all_attr(self, obj: object, temp: int):
         for key in obj.__dict__.keys():
             for i in range(temp):
                 print('     ', end='')
             print(key, ': ', end='')
-            if (type(obj.__getattribute__(key)) == type('str')) or (type(obj.__getattribute__(key)) == type(0)):
+            if (type(obj.__getattribute__(key)) == type(True)) or (type(obj.__getattribute__(key)) == type('str')) or (type(obj.__getattribute__(key)) == type(0)) or (type(obj.__getattribute__(key)) == type(None)):
                 print(obj.__getattribute__(key))
             else:
                 print()
@@ -33,6 +33,7 @@ class CommonFunctions:
             else:
                 cleaned_dict.update({now: input_dict[now]})
         return cleaned_dict
+
     # def print_all_attr(obj: object):
     #     for key in obj.__dict__.keys():
     #         print(key, ': ', obj.__getattribute__(key))
