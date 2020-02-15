@@ -41,6 +41,21 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 	conn = Connector(base_url, api_key, secret_key, customer_id)
 	print(conn.get_datetime())
 
+### 자세한 사용법은 [docs](https://github.com/taegyumin/python_nevada/tree/master/docs) 폴더 내 설명서들을 참고해주시기 바랍니다.
+
 ---
 
-### 자세한 사용법은 [docs](https://github.com/taegyumin/python_nevada/tree/master/docs) 폴더 내 설명서들을 참고해주시기 바랍니다.
+## update
+### 0.x.x
+- beta
+
+### 1.0.0
+- launch
+
+### 1.0.1
+- docs/BusinessChannel.md 추가
+- Common/Connector.CommonFunctions.print_all_attr 추가
+- API/Estimate.get_performance_bulk_json 수정
+- API/Estimate.get_performance_bulk_list 수정
+
+
