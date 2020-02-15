@@ -180,17 +180,18 @@ class Estimate:
     #     result = result['estimate']
     #     return result
 
-    def get_performance_many_json(self, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
+    def get_performance_bulk_json(self, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
         data = jsonpickle.encode(GetPerformanceBulkObjectList, unpicklable=False)
         data = json.loads(data)
         #data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
+        print(data_str)
         result = self.conn.post('/estimate/performance-bulk', data_str)
         result = result['estimate']
         return result
 
-    def get_performance_many_list(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
-        result_json = self.get_performance_many_json(type, GetPerformanceObjectList)
+    def get_performance_bulk_list(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
+        result_json = self.get_performance_bulk_json(type, GetPerformanceObjectList)
         estimate_list = []
         for arr in result_json:
             estimate = EstimatePerformanceObject(arr)

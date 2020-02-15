@@ -11,7 +11,13 @@ class CommonFunctions:
     def dropna(input_dict):
         cleaned_dict = dict()
         for now in input_dict:
-            if input_dict[now] != None:
+            if type(input_dict[now])==type({'j':'son'}):
+                temp = dict()
+                for now2 in now:
+                    if now[now2] != None:
+                        temp.update({now2: now[now2]})
+                cleaned_dict.update({now: temp})
+            else:
                 cleaned_dict.update({now: input_dict[now]})
         return cleaned_dict
 
@@ -38,13 +44,13 @@ class Connector:
             query_list = []
             for key, value in query.items():
                 if value != None:
-                    if len(value)==1:
-                        q = "{key}={value}".format(key=urllib.parse.quote_plus(key),value=urllib.parse.quote_plus(value))
-                        query_list.append(q)
-                    else:
+                    if (type(value)==type([])) and len(value)!=1:
                         for i in value:
                             q = "{key}={value}".format(key=urllib.parse.quote_plus(key),value=urllib.parse.quote_plus(i))
                             query_list.append(q)
+                    else:
+                        q = "{key}={value}".format(key=urllib.parse.quote_plus(key),value=urllib.parse.quote_plus(value))
+                        query_list.append(q)
             return '&'.join(query_list)
         else:
             return ''
@@ -78,11 +84,10 @@ class Connector:
 
     def get(self, uri, query={}):
         url = "{base_url}{uri}{query}{http_query}".format(
-            base_url = self.base_url,
-            uri = uri,
-            query = '' if query == {} else '?',
-            http_query = self.build_http_query(query))
-
+            base_url=self.base_url,
+            uri=uri,
+            query='' if query == {} else '?',
+            http_query=self.build_http_query(query))
         headers = self.get_header('GET', uri)
 
         try:
@@ -100,9 +105,7 @@ class Connector:
             uri=uri,
             query='' if query == {} else '?',
             http_query=self.build_http_query(query))
-
         headers = self.get_header('POST', uri)
-
         try:
             r = requests.post(url=url, data=data, headers=headers)
             response = self.parse_response(r)
