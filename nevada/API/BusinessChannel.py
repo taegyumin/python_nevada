@@ -72,14 +72,16 @@ class BusinessChannel:
     BusinessChannelObjectList = List[BusinessChannelObject]
     BusinessChannelIdList = List[str]
 
-    def get_business_channel_list(self) -> BusinessChannelObjectList:
+    def get_business_channel_json(self):
         result = self.conn.get('/ncc/channels')
+        return result
 
+    def get_business_channel_list(self) -> BusinessChannelObjectList:
+        result = self.get_business_channel_json()
         business_channel_list = []
         for arr in result:
             channel = BusinessChannelObject(arr)
             business_channel_list.append(channel)
-
         return business_channel_list
 
     def get_business_channel_list_by_type(self, tp: str) -> BusinessChannelObjectList:
