@@ -54,7 +54,7 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 
 ### 1.0.1
 - docs/BusinessChannel.md 추가
-- Common/Connector.CommonFunctions.print_all_attr 추가
+- Common/Connector.CommonFunctions.print_all_attr() 추가
 - API/Estimate.get_performance_bulk_json 수정
 - API/Estimate.get_performance_bulk_list 수정
 
