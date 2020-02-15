@@ -34,10 +34,10 @@ class UpdateBusinessChannelObject:
         self.nccBusinessChannelId = nccBusinessChannelId
 
 class CreateBusinessChannelObject:
-    def __init__(self, site_url, name):
-        self.businessInfo = {'site' : site_url}
-        self.channelTp = 'SITE'
-        self.inspectRequestMsg = None
+    def __init__(self, businessInfo, channelTp, name, inspectReqeustMsg=None):
+        self.businessInfo = businessInfo
+        self.channelTp = channelTp
+        self.inspectRequestMsg = inspectReqeustMsg
         self.name = name
 
 class BusinessChannelObject:
@@ -48,8 +48,8 @@ class BusinessChannelObject:
         self.adultStatus = None if 'adultStatus' not in s else s['adultStatus']
         self.blackStatus = None if 'blackStatus' not in s else s['blackStatus']
         self.businessInfo = None if 'businessInfo' not in s else BusinessInfo(s['businessInfo'])
-        self.channelKey = None if 'adultStatus' not in s else s['adultStatus']
-        self.channelTp = None if 'adultStatus' not in s else s['adultStatus']
+        self.channelKey = None if 'channelKey' not in s else s['channelKey']
+        self.channelTp = None if 'channelTp' not in s else s['channelTp']
         self.customerId = None if 'customerId' not in s else s['customerId']
         self.delFlag = None if 'delFlag' not in s else s['delFlag']
         self.editTm = None if 'editTm' not in s else s['editTm']
@@ -79,28 +79,6 @@ class BusinessChannel:
     def get_business_channel_list(self) -> BusinessChannelObjectList:
         result = self.get_business_channel_json()
         business_channel_list = []
-        
-        for arr in result:
-            channel = BusinessChannelObject(arr)
-            business_channel_list.append(channel)
-        return business_channel_list
-
-    def get_business_channel_list_by_type(self, tp: str) -> BusinessChannelObjectList:
-        result = self.conn.get('/ncc/channels', {'channelTp': tp})
-
-        business_channel_list = []
-        for arr in result:
-            channel = BusinessChannelObject(arr)
-            business_channel_list.append(channel)
-
-        return business_channel_list
-
-    def get_business_channel_list_by_ids(self, ids: BusinessChannelIdList) -> BusinessChannelObjectList:
-        ids = ",".join(ids)
-        query = {'ids': ids}
-        result = self.conn.get('/ncc/channels', query)
-
-        business_channel_list = []
         for arr in result:
             channel = BusinessChannelObject(arr)
             business_channel_list.append(channel)
@@ -109,15 +87,33 @@ class BusinessChannel:
     def get_business_channel(self, businessChannelId) -> BusinessChannelObject:
         result = self.conn.get('/ncc/channels/' + businessChannelId)
         result = BusinessChannelObject(result)
-
         return result
 
-    def create_business_channel(self, CreateBusinessChannelObj: CreateBusinessChannelObject) -> BusinessChannelObject:
+    def get_business_channel_list_by_type(self, tp: str) -> BusinessChannelObjectList:
+        result = self.conn.get('/ncc/channels', {'channelTp': tp})
+        business_channel_list = []
+        for arr in result:
+            channel = BusinessChannelObject(arr)
+            business_channel_list.append(channel)
+        return business_channel_list
 
+    def get_business_channel_list_by_ids(self, ids: BusinessChannelIdList) -> BusinessChannelObjectList:
+        ids = ",".join(ids)
+        query = {'ids': ids}
+        result = self.conn.get('/ncc/channels', query)
+        business_channel_list = []
+        for arr in result:
+            channel = BusinessChannelObject(arr)
+            business_channel_list.append(channel)
+        return business_channel_list
+
+    def create_business_channel(self, CreateBusinessChannelObj: CreateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(CreateBusinessChannelObj, unpicklable=False)
         data = json.loads(data)
+        print(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
+        print(data_str)
         result = self.conn.post('/ncc/channels', data_str)
         result = BusinessChannelObject(result)
         return result
@@ -126,7 +122,7 @@ class BusinessChannel:
                                 UpdateBusinessChannelObj: UpdateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(UpdateBusinessChannelObj, unpicklable=False)
         data = json.loads(data)
-        data = CommonFunctions.dropna(data)
+        #data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/channels', data_str, fields)
         result = BusinessChannelObject(result)
