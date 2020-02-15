@@ -33,7 +33,6 @@ class CommonFunctions:
             else:
                 cleaned_dict.update({now: input_dict[now]})
         return cleaned_dict
-
     # def print_all_attr(obj: object):
     #     for key in obj.__dict__.keys():
     #         print(key, ': ', obj.__getattribute__(key))
