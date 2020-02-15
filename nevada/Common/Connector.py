@@ -18,6 +18,7 @@ class CommonFunctions:
     def print_all_attr(obj: object):
         for key in obj.__dict__.keys():
             print(key, ': ', obj.__getattribute__(key))
+        print("")
 
 
 class Connector:
