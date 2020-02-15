@@ -79,6 +79,7 @@ class BusinessChannel:
     def get_business_channel_list(self) -> BusinessChannelObjectList:
         result = self.get_business_channel_json()
         business_channel_list = []
+        
         for arr in result:
             channel = BusinessChannelObject(arr)
             business_channel_list.append(channel)
