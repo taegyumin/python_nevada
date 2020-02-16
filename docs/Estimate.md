@@ -1,4 +1,4 @@
-# API/Estimate.py
+**# API/Estimate.py
 
 `Estimate.py`는 `광고시스템 > 도구 > 키워드 도구 > 월간 예상 실적 보기`의 기능들을 담고 있습니다.
 
@@ -94,27 +94,30 @@
 #### 결과 예시
 	[{'bid': 100, 'clicks': 1, 'impressions': 642, 'cost': 88}, {'bid': 200, 'clicks': 1, 'impressions': 1815, 'cost': 172}, {'bid': 300, 'clicks': 2, 'impressions': 2803, 'cost': 512}] 
 
-    종이빨대
-    bid : 100
-    clicks : 1
-    cost : 88
-    impressions : 642
-    
-    종이빨대
-    bid : 200
-    clicks : 1
-    cost : 172
-    impressions : 1815
-    
-    종이빨대
-    bid : 300
-    clicks : 2
-    cost : 512
-    impressions : 2803
+	종이빨대
+	bid : 100
+	clicks : 1
+	cost : 88
+	impressions : 642
+	cost_per_click : 88
+	
+	종이빨대
+	bid : 200
+	clicks : 1
+	cost : 172
+	impressions : 1815
+	cost_per_click : 172
+	
+	종이빨대
+	bid : 300
+	clicks : 2
+	cost : 512
+	impressions : 2803
+	cost_per_click : 256
     
 #### 변수 설명
-
     bid : 입찰가
     impressions : 예상 노출수
     clicks : 예상 클릭수
     cost : 예상 비용
+    cost_per_click: 예상 평균클릭비용
