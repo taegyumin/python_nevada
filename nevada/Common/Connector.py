@@ -16,11 +16,11 @@ class CommonFunctions:
         def print_all_attr_copy(obj: object, temp):
             for key in obj.__dict__.keys():
                 if temp == 1:
-                    print(' L ', end='')
+                    print(' L  ', end='')
                 elif temp == 2:
-                    print('    L ', end='')
+                    print('     L  ', end='')
                 elif temp == 3:
-                    print('       L ', end='')
+                    print('         L  ', end='')
 
                 print(key, ': ', end='')
 
