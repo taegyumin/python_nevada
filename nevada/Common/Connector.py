@@ -8,17 +8,25 @@ import urllib.parse
 from datetime import datetime
 
 class CommonFunctions:
-    def print_all_attr(self, obj: object, temp: int):
-        for key in obj.__dict__.keys():
-            for i in range(temp):
-                print('     ', end='')
-            print(key, ': ', end='')
-            if (type(obj.__getattribute__(key)) == type(True)) or (type(obj.__getattribute__(key)) == type('str')) or (type(obj.__getattribute__(key)) == type(0)) or (type(obj.__getattribute__(key)) == type(None)):
-                print(obj.__getattribute__(key))
-            else:
-                print()
-                temp += 1
-                self.print_all_attr(obj.__getattribute__(key), temp)
+
+    def print_all_attr(self, obj: object):
+        type_list = [type(True), type('str'), type(0), type(None),type({'0':0})]
+        def print_all_attr_copy(obj: object, temp):
+            for key in obj.__dict__.keys():
+                if temp == 1:
+                    print(' L ', end='')
+                if temp == 2:
+                    print('    L ', end='')
+                print(key, ': ', end='')
+                if type(obj.__getattribute__(key))  in type_list:
+                    print(obj.__getattribute__(key))
+                else:
+                    print()
+                    temp += 1
+                    print_all_attr_copy(obj.__getattribute__(key), temp)
+                    temp -= 1
+
+        print_all_attr_copy(obj, 0)
         print()
 
     def dropna(self, input_dict):
@@ -33,11 +41,6 @@ class CommonFunctions:
             else:
                 cleaned_dict.update({now: input_dict[now]})
         return cleaned_dict
-
-    # def print_all_attr(obj: object):
-    #     for key in obj.__dict__.keys():
-    #         print(key, ': ', obj.__getattribute__(key))
-    #     print()
 
     # def dropna(input_dict):
     #     cleaned_dict = dict()
