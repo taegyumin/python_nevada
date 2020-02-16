@@ -12,7 +12,7 @@
 	
 	bc = BusinessChannel(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
 
-### 비즈니스 채널 조회하기
+### 비즈니스 채널 전체 조회하기
 #### 코드 예시
     result = bc.get_business_channel_all_json()
     print(result, end='\n\n')
@@ -182,7 +182,7 @@
     bsn-a001-00-000000003298108
     
     
-### ids로 비즈니스 채널 조회하기
+### ids로 여러 비즈니스 채널 조회하기
 #### 코드 예시
     ids = ['bsn-a001-00-000000003298108','bsn-a001-00-000000003333742']
     # result_list = bc.get_business_channel_by_ids_json(ids) 도 있음.
@@ -194,7 +194,7 @@
     bsn-a001-00-000000003298108 ,  nevada
     bsn-a001-00-000000003333742 ,  JunhoSong
 
-### id로 비즈니스 채널 검색하기
+### id로 특정 비즈니스 채널 검색하기
 #### 코드 예시
 	result = bc.get_business_channel_json('bsn-a001-00-000000003298108')
     print(result)
@@ -219,3 +219,26 @@
     failed to request
     3
     
+### ids로 여러 비즈니스 채널 삭제하기
+#### 코드 예시
+    print(len(bc.get_business_channel_json()))
+    ids = ['bsn-a001-00-000000003333743', 'bsn-a001-00-000000003333745']
+    bc.delete_business_channel_by_ids(ids)
+    print(len(bc.get_business_channel_json()))
+    
+#### 결과 예시
+    3
+    failed to request
+    1
+    
+### 비즈니스 채널 생성하기
+#### 코드 예시
+	추후 추가
+#### 결과 예시
+	추후 추가
+
+### 비즈니스 채널 업데이트하기
+#### 코드 예시
+	추후 추가
+#### 결과 예시
+	추후 추가
