@@ -8,7 +8,9 @@ import urllib.parse
 from datetime import datetime
 
 class CommonFunctions:
-    def print_all_attr(self, obj: object):
+
+    @staticmethod
+    def print_all_attr(obj: object):
         type_list = [type(True), type('str'), type(0), type(None),type({'0':0})]
 
         def print_all_attr_copy(obj: object, temp):
@@ -33,6 +35,7 @@ class CommonFunctions:
         print_all_attr_copy(obj, 0)
         print()
 
+    @staticmethod
     def dropna(input_dict):
         cleaned_dict = dict()
         for now in input_dict:

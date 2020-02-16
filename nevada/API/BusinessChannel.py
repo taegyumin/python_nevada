@@ -72,25 +72,29 @@ class BusinessChannel:
     BusinessChannelObjectList = List[BusinessChannelObject]
     BusinessChannelIdList = List[str]
 
-    def get_business_channel_json(self):
+    def get_business_channel_json(self, businessChannelId: str) -> BusinessChannelObject:
+        result = self.conn.get('/ncc/channels/' + businessChannelId)
+        return result
+
+    def get_business_channel_list(self, businessChannelId: str) -> BusinessChannelObject:
+        result = self.get_business_channel_json(businessChannelId)
+        result = BusinessChannelObject(result)
+        return result
+
+    def get_business_channel_all_json(self):
         result = self.conn.get('/ncc/channels')
         return result
 
-    def get_business_channel_list(self) -> BusinessChannelObjectList:
-        result = self.get_business_channel_json()
+    def get_business_channel_all_list(self) -> BusinessChannelObjectList:
+        result = self.get_business_channel_all_json()
         business_channel_list = []
         for arr in result:
             channel = BusinessChannelObject(arr)
             business_channel_list.append(channel)
         return business_channel_list
 
-    def get_business_channel(self, businessChannelId) -> BusinessChannelObject:
-        result = self.conn.get('/ncc/channels/' + businessChannelId)
-        result = BusinessChannelObject(result)
-        return result
-
-    def get_business_channel_list_by_type(self, tp: str) -> BusinessChannelObjectList:
-        result = self.conn.get('/ncc/channels', {'channelTp': tp})
+    def get_business_channel_list_by_type(self, channelTp: str) -> BusinessChannelObjectList:
+        result = self.conn.get('/ncc/channels', {'channelTp': channelTp})
         business_channel_list = []
         for arr in result:
             channel = BusinessChannelObject(arr)
