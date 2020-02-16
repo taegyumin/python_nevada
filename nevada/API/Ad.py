@@ -69,30 +69,43 @@ class Ad:
     AdObjectList = List[AdObject]
     ChangeFieldsList = List[str]
 
-    def get_ad_list_by_ids(self, ids: AdIdList) -> AdObjectList:
+    def get_ad_by_ad_id(self, adId: str, json=False) -> AdObject:
+        result = self.conn.get('/ncc/ads/' + adId)
+        if json==False:
+            result = AdObject(result)
+            return result
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
+
+    def get_ad_by_adgroup_id(self, nccAdGroupId: str, json=False) -> AdObjectList:
+        result = self.conn.get('/ncc/ads', {'nccAdgroupId': nccAdGroupId})
+        if json==False:
+            adobj_list = []
+            for arr in result:
+                ad_obj = AdObject(arr)
+                adobj_list.append(ad_obj)
+            return adobj_list
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
+
+    def get_ad_by_ad_ids(self, ids: AdIdList, json=False) -> AdObjectList:
         ids = ",".join(ids)
         ids = {'ids': ids}
         result = self.conn.get('/ncc/ads', ids)
-        ad_obj_list = []
-        for arr in result:
-            ad_obj = AdObject(arr)
-            ad_obj_list.append(ad_obj)
-
-        return ad_obj_list
-
-    def get_ad_list(self, nccAdGroupId: str) -> AdObjectList:
-        result = self.conn.get('/ncc/ads', {'nccAdgroupId': nccAdGroupId})
-        adobj_list = []
-        for arr in result:
-            ad_obj = AdObject(arr)
-            adobj_list.append(ad_obj)
-
-        return adobj_list
-
-    def get_ad(self, adId: str) -> AdObject:
-        result = self.conn.get('/ncc/ads/' + adId)
-        result = AdObject(result)
-        return result
+        if json==False:
+            ad_obj_list = []
+            for arr in result:
+                ad_obj = AdObject(arr)
+                ad_obj_list.append(ad_obj)
+            return ad_obj_list
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
 
     def create_ad(self, CreateAdObject: CreateAdObject) -> AdObject:
         data = jsonpickle.encode(CreateAdObject, unpicklable=False)
