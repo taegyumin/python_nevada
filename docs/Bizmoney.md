@@ -19,18 +19,19 @@
 	print(result, "\n")
 	
 	result = bizmoney.get_biz_money_list()
-	print('customerId: ', result.customerId)
-	print('bizmoney: ', result.bizmoney)
-	print('budgetLock: ', result.budgetLock)
-	print('refundLock: ', result.refundLock)
+	
+	print('customerId :', result.customerId)
+	print('bizmoney :', result.bizmoney)
+	print('budgetLock :', result.budgetLock)
+	print('refundLock :', result.refundLock)
 	
 #### 결과 예시
 	{'customerId': 1810030, 'bizmoney': 1000, 'budgetLock': False, 'refundLock': False}
 	
-	customerId:  1810030
-	bizmoney:  1000
-	budgetLock:  False
-	refundLock:  False
+	customerId : 1810030
+	bizmoney : 1000
+	budgetLock : False
+	refundLock : False
 	
 ### 비즈머니 소진 내역 조회하기
 #### 코드 예시
@@ -50,4 +51,9 @@
         print(result.refundableAmt)
         
 #### 결과 예시
-	생략
+	추가 예정
+
+#### 변수 설명
+    customerId : 고객의 고유 ID, bizmoney : 가지고 있는 비즈머니 잔액
+    budgetLock : 예산 잠금 여부, refundLock : 환불 잠금 여부 
+    

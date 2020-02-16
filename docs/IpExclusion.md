@@ -117,4 +117,10 @@ ipFilterId가 6777029인 ip, 6776978인 ip를 각각 삭제하였으므로, <br>
 	
 	
 #### 변수 설명
-    	
+    customerId : 고객의 고유 ID
+    filterIp : 광고노출제한 IP
+    ipFilterId : filterIp의 고유 ID
+    loginId : 시스템에 접속 중인 유저 ID
+    memo : IP에 대한 메모 
+    regTm : 등록 된 시간,
+    userId : 사용자 ID
