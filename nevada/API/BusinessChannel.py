@@ -35,7 +35,7 @@ class UpdateBusinessChannelObject:
 
 class CreateBusinessChannelObject:
     def __init__(self, businessInfo, channelTp, name, inspectReqeustMsg=None):
-        self.businessInfo = {'site':'github.com/taegyumin'}#businessInfo
+        self.businessInfo = businessInfo#{'site':'github.com/taegyumin'}#
         self.channelTp = channelTp
         self.inspectRequestMsg = inspectReqeustMsg
         self.name = name
