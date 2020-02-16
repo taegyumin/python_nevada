@@ -1,6 +1,6 @@
 # nevada
 
-##### Its English version documentation is [here](https://github.com/taegyumin/python_nevada/blob/master/README(english).md).
+##### Its English Documentation is [here](https://github.com/taegyumin/python_nevada/blob/master/README(english).md).
 
 [<img src="https://img.shields.io/pypi/v/nevada">](https://pypi.org/project/nevada/)
 [<img src="https://img.shields.io/pypi/pyversions/nevada">](https://pypi.org/project/nevada/)
@@ -40,13 +40,11 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 
 	conn = Connector(base_url, api_key, secret_key, customer_id)
 	print(conn.get_datetime())
+	
+### 자세한 사용 방법은 [docs](https://github.com/taegyumin/python_nevada/tree/master/docs)의 설명서를 참고해주시기 바랍니다.
 
-### 자세한 사용법은 [docs](https://github.com/taegyumin/python_nevada/tree/master/docs) 폴더 내 설명서들을 참고해주시기 바랍니다.
-
----
-
-## update
-### 0.x.x
+## update info.
+### 0.x.y
 - beta
 
 ### 1.0.0
@@ -57,5 +55,3 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 - Common/Connector.CommonFunctions.print_all_attr() 추가
 - API/Estimate.get_performance_bulk_json 수정
 - API/Estimate.get_performance_bulk_list 수정
-
-
