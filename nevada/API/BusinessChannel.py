@@ -35,7 +35,7 @@ class UpdateBusinessChannelObject:
 
 class CreateBusinessChannelObject:
     def __init__(self, businessInfo, channelTp, name, inspectReqeustMsg=None):
-        self.businessInfo = {'site':'github.com/taegyumin'}#businessInfo
+        self.businessInfo = businessInfo#{'site':'github.com/taegyumin'}#
         self.channelTp = channelTp
         self.inspectRequestMsg = inspectReqeustMsg
         self.name = name
@@ -98,7 +98,7 @@ class BusinessChannel:
         return result
 
     def get_business_channel_by_type_list(self, channelTp: str) -> BusinessChannelObjectList:
-        result = self.get_business_channel_json(channelTp)
+        result = self.get_business_channel_by_type_json(channelTp)
         business_channel_list = []
         for arr in result:
             channel = BusinessChannelObject(arr)

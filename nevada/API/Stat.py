@@ -45,12 +45,10 @@ class StatObject:
         self.summary = None if 'data' not in s else SummaryObject(s['data'])
 
     def match_data(self, s):
-
         stat_list = []
         for arr in s:
             stat = StatDataObject(arr)
             stat_list.append(stat)
-
         return stat_list
 
 class Stat:
