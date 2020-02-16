@@ -2,8 +2,6 @@ from nevada.Common.Connector import *
 from typing import List
 import jsonpickle
 import json
-
-
 # pylint: disable=C0103
 # pylint: disable=E0401
 
@@ -163,7 +161,6 @@ class AdgroupObject:
         for arr in sarray:
             target_item = target(arr)
             target_list.append(target_item)
-
         return target_list
 
     def __match_target_summary(self, sarray):
@@ -185,6 +182,31 @@ class Adgroup:
     RestrictedKeywordIdList = List[str]
     ChangeFieldsList = List[str]
 
+    def get_adgroup_by_id(self, adgroupId: str, json=False) -> AdgroupObject:
+        result = self.conn.get('/ncc/adgroups/' + adgroupId)
+        if json==False:
+            adgroup = AdgroupObject(result)
+            return adgroup
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
+
+    def get_adgroup_by_ids(self, ids: AdgroupIdList, json=False) -> AdgroupList:
+        ids = ",".join(ids)
+        query = {'ids': ids}
+        result = self.conn.get('/ncc/adgroups', query)
+        if json==False:
+            adgroup_list = []
+            for arr in result:
+                camp = AdgroupObject(arr)
+                adgroup_list.append(camp)
+            return adgroup_list
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
+
     def get_restricted_keyword(self, adgroupId: str) -> RestrictedKeywordList:
         query = {'type': 'KEYWORD_PLUS_RESTRICT'}
         result = self.conn.get('/ncc/adgroups/' + adgroupId + "/restricted-keywords", query);
@@ -194,7 +216,7 @@ class Adgroup:
             restricted_list.append(restricted_keyword)
         return restricted_list
 
-    def get_adgroup_list(self, nccCampaignId: str = None, baseSearchId: str = None,
+    def get_adgroup_by_campaign(self, nccCampaignId: str = None, baseSearchId: str = None,
                          recordSize: int = None, selector: str = None) -> AdgroupList:
 
         query = {'nccCampaignId': nccCampaignId, 'baseSearchId': baseSearchId,
@@ -205,21 +227,6 @@ class Adgroup:
             camp = AdgroupObject(arr)
             adgroup_list.append(camp)
         return adgroup_list
-
-    def get_adgroup_list_by_ids(self, ids: AdgroupIdList) -> AdgroupList:
-        ids = ",".join(ids)
-        query = {'ids': ids}
-        result = self.conn.get('/ncc/adgroups', query)
-        adgroup_list = []
-        for arr in result:
-            camp = AdgroupObject(arr)
-            adgroup_list.append(camp)
-        return adgroup_list
-
-    def get_adgroup_by_adgroupid(self, adgroupId: str) -> AdgroupObject:
-        result = self.conn.get('/ncc/adgroups/' + adgroupId)
-        adgroup = AdgroupObject(result)
-        return adgroup
 
     def create_restricted_keyword(self, adgroupId: str,
                                   restricted_keywords_object: RestrictedKeywordsAddObject) -> RestrictedKeyword:
