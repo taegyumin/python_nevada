@@ -11,7 +11,7 @@ class CommonFunctions:
 
     @staticmethod
     def print_all_attr(obj: object):
-        type_list = [type(True), type('str'), type(0), type(None),type({'0':0})]
+        type_list = [type(True), type('str'), type(0), type(None), type({'0':0}), type(0.1)]
 
         def print_all_attr_copy(obj: object, temp):
             for key in obj.__dict__.keys():
