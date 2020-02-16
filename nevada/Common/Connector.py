@@ -8,17 +8,21 @@ import urllib.parse
 from datetime import datetime
 
 class CommonFunctions:
-
     def print_all_attr(self, obj: object):
         type_list = [type(True), type('str'), type(0), type(None),type({'0':0})]
+
         def print_all_attr_copy(obj: object, temp):
             for key in obj.__dict__.keys():
                 if temp == 1:
                     print(' L ', end='')
-                if temp == 2:
+                elif temp == 2:
                     print('    L ', end='')
+                elif temp == 3:
+                    print('       L ', end='')
+
                 print(key, ': ', end='')
-                if type(obj.__getattribute__(key))  in type_list:
+
+                if type(obj.__getattribute__(key)) in type_list:
                     print(obj.__getattribute__(key))
                 else:
                     print()
