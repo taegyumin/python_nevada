@@ -49,7 +49,8 @@
     ...
     생략
     
-     # relKeyword : 연관 키워드, monthlyPcQcCnt : 월간(30일) PC검색 수, monthlyMobileQcCnt : 월간(30일) 모바일 검색 수
-     # monthlyAvePcClkCnt : 월평균(4주) PC 클릭 수, monthAveMobileClkCnt : 월평균(4주) 모바일 클릭 수
-     # monthlyAvePcCtr : 월평균(4주) PC 클릭률, monthlyAveMobileCtr : 월평균(4주) 모바일 클릭률
-     # plAvgDepth : 월평균(4주) 노출광고수, compIdx : 경쟁정도(높음, 중간, 낮음)
+#### 변수 설명
+    relKeyword : 연관 키워드, monthlyPcQcCnt : 월간(30일) PC검색 수, monthlyMobileQcCnt : 월간(30일) 모바일 검색 수
+    monthlyAvePcClkCnt : 월평균(4주) PC 클릭 수, monthAveMobileClkCnt : 월평균(4주) 모바일 클릭 수
+    monthlyAvePcCtr : 월평균(4주) PC 클릭률, monthlyAveMobileCtr : 월평균(4주) 모바일 클릭률
+    plAvgDepth : 월평균(4주) 노출광고수, compIdx : 경쟁정도(높음, 중간, 낮음)
