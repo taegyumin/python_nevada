@@ -157,7 +157,7 @@ class Estimate:
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         query = {'items': data_str}
-        result = self.conn.post('/estimate/performance/' + type, query=query)
+        result = self.conn.post('/estimate/performance/' + type, data_str, query=query)
         result = result['estimate']
         return result
 
