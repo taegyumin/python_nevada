@@ -182,4 +182,40 @@
     bsn-a001-00-000000003298108
     
     
-### 
+### ids로 비즈니스 채널 조회하기
+#### 코드 예시
+    ids = ['bsn-a001-00-000000003298108','bsn-a001-00-000000003333742']
+    # result_list = bc.get_business_channel_by_ids_json(ids) 도 있음.
+    result_list = bc.get_business_channel_by_ids_list(ids)
+    for result in result_list:
+        print(result.nccBusinessChannelId,', ',result.name)
+        
+#### 결과 예시
+    bsn-a001-00-000000003298108 ,  nevada
+    bsn-a001-00-000000003333742 ,  JunhoSong
+
+### id로 비즈니스 채널 검색하기
+#### 코드 예시
+	result = bc.get_business_channel_json('bsn-a001-00-000000003298108')
+    print(result)
+    print()
+    
+    result = bc.get_business_channel_list('bsn-a001-00-000000003298108')
+    print(result.nccBusinessChannelId, result.name)
+
+#### 결과 예시
+	{'nccBusinessChannelId': 'bsn-a001-00-000000003298108', 'customerId': 1839303, 'channelTp': 'SITE', 'name': 'nevada', 'channelKey': 'https://github.com/taegyumin/python_nevada', 'businessInfo': {'site': 'https://github.com/taegyumin/python_nevada', 'isNaverPay': 0, 'isMobileNaverPay': 0, 'isStoreFarm': 0, 'isNaverLogin': 0, 'isMobileNaverLogin': 0, 'isNaverTalkTalk': 0, 'isMobileNaverTalkTalk': 0, 'useSaNaScript': 0, 'useNaverPayNaScript': 0, 'useStoreFarmNaScript': 0, 'naAccountId': '', 'naAccountType': 0, 'mobileCertStatus': 20, 'isMedical': 0, 'inspectId': '', 'inspectPw': ''}, 'delFlag': False, 'regTm': '2020-02-08T10:37:41.000Z', 'editTm': '2020-02-15T10:46:36.000Z', 'firstChargeTm': '2020-02-16T05:16:21.000Z', 'inspectTm': '2020-02-10T06:32:01.000Z', 'pcInspectStatus': 'PENDING', 'mobileInspectStatus': 'PENDING', 'status': 'PAUSED', 'statusReason': 'BUSINESS_CHANNEL_DISAPPROVED', 'adultStatus': 'NOT_ADULT_URL', 'enabled': True, 'blackStatus': 'WHITE_URL'}
+	
+    bsn-a001-00-000000003298108 nevada
+    
+### id로 특정 비즈니스 채널 삭제하기
+#### 코드 예시
+    print(len(bc.get_business_channel_all_json()))
+    bc.delete_business_channel('bsn-a001-00-000000003333742')
+    print(len(bc.get_business_channel_all_json()))
+
+#### 결과 예시
+    4
+    failed to request
+    3
+    
