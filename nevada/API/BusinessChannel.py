@@ -98,7 +98,7 @@ class BusinessChannel:
         return result
 
     def get_business_channel_by_type_list(self, channelTp: str) -> BusinessChannelObjectList:
-        result = self.get_business_channel_json(channelTp)
+        result = self.get_business_channel_by_type_json(channelTp)
         business_channel_list = []
         for arr in result:
             channel = BusinessChannelObject(arr)
