@@ -2,7 +2,7 @@
 
 ### [nevada 라이브러리에 대해 문의하기, 요청하기](https://github.com/taegyumin/python_nevada/issues) <br>
 
-### 각 `네이버 광고시스템 기능(항목)`에 대응되는 Python 파일
+### 각 `네이버 광고시스템 기능(항목)`에 대응되는 API python 파일
 
 - `광고시스템 > 광고관리 > 캠페인` Campaign.py <br>
 - `광고시스템 > 광고관리 > 광고그룹` Adgroup.py <br>
@@ -18,9 +18,9 @@
 - `광고시스템 > 도구 > 광고노출제한 관리` IpExclusion.py
 - `광고시스템 > 비즈머니` Bizmoney.py <br>
 
-
-아래 항목은 추후 추가하겠습니다. <br>
+이외에도 <br>
 -  `추가예정` ManagedCustomerLink.py <br>
 - `추가예정` Stat.py <br>
 - `추가예정` Target.py <br>
-
+- ManagedKeyword.py <br>
+등이 있습니다.
