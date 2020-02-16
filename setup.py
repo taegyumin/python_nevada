@@ -11,7 +11,7 @@ INSTALL_REQUIRES = (['requests','jsonpickle'])
 
 setup(
     name='nevada',
-    version='1.0.0',
+    version='1.0.1',
     description='For those who want to use Naver Search Ad easily.',
     long_description=long_description,
     long_description_content_type='text/markdown',
