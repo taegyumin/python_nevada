@@ -15,7 +15,7 @@
 ### 비즈니스 채널 조회하기
 #### 코드 예시
     result = bc.get_business_channel_json()
-    print(result)
+    print(result, "\n")
 
     result = bc.get_business_channel_list()
     for obj in result:
