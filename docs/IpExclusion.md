@@ -11,86 +11,116 @@
     secret_key = "Naver-search_AD_SECRET_KEY" #변경하세요.
     customer_id = "Naver-search_AD_CUSTOMER_ID" #변경하세요.
     
-    ip = IpExclusion(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
+    ipExclusion = IpExclusion(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
     
     
 ### 광고노출제한 IP 조회하기
 #### 코드 예시
-	result = ip.get_ip_exclusion_json()
-	print(result)
+	result = ipExclusion.get_ip_exclusion_json()
+    print(result, "\n")
 	    
-	result_list = ip.get_ip_exclusion_list()
-	for result in result_list:
-	    print('customer_id:', result.customerId, end=' & ')
-	    print('filterIp:', result.filterIp, end=' & ')
-	    print('ipFilterId:', result.ipFilterId, end=' & ')
-	    print('memo:', result.memo, end=' & ')
-	    print('regTm:', result.regTm)
-
-
+	result_list = ipExclusion.get_ip_exclusion_list()
+	for i in result_list:
+        CommonFunctions.print_all_attr(i) # from nevada.Common.Connector import * 를 해줘야 함.
+	    
 #### 결과 예시
-	[{'ipFilterId': 6672662, 'customerId': 1810030, 'filterIp': '125.128.118.179', 'regTm': 1579704772000, 'memo': '누구의 IP 주소일까'}, {'ipFilterId': 6672661, 'customerId': 1810030, 'filterIp': '125.128.118.178', 'regTm': 1579704752000, 'memo': '나의 IP 주소'}]
-	
-	customer_id: 1810030 & filterIp: 125.128.118.179 & ipFilterId: 6672662 & memo: 누구의 IP 주소일까 & regTm: 1579704772000
-	customer_id: 1810030 & filterIp: 125.128.118.178 & ipFilterId: 6672661 & memo: 나의 IP 주소 & regTm: 1579704752000
-	
+	[{'ipFilterId': 6777029, 'customerId': 1839303, 'filterIp': '111.111.111.112', 'regTm': 1581829891000, 'memo': '테스트2'}, {'ipFilterId': 6776978, 'customerId': 1839303, 'filterIp': '111.111.111.111', 'regTm': 1581828179000, 'memo': '테스트'}] 
+
+    customerId : 1839303
+    filterIp : 111.111.111.112
+    ipFilterId : 6777029
+    memo : 테스트2
+    regTm : 1581829891000
+    
+    customerId : 1839303
+    filterIp : 111.111.111.111
+    ipFilterId : 6776978
+    memo : 테스트
+    regTm : 1581828179000
+
+        
 ### 광고노출제한 IP 추가하기
 #### 코드 예시
-    result = ip.create_ip_exclusion(filterIp='125.128.118.180', memo='누구의 IP 주소일까 22')
+    result = ipExclusion.create_ip_exclusion(filterIp='111.111.111.113', memo='추가 된 IP')
     
-    print('customer_id:', result.customerId, end=' & ')
-    print('filterIp:', result.filterIp, end=' & ')
-    print('ipFilterId:', result.ipFilterId, end=' & ')
-    print('memo:', result.memo, end=' & ')
-    print('regTm:', result.regTm)
-    
+    print('customer_id :', result.customerId)
+    print('filterIp :', result.filterIp)
+    print('ipFilterId :', result.ipFilterId)
+    print('memo :', result.memo)
+    print('regTm :', result.regTm)
+
 #### 결과 예시
-    customer_id: 1810030 & filterIp: 125.128.118.180 & ipFilterId: 6672680 & memo: 누구의 IP 주소일까 22 & regTm: 1579706122737
+    customer_id : 1839303
+    filterIp : 111.111.111.113
+    ipFilterId : 6777032
+    memo : 추가 된 IP
+    regTm : 1581829961200
     
 ### 광고노출제한 IP 수정하기
 #### 코드 예시
-    result = ip.update_ip_exclusion(filterIp='125.128.118.180', ipFilterId='6672681', memo='memo를 변경했다')
+    result = ipExclusion.update_ip_exclusion(filterIp='111.111.111.113', ipFilterId='6777032', memo='변경 된 메모')
     
-    print('customer_id:', result.customerId, end=' & ')
-    print('filterIp:', result.filterIp, end=' & ')
-    print('ipFilterId:', result.ipFilterId, end=' & ')
-    print('memo:', result.memo, end=' & ')
-    print('regTm:', result.regTm)
+    print('customer_id :', result.customerId)
+    print('filterIp :', result.filterIp)
+    print('ipFilterId :', result.ipFilterId)
+    print('memo :', result.memo)
+    print('regTm :', result.regTm)
     
 #### 결과 예시
-    customer_id: 1810030 & filterIp: 125.128.118.180 & ipFilterId: 6672681 & memo: memo를 변경했다 & regTm: 1579706196000
+    customer_id : 1839303
+    filterIp : 111.111.111.113
+    ipFilterId : 6777032
+    memo : 변경 된 메모
+    regTm : 1581829961000
     
 
 ### 광고노출제한 IP 삭제하기
 #### 코드 예시
-    ip.delete_ip_exclusion(id='6672681')
+    ipExclusion.delete_ip_exclusion(id='6777032')
 
-    result_list = ip.get_ip_exclusion_list()
-    for result in result_list:
-        print('customer_id:', result.customerId, end=' & ')
-        print('filterIp:', result.filterIp, end=' & ')
-        print('ipFilterId:', result.ipFilterId, end=' & ')
-        print('memo:', result.memo, end=' & ')
-        print('regTm:', result.regTm)
+    result_list = ipExclusion.get_ip_exclusion_list()
+    for i in result_list:
+        CommonFunctions.print_all_attr(i)  # from nevada.Common.Connector import * 를 해줘야 함.
+
 
 #### 결과 예시
-memo가 'memo를 변경했다'였던 ip주소가 목록에서 삭제된 것을 확인할 수 있다.
+memo가 '변경 된 메모'였던 ip주소가 목록에서 삭제된 것을 확인할 수 있다.
 
-    customer_id: 1810030 & filterIp: 125.128.118.179 & ipFilterId: 6672662 & memo: 누구의 IP 주소일까 & regTm: 1579704772000
-    customer_id: 1810030 & filterIp: 125.128.118.178 & ipFilterId: 6672661 & memo: 나의 IP 주소 & regTm: 1579704752000
+    customerId : 1839303
+    filterIp : 111.111.111.112
+    ipFilterId : 6777029
+    memo : 테스트2
+    regTm : 1581829891000
+    
+    customerId : 1839303
+    filterIp : 111.111.111.111
+    ipFilterId : 6776978
+    memo : 테스트
+    regTm : 1581828179000
     
     
 ### 광고노출제한 IP 여러 개 한꺼번에 삭제하기
 #### 코드 예시
 **ipFilterId**의 list를 구성한다.
-		
-	id_array = ['6672662','6672661']
-	ip.delete_ip_exclusion_many(id_array)
-		
-	result = ip.get_ip_exclusion_json()
-	print(result)
+
+    id_array = ['6777029', '6776978']
+    
+    ipExclusion.delete_ip_exclusion_many(id_array)
+    
+    result = ipExclusion.get_ip_exclusion_json()
+    print(result)
 
 #### 결과 예시
-ipFilterId가 6672662인 ip, 6672661인 ip를 각각 삭제하였으므로, <br> 광고노출제한 IP을 다시 조회하면 empty list가 반환된다.
+ipFilterId가 6777029인 ip, 6776978인 ip를 각각 삭제하였으므로, <br> 광고노출제한 IP을 다시 조회하면 empty list가 반환된다.
 
 	[]
+	
+	
+#### 변수 설명
+    customerId : 고객의 고유 ID
+    filterIp : 광고노출제한 IP
+    ipFilterId : filterIp의 고유 ID
+    loginId : 시스템에 접속 중인 유저 ID
+    memo : IP에 대한 메모 
+    regTm : 등록 된 시간,
+    userId : 사용자 ID

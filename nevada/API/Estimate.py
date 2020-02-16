@@ -74,6 +74,7 @@ class EstimatePerformanceObject:
         self.clicks = None if 'clicks' not in s else s['clicks']
         self.cost = None if 'cost' not in s else s['cost']
         self.impressions = None if 'impressions' not in s else s['impressions']
+        self.cost_per_click = int(self.cost / self.clicks)
 
 class EstimatePerformanceBulkObject:
     def __init__(self, device, keywordplus, keyword, bid, clicks, impressions, cost):
@@ -84,7 +85,7 @@ class EstimatePerformanceBulkObject:
         self.clicks = clicks
         self.impressions = impressions
         self.cost = cost
-
+        self.cost_per_click = int(self.cost / self.clicks)
 
 class Estimate:
     def __init__(self, base_url: str, api_key: str, secret_key: str, customer_id: int):
@@ -157,7 +158,7 @@ class Estimate:
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         query = {'items': data_str}
-        result = self.conn.post('/estimate/performance/' + type, query=query)
+        result = self.conn.post('/estimate/performance/' + type, data_str, query=query)
         result = result['estimate']
         return result
 
@@ -180,17 +181,18 @@ class Estimate:
     #     result = result['estimate']
     #     return result
 
-    def get_performance_many_json(self, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
+    def get_performance_bulk_json(self, type: str, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
         data = jsonpickle.encode(GetPerformanceBulkObjectList, unpicklable=False)
         data = json.loads(data)
         #data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
+        print(data_str)
         result = self.conn.post('/estimate/performance-bulk', data_str)
         result = result['estimate']
         return result
 
-    def get_performance_many_list(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
-        result_json = self.get_performance_many_json(type, GetPerformanceObjectList)
+    def get_performance_bulk_list(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
+        result_json = self.get_performance_bulk_json(type, GetPerformanceObjectList)
         estimate_list = []
         for arr in result_json:
             estimate = EstimatePerformanceObject(arr)
