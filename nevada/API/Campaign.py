@@ -65,9 +65,33 @@ class Campaign:
     CampaignIdList = List[str]
     ChangeFieldsList = List[str]
 
+    def get_campaign_by_id(self, campaignId: str,json=False) -> CampaignObject:
+        result = self.conn.get('/ncc/campaigns/' + campaignId)
+        if json==False:
+            camp = CampaignObject(result)
+            return camp
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
+
+    def get_campaign_by_ids(self, ids: CampaignIdList, json=False) -> CampaignList:
+        ids = ",".join(ids)
+        query = {'ids': ids}
+        result = self.conn.get('/ncc/campaigns', query)
+        if json==False:
+            camp_list = []
+            for arr in result:
+                camp = CampaignObject(arr)
+                camp_list.append(camp)
+            return camp_list
+        elif json==True:
+            return result
+        else:
+            print('Check the type, value of input parameter json.')
+
     def get_campaign_list(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
                           selector: str = None) -> CampaignList:
-
         query = {'campaignType': campaignType, 'baseSearchId': baseSearchId, 'recordSize': recordSize,
                  'selector': selector}
         result = self.conn.get('/ncc/campaigns', query)
@@ -77,23 +101,6 @@ class Campaign:
             camp = CampaignObject(arr)
             camp_list.append(camp)
         return camp_list
-
-    def get_campaign_list_by_ids(self, ids: CampaignIdList) -> CampaignList:
-        ids = ",".join(ids)
-        query = {'ids': ids}
-
-        result = self.conn.get('/ncc/campaigns', query)
-
-        camp_list = []
-        for arr in result:
-            camp = CampaignObject(arr)
-            camp_list.append(camp)
-        return camp_list
-
-    def get_campaign(self, campaignId: str) -> CampaignObject:
-        result = self.conn.get('/ncc/campaigns/' + campaignId)
-        camp = CampaignObject(result)
-        return camp
 
     def create_campaign(self, campaign_add_object: CampaignAddObject):
 
