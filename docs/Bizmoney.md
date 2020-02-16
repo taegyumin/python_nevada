@@ -16,7 +16,7 @@
 ### 비즈머니 잔액 조회하기
 #### 코드 예시
 	result = bizmoney.get_biz_money_json()
-	print(result)
+	print(result, "\n")
 	
 	result = bizmoney.get_biz_money_list()
 	print('customerId: ', result.customerId)

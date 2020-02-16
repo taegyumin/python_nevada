@@ -12,15 +12,14 @@
 	secret_key = "Naver-search_AD_SECRET_KEY" #변경하세요.
 	customer_id = "Naver-search_AD_CUSTOMER_ID" #변경하세요.
 	
-	rel_kwd_stat = RelKwdStat(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
+	relKwdStat = RelKwdStat(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
 
 ### 연관키워드, 월간검색수(PC/모바일), 월평균클릭수(PC/모바일) 등 구하기
 #### 코드 예시
     result = rel_kwd_stat.get_json(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')
-    print(result); print()
+    print(result, "\n")
 
-    result_list = rel_kwd_stat.get_list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')
-    
+    result_list = rel_kwd_stat.get_list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')    
     for i in result_list:
         CommonFunctions.print_all_attr(i) # from nevada.Common.Connector import * 를 해줘야 함.
 
@@ -46,6 +45,7 @@
     monthlyAveMobileCtr : 0.31
     plAvgDepth : 15
     compIdx : 높음
+    
     ...
     생략
     
