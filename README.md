@@ -55,3 +55,7 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 - Common/Connector.CommonFunctions.print_all_attr() 추가
 - API/Estimate.get_performance_bulk_json 수정
 - API/Estimate.get_performance_bulk_list 수정
+
+### 1.0.2
+- docs/Ad.md, Adgroup.md, Campaign.md, ManagedKeyword.py 추가
+- API/ManagedKeyword.py 추가
