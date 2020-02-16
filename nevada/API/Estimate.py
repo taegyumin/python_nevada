@@ -84,7 +84,7 @@ class EstimatePerformanceBulkObject:
         self.clicks = clicks
         self.impressions = impressions
         self.cost = cost
-
+        self.cost_per_click = int(cost / clicks)  # 예상 평균클릭비용
 
 class Estimate:
     def __init__(self, base_url: str, api_key: str, secret_key: str, customer_id: int):
@@ -180,7 +180,7 @@ class Estimate:
     #     result = result['estimate']
     #     return result
 
-    def get_performance_bulk_json(self, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
+    def get_performance_bulk_json(self, type: str, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
         data = jsonpickle.encode(GetPerformanceBulkObjectList, unpicklable=False)
         data = json.loads(data)
         #data = CommonFunctions.dropna(data)
