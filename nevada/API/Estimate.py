@@ -84,7 +84,7 @@ class EstimatePerformanceBulkObject:
         self.clicks = clicks
         self.impressions = impressions
         self.cost = cost
-        self.cost_per_click = int(cost / clicks)  # 예상 평균클릭비용
+        self.cost_per_click = int(self.cost / self.clicks)  # 예상 평균클릭비용
 
 class Estimate:
     def __init__(self, base_url: str, api_key: str, secret_key: str, customer_id: int):
