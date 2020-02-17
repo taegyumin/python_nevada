@@ -4,12 +4,14 @@ import jsonpickle
 import json
 
 class UpdateLabelRefObject:
-    def __init__(self, customerId, nccLabelId, refId, refTp):
+    def __init__(self, editTm, customerId, enable, nccLabelId, refId, refTp, regTm):
+        self.editTm = editTm
         self.customerId = customerId
-        self.enable = True
+        self.enable = enable
         self.nccLabelId = nccLabelId
         self.refId = refId
         self.refTp = refTp
+        self.regTm = regTm
 
 class LabelRefObject:
     def __init__(self, json_def):
@@ -28,18 +30,22 @@ class LabelRef:
 
     LabelRefObjectList = List[LabelRefObject]
 
-    def update_label_ref(self, UpdateLabelRefObject: UpdateLabelRefObject) -> LabelRefObjectList:
-        data = jsonpickle.encode(UpdateLabelRefObject, unpicklable=False)
+    def update_label_ref(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None, format=False) -> LabelRefObjectList:
+        data = jsonpickle.encode(UpdateLabelRefObject(editTm, customerId, enable, nccLabelId, refId, refTp, regTm),
+                                 unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data = [data]
         data_str = json.dumps(data)
-
         result = self.conn.put('/ncc/label-refs/', data_str)
 
-        labelref_list = []
-        for arr in result:
-            labelref = LabelRefObject(arr)
-            labelref_list.append(labelref)
-
-        return labelref_list
+        if format==False or format=='json':
+            return result
+        elif format==True or format=='object':
+            labelref_list = []
+            for arr in result:
+                labelref = LabelRefObject(arr)
+                labelref_list.append(labelref)
+            return labelref_list
+        else:
+            print('Check the type, value of input parameter json.')
