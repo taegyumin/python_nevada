@@ -18,9 +18,8 @@
 - `광고시스템 > 도구 > 광고노출제한 관리` IpExclusion.py
 - `광고시스템 > 비즈머니` Bizmoney.py <br>
 
-이외에도 <br>
--  `추가예정` ManagedCustomerLink.py <br>
-- `추가예정` Stat.py <br>
-- `추가예정` Target.py <br>
+이외에도 다음과 같은 프로그램이 있습니다. <br>
+- Stat.py <br>
+- Target.py <br>
 - ManagedKeyword.py <br>
-등이 있습니다.
+- ManagedCustomerLink.py <br>
