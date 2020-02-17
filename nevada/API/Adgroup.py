@@ -2,8 +2,6 @@ from nevada.Common.Connector import *
 from typing import List
 import jsonpickle
 import json
-# pylint: disable=C0103
-# pylint: disable=E0401
 
 class targetSummaryObject:
     def __init__(self, json_def):
