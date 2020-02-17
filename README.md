@@ -59,3 +59,6 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 ### 1.0.2
 - docs/Ad.md, Adgroup.md, Campaign.md, ManagedKeyword.py 추가
 - API/ManagedKeyword.py 추가
+
+### 1.0.3
+- docs/ManagedCustomerLink.md, LabelRef.md 추가
