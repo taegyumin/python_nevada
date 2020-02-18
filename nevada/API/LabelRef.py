@@ -39,9 +39,9 @@ class LabelRef:
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/label-refs/', data_str)
 
-        if format==False or format=='json':
+        if format in [False, 'json']:
             return result
-        elif format==True or format=='object':
+        elif format in [True, 'object', 'list']:
             labelref_list = []
             for arr in result:
                 labelref = LabelRefObject(arr)
@@ -49,3 +49,4 @@ class LabelRef:
             return labelref_list
         else:
             print('Please Check the input value of format.')
+
