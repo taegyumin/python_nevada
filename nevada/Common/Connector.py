@@ -43,19 +43,6 @@ class CommonFunctions:
                 cleaned_dict.update({now: input_dict[now]})
         return cleaned_dict
 
-    # def dropna(self, input_dict):
-    #     cleaned_dict = dict()
-    #     for now in input_dict:
-    #         if type(input_dict[now])==type({'j':'son'}):
-    #             temp = dict()
-    #             for now2 in now:
-    #                 if now[now2] != None:
-    #                     temp.update({now2: now[now2]})
-    #             cleaned_dict.update({now: temp})
-    #         else:
-    #             cleaned_dict.update({now: input_dict[now]})
-    #     return cleaned_dict
-
 class Connector:
     def __init__(self, base_url, api_key, secret_key, customer_id):
         self.base_url = base_url
