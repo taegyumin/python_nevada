@@ -24,13 +24,13 @@ class MasterReportObject:
         self.status = None if 'status' not in s else s['status']
         self.updateTime = None if 'updateTime' not in s else s['updateTime']
 
-class MasterReport:  # 광고정보일괄다운로드탭
+class MasterReport: #광고 정보 일괄 다운로드
     def __init__(self, base_url: str, api_key: str, secret_key: str, customer_id: int):
         self.conn = Connector(base_url, api_key, secret_key, customer_id)
 
     MasterReportObjectList = List[MasterReportObject]
 
-    def list(self, format=False) -> MasterReportObjectList:
+    def list(self, format=True) -> MasterReportObjectList:
         result = self.conn.get('/master-reports')
         if format in [False, 'json']:
             return result
@@ -43,7 +43,7 @@ class MasterReport:  # 광고정보일괄다운로드탭
         else:
             print('Please Check the input value of format.')
 
-    def get_by_id(self, id:str, format=False) -> MasterReportObject:
+    def get_by_id(self, id:str, format=True) -> MasterReportObject:
         result = self.conn.get('/master-reports/' + id)
         if format in [False, 'json']:
             return result
@@ -52,7 +52,7 @@ class MasterReport:  # 광고정보일괄다운로드탭
         else:
             print('Please Check the input value of format.')
 
-    def create(self, item:str, fromTime:str, format=False) -> MasterReportObject:
+    def create(self, item:str, fromTime:str, format=True) -> MasterReportObject:
         data = jsonpickle.encode(CreateMasterReportObject(item, fromTime), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -70,5 +70,5 @@ class MasterReport:  # 광고정보일괄다운로드탭
         return True
 
     def delete_by_id(self, id: str):
-        self.conn.delete('/master-reports', {'id': id})
+        self.conn.delete('/master-reports/', {'id': id})
         return True
