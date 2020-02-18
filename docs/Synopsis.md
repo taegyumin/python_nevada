@@ -10,6 +10,7 @@
 - `광고시스템 > 광고관리 > 키워드` AdKeyword.py <br>
 - `광고시스템 > 광고관리 > 확장소재` AdExtension.py <br>
 - `광고시스템 > 광고관리 > 즐겨찾기` Label.py, LabelRef.py <br>
+- `광고시스템 > 보고서 > 다차원 보고서` Stat.py <br>
 - `광고시스템 > 보고서 > 대용량 다운로드 보고서 > 광고 정보 일괄 다운로드` MasterReport.py <br>
 - `광고시스템 > 보고서 > 대용량 다운로드 보고서 > 대용량 보고서 다운로드` StatReport.py <br>
 - `광고시스템 > 도구 > 비즈채널 관리` BusinessChannel.py <br>
@@ -19,7 +20,6 @@
 - `광고시스템 > 비즈머니` Bizmoney.py <br>
 
 이외에도 다음과 같은 프로그램이 있습니다. <br>
-- Stat.py <br>
 - Target.py <br>
 - ManagedKeyword.py <br>
 - ManagedCustomerLink.py <br>
