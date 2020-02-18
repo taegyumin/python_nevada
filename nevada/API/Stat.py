@@ -57,7 +57,7 @@ class Stat:
 
     StatIdList = List[str]
 
-    def get_stat_by_id(self, id: str, fields: str, timeRange: str, dataPreset: str = None, timeIncrement: str = None,
+    def get_by_id(self, id: str, fields: str, timeRange: str, dataPreset: str = None, timeIncrement: str = None,
                        breakdown: str = None) -> StatObject:
         query = {'id': id, 'fields': fields, 'timeRange': timeRange, 'dataPreset': dataPreset,
                  'timeIncrement': timeIncrement, 'breakdown': breakdown}
@@ -65,7 +65,7 @@ class Stat:
         result = StatObject(result)
         return result
 
-    def get_stat_by_ids(self, ids: StatIdList, fields: str, timeRange: str, dataPreset: str = None,
+    def get_by_ids(self, ids: StatIdList, fields: str, timeRange: str, dataPreset: str = None,
                         timeIncrement: str = None, breakdown: str = None) -> StatObject:
         query = {'ids': ids, 'fields': fields, 'timeRange': timeRange, 'dataPreset': dataPreset,
                  'timeIncrement': timeIncrement, 'breakdown': breakdown}
@@ -73,7 +73,7 @@ class Stat:
         result = StatObject(result)
         return result
 
-    def get_stat_by_type(self, id: str, statType: str) -> StatTypeObject:
+    def get_by_stat_type(self, id: str, statType: str) -> StatTypeObject:
         query = {'id': id, 'statType': statType}
         result = self.conn.get('/stats', query)
         result = StatTypeObject(result)
