@@ -30,32 +30,45 @@ class MasterReport:  # 광고정보일괄다운로드탭
 
     MasterReportObjectList = List[MasterReportObject]
 
-    def get_master_report_list(self) -> MasterReportObjectList:
+    def list(self, format=False) -> MasterReportObjectList:
         result = self.conn.get('/master-reports')
-        mreport_list = []
-        for arr in result:
-            mreport = MasterReportObject(arr)
-            mreport_list.append(mreport)
-        return mreport_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            report_list = []
+            for arr in result:
+                report = MasterReportObject(arr)
+                report_list.append(report)
+            return report_list
+        else:
+            print('Please Check the input value of format.')
 
-    def get_master_report_by_id(self, id: str) -> MasterReportObject:
+    def get_by_id(self, id:str, format=False) -> MasterReportObject:
         result = self.conn.get('/master-reports/' + id)
-        result = MasterReportObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            return MasterReportObject(result)
+        else:
+            print('Please Check the input value of format.')
 
-    def create_master_report(self, CreateMasterReportObject: CreateMasterReportObject) -> MasterReportObject:
-        data = jsonpickle.encode(CreateMasterReportObject, unpicklable=False)
+    def create(self, item:str, fromTime:str, format=False) -> MasterReportObject:
+        data = jsonpickle.encode(CreateMasterReportObject(item, fromTime), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/master-reports', data_str)
-        result = MasterReportObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            return MasterReportObject(result)
+        else:
+            print('Please Check the input value of format.')
 
-    def delete_master_report_all(self):
+    def delete_all(self):
         self.conn.delete('/master-reports')
         return True
 
-    def delete_master_report_by_id(self, id: str):
+    def delete_by_id(self, id: str):
         self.conn.delete('/master-reports', {'id': id})
         return True
