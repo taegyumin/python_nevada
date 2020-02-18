@@ -164,7 +164,6 @@ class Connector:
             uri=uri,
             query='' if query == {} else '?',
             http_query=self.build_http_query(query))
-
         headers = self.get_header('DELETE', uri)
 
         try:
