@@ -48,4 +48,4 @@ class LabelRef:
                 labelref_list.append(labelref)
             return labelref_list
         else:
-            print('Check the type, value of input parameter json.')
+            print('Please Check the input value of format.')
