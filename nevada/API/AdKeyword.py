@@ -101,7 +101,7 @@ class AdKeyword:
         result = AdKeywordObject(result)
         return result
 
-    def update_adkeyrword(self, nccKeywordId, fields, UpdateAdKeywordObject) -> AdKeywordObject:
+    def update_adkeyword(self, nccKeywordId, fields, UpdateAdKeywordObject) -> AdKeywordObject:
         data = jsonpickle.encode(UpdateAdKeywordObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
