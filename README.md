@@ -65,4 +65,6 @@ Python 파일을 만들고, 아래 코드를 실행하십시오. <br>
 
 ### 1.0.4
 - docs/MasterReport.md, StatReport.md 추가
-- API/
+- API/MasterReport.py의 delete_by_id(id) 오류 수정
+
+### 1.0.5
