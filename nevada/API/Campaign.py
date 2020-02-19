@@ -69,7 +69,7 @@ class Campaign:
         result = self.conn.get('/ncc/campaigns/' + campaignId)
         if format in [False, 'json']:
             return result
-        elif format in [True, 'object']:
+        elif format in [True, 'object', 'list']:
             camp = CampaignObject(result)
             return camp
         else:
@@ -81,7 +81,7 @@ class Campaign:
         result = self.conn.get('/ncc/campaigns', query)
         if format in [False, 'json']:
             return result
-        elif format in [True, 'object']:
+        elif format in [True, 'object', 'list']:
             camp_list = []
             for arr in result:
                 camp = CampaignObject(arr)

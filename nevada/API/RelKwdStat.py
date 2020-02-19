@@ -24,7 +24,7 @@ class RelKwdStat:
 
     RelKwdStatObjectList = List[RelKwdStatObject]
 
-    def get_json(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
+    def get_RelKwdStat(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
                               month: int = None, showDetail: str = '1'):
         query = {'siteId': siteId,
                  'biztpId': biztpId,

@@ -166,7 +166,7 @@ class Estimate:
             return result
         elif format in [True, 'object', 'list']:
             estimate_list = []
-            for arr in result_json:
+            for arr in result:
                 estimate = EstimatePerformanceObject(arr)
                 estimate_list.append(estimate)
             return estimate_list

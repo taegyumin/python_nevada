@@ -31,7 +31,7 @@ class IpExclusion:
 
     ExclusionIdList = List[str]
 
-    def get_ip_exclusion(self, format=False):
+    def get_ip_exclusion(self, format=True):
         result = self.conn.get('/tool/ip-exclusions')
         if format in [False, 'json']:
             return result
