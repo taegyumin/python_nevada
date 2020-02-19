@@ -65,7 +65,7 @@ class Campaign:
     CampaignIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get_campaign_by_id(self, campaignId: str, format=True) -> CampaignObject:
+    def get_by_id(self, campaignId: str, format=True) -> CampaignObject:
         result = self.conn.get('/ncc/campaigns/' + campaignId)
         if format in [False, 'json']:
             return result
@@ -75,7 +75,7 @@ class Campaign:
         else:
             print('Please Check the input value of format.')
 
-    def get_campaign_by_ids(self, ids: CampaignIdList, format=True) -> CampaignList:
+    def list_by_ids(self, ids: CampaignIdList, format=True) -> CampaignList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/campaigns', query)
@@ -90,7 +90,7 @@ class Campaign:
         else:
             print('Please Check the input value of format.')
 
-    def get_campaign_list(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
+    def list_by_customer_id_or_campaign_type(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
                           selector: str = None) -> CampaignList:
         query = {'campaignType': campaignType, 'baseSearchId': baseSearchId, 'recordSize': recordSize,
                  'selector': selector}
@@ -102,7 +102,7 @@ class Campaign:
             camp_list.append(camp)
         return camp_list
 
-    def create_campaign(self, campaign_add_object: CampaignAddObject):
+    def create(self, campaign_add_object: CampaignAddObject):
 
         data = jsonpickle.encode(campaign_add_object, unpicklable=False)
         data = json.loads(data)
@@ -112,7 +112,7 @@ class Campaign:
         camp = CampaignObject(result)
         return camp
 
-    def update_campaign(self, campaign_update_object: CampaignUpdateObject, campaignId: str,
+    def update(self, campaign_update_object: CampaignUpdateObject, campaignId: str,
                         fields: ChangeFieldsList) -> CampaignObject:
         fields = ",".join(fields)
         fields = {'fields': fields}

@@ -69,7 +69,7 @@ class Ad:
     AdObjectList = List[AdObject]
     ChangeFieldsList = List[str]
 
-    def get_ad_by_ad_id(self, adId: str, format=True) -> AdObject:
+    def get(self, adId: str, format=True) -> AdObject:
         result = self.conn.get('/ncc/ads/' + adId)
         if format in [False, 'json']:
             return result
@@ -79,7 +79,7 @@ class Ad:
         else:
             print('Please Check the input value of format.')
 
-    def get_ad_by_adgroup_id(self, nccAdGroupId: str, format=True) -> AdObjectList:
+    def list_by_adgroup_id(self, nccAdGroupId: str, format=True) -> AdObjectList:
         result = self.conn.get('/ncc/ads', {'nccAdgroupId': nccAdGroupId})
         if format in [False, 'json']:
             return result
@@ -92,7 +92,7 @@ class Ad:
         else:
             print('Please Check the input value of format.')
 
-    def get_ad_by_ad_ids(self, ids: AdIdList, format=True) -> AdObjectList:
+    def list(self, ids: AdIdList, format=True) -> AdObjectList:
         ids = ",".join(ids)
         ids = {'ids': ids}
         result = self.conn.get('/ncc/ads', ids)
@@ -107,7 +107,7 @@ class Ad:
         else:
             print('Please Check the input value of format.')
 
-    def create_ad(self, CreateAdObject: CreateAdObject) -> AdObject:
+    def create(self, CreateAdObject: CreateAdObject) -> AdObject:
         data = jsonpickle.encode(CreateAdObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -117,7 +117,7 @@ class Ad:
         result = AdObject(result)
         return result
 
-    def update_ad(self, adId: str, fields: ChangeFieldsList, UpdateAdObject: UpdateAdObject) -> AdObject:
+    def update(self, adId: str, fields: ChangeFieldsList, UpdateAdObject: UpdateAdObject) -> AdObject:
         change_fields_list = ",".join(fields)
         query = {'fields': change_fields_list}
         data = jsonpickle.encode(UpdateAdObject, unpicklable=False)
@@ -129,11 +129,11 @@ class Ad:
         result = AdObject(result)
         return result
 
-    def delete_ad(self, adId: str):
+    def delete(self, adId: str):
         self.conn.delete('/ncc/ads/' + adId)
         return True
 
-    def copy_ad(self, adId: str, targetAdGroupId: str, userLock: bool) -> AdObject:
+    def copy(self, adId: str, targetAdGroupId: str, userLock: bool) -> AdObject:
         query = {'ids': adId, 'targetAdgroupId': targetAdGroupId, 'userLock': userLock}
         result = self.conn.put('/ncc/ads', None, query)
         result = AdObject(result)

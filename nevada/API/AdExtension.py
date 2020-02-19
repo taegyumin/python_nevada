@@ -45,7 +45,7 @@ class AdExtension:  # 확장소재
     IdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get_ad_extensions_list(self, ownerId: str) -> AdExtensionObjectList:
+    def list_by_owner_id(self, ownerId: str) -> AdExtensionObjectList:
         result = self.conn.get('/ncc/ad-extensions', {'ownerId': ownerId})
         adext_list = []
         for arr in result:
@@ -53,7 +53,7 @@ class AdExtension:  # 확장소재
             adext_list.append(camp)
         return adext_list
 
-    def get_ad_extensions_list_by_ids(self, ids: IdList) -> AdExtensionObjectList:
+    def list_by_ids(self, ids: IdList) -> AdExtensionObjectList:
         ids = ",".join(ids)
         ids = {'ids': ids}
         result = self.conn.get('/ncc/ad-extensions', ids)
@@ -63,13 +63,13 @@ class AdExtension:  # 확장소재
             adext_list.append(camp)
         return adext_list
 
-    def get_ad_extensions(self, adExtensionId: str) -> AdExtensionObject:
+    def get(self, adExtensionId: str) -> AdExtensionObject:
         result = self.conn.get('/ncc/ad-extensions/' + adExtensionId)
         result = AdExtensionObject(result)
 
         return result
 
-    def create_ad_extensions(self, CreateAdExtensionObject: CreateAdExtensionObject) -> AdExtensionObject:
+    def create(self, CreateAdExtensionObject: CreateAdExtensionObject) -> AdExtensionObject:
         data = jsonpickle.encode(CreateAdExtensionObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -93,6 +93,6 @@ class AdExtension:  # 확장소재
         result = AdExtensionObject(result)
         return result
 
-    def delete_ad_extensions(self, adExtensionId: str):
+    def delete(self, adExtensionId: str):
         self.conn.delete('/ncc/ad-extensions/' + adExtensionId)
         return True

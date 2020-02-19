@@ -33,7 +33,7 @@ class ManagedKeyword:
 
     KeywordsList = List[str]
 
-    def managed_keyword(self, keywords: KeywordsList, format=True) -> ManagedKeywordObject:
+    def list_by_keywords(self, keywords: KeywordsList, format=True) -> ManagedKeywordObject:
         keywords = ",".join(keywords)
         query = {'keywords': keywords}
         result = self.conn.get('/ncc/managedKeyword', query)

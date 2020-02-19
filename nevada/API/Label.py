@@ -27,7 +27,7 @@ class Label:
 
     LabelObjectList = List[LabelObject]
 
-    def get_label(self, format=False):
+    def list(self, format=False):
         result = self.conn.get('/ncc/labels')
         if format in [False, 'json']:
             return result
@@ -40,7 +40,7 @@ class Label:
         else:
             print('Please Check the input value of format.')
 
-    def update_label(self, color:str, name:str, nccLabelId:str) -> LabelObject:
+    def update(self, color:str, name:str, nccLabelId:str) -> LabelObject:
         data = jsonpickle.encode(UpdateLabelObject(color, name, nccLabelId), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)

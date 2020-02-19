@@ -59,8 +59,7 @@ class StatReport:  #대용량 다운로드 보고서
         if format in [False, 'json']:
             return result
         elif format in [True, 'object', 'list']:
-            result = StatReportObject(result)
-            return result
+            return StatReportObject(result)
         else:
             print('Please Check the input value of format.')
 

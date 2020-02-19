@@ -72,7 +72,7 @@ class BusinessChannel:
     BusinessChannelObjectList = List[BusinessChannelObject]
     BusinessChannelIdList = List[str]
 
-    def get_business_channel(self, businessChannelId: str, format=True):
+    def get(self, businessChannelId: str, format=True):
         result = self.conn.get('/ncc/channels/' + businessChannelId)
         if format in [False, 'json']:
             return result
@@ -82,7 +82,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def get_business_channel_all(self, format=True):
+    def list(self, format=True):
         result = self.conn.get('/ncc/channels')
         if format in [False, 'json']:
             return result
@@ -95,7 +95,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def get_business_channel_by_type(self, channelTp: str, format=True):
+    def list_by_channel_type(self, channelTp: str, format=True):
         result = self.conn.get('/ncc/channels', {'channelTp': channelTp})
         if format in [False, 'json']:
             return result
@@ -108,7 +108,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def get_business_channel_by_ids(self, ids: BusinessChannelIdList):
+    def list_by_ids(self, ids: BusinessChannelIdList):
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/channels', query)
@@ -123,7 +123,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def create_business_channel(self, CreateBusinessChannelObject: CreateBusinessChannelObject) -> BusinessChannelObject:
+    def create(self, CreateBusinessChannelObject: CreateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(CreateBusinessChannelObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -132,8 +132,7 @@ class BusinessChannel:
         result = BusinessChannelObject(result)
         return result
 
-    def update_business_channel(self, fields,
-                                UpdateBusinessChannelObject: UpdateBusinessChannelObject) -> BusinessChannelObject:
+    def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(UpdateBusinessChannelObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -142,11 +141,11 @@ class BusinessChannel:
         result = BusinessChannelObject(result)
         return result
 
-    def delete_business_channel(self, businessChannelId: str):
+    def delete_by_id(self, businessChannelId: str):
         self.conn.delete('/ncc/channels/' + businessChannelId)
         return True
 
-    def delete_business_channel_by_ids(self, ids: BusinessChannelIdList):
+    def delete_by_ids(self, ids: BusinessChannelIdList):
         ids = ",".join(ids)
         query = {'ids': ids}
         self.conn.delete('/ncc/channels', query)

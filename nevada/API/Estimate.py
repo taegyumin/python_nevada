@@ -98,7 +98,7 @@ class Estimate:
     GetPerformanceObjectList = List[GetPerformanceObject]
     GetPerformanceBulkObjectList = List[GetPerformanceBulkObject]
 
-    def get_avg_position_bid(self, type, device, key_and_position_list, format=True):
+    def get_average_position_bid(self, type, device, key_and_position_list, format=True):
         temp = []
         for key_and_position in key_and_position_list:
              temp.append(KeyAndPositionObject(key_and_position[0],key_and_position[1]))
@@ -118,7 +118,7 @@ class Estimate:
         else:
             print('Please Check the input value of format.')
 
-    def get_exposure_mini_bid(self, type: str, device, period, keys, format=True):
+    def get_exposure_minimum_bid(self, type: str, device, period, keys, format=True):
         data = jsonpickle.encode(GetExposureMiniBidObject(device, period, keys), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)

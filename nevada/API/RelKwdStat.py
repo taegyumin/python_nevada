@@ -24,7 +24,7 @@ class RelKwdStat:
 
     RelKwdStatObjectList = List[RelKwdStatObject]
 
-    def get_RelKwdStat(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
+    def list(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
                               month: int = None, showDetail: str = '1'):
         query = {'siteId': siteId,
                  'biztpId': biztpId,
@@ -42,7 +42,6 @@ class RelKwdStat:
             for arr in result:
                 relstat = RelKwdStatObject(arr)
                 relstat_list.append(relstat)
-
             return relstat_list
         else:
             print('Please Check the input value of format.')

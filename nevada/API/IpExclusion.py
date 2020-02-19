@@ -31,7 +31,7 @@ class IpExclusion:
 
     ExclusionIdList = List[str]
 
-    def get_ip_exclusion(self, format=True):
+    def get(self, format=True):
         result = self.conn.get('/tool/ip-exclusions')
         if format in [False, 'json']:
             return result
@@ -45,7 +45,7 @@ class IpExclusion:
             print('Please Check the input value of format.')
         return result
 
-    def create_ip_exclusion(self, filterIp, memo) -> IpExclusionObject:
+    def create(self, filterIp, memo) -> IpExclusionObject:
         data = jsonpickle.encode(CreateIpExclusionObject(filterIp, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -54,7 +54,7 @@ class IpExclusion:
         result = IpExclusionObject(result)
         return result
 
-    def update_ip_exclusion(self, filterIp, ipFilterId, memo) -> IpExclusionObject:
+    def update(self, filterIp, ipFilterId, memo) -> IpExclusionObject:
         data = jsonpickle.encode(UpdateIpExclusionObject(filterIp, ipFilterId, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -63,12 +63,12 @@ class IpExclusion:
         result = IpExclusionObject(result)
         return result
 
-    def delete_ip_exclusion(self, id: str):
+    def delete_by_id(self, id: str):
         result = self.conn.delete('/tool/ip-exclusions/' + id)
         result = IpExclusionObject(result)
         return result
 
-    def delete_ip_exclusion_many(self, id_array: ExclusionIdList):
+    def delete_by_ids(self, id_array: ExclusionIdList):
         query = {'ids':id_array}
         self.conn.delete('/tool/ip-exclusions', query)
         return True

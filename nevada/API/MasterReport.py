@@ -70,5 +70,5 @@ class MasterReport: #광고 정보 일괄 다운로드
         return True
 
     def delete_by_id(self, id: str):
-        self.conn.delete('/master-reports/', {'id': id})
+        self.conn.delete('/master-reports/'+id)
         return True

@@ -32,12 +32,16 @@ class ManagedCustomerLink:
 
     ManagedCustomerLinkObjectList = List[ManagedCustomerLinkObject]
 
-    def get_managed_customer_link_list(self, rel_type: str = None) -> ManagedCustomerLinkObjectList:
+    def list(self, rel_type: str = None) -> ManagedCustomerLinkObjectList:
         query = {'type': rel_type}
         result = self.conn.get('/customer-links', query)
-        customer_list = []
-        for arr in result:
-            customer = ManagedCustomerLinkObject(arr)
-            customer_list.append(customer)
-
-        return customer_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            customer_list = []
+            for arr in result:
+                customer = ManagedCustomerLinkObject(arr)
+                customer_list.append(customer)
+            return customer_list
+        else:
+            print('Please Check the input value of format.')

@@ -30,7 +30,7 @@ class LabelRef:
 
     LabelRefObjectList = List[LabelRefObject]
 
-    def update_label_ref(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None, format=False) -> LabelRefObjectList:
+    def update(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None, format=False) -> LabelRefObjectList:
         data = jsonpickle.encode(UpdateLabelRefObject(editTm, customerId, enable, nccLabelId, refId, refTp, regTm),
                                  unpicklable=False)
         data = json.loads(data)
@@ -49,4 +49,3 @@ class LabelRef:
             return labelref_list
         else:
             print('Please Check the input value of format.')
-

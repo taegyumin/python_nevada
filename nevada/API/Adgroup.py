@@ -180,7 +180,7 @@ class Adgroup:
     RestrictedKeywordIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get_adgroup_by_id(self, adgroupId: str, format=True) -> AdgroupObject:
+    def get_by_id(self, adgroupId: str, format=True) -> AdgroupObject:
         result = self.conn.get('/ncc/adgroups/' + adgroupId)
         if format in [False, 'json']:
             return result
@@ -190,7 +190,7 @@ class Adgroup:
         else:
             print('Please Check the input value of format.')
 
-    def get_adgroup_by_ids(self, ids: AdgroupIdList, format=True) -> AdgroupList:
+    def list_by_ids(self, ids: AdgroupIdList, format=True) -> AdgroupList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/adgroups', query)
@@ -247,7 +247,7 @@ class Adgroup:
         result = AdgroupObject(result)
         return result
 
-    def update_adgroup(self, adgroupId: str, fields: ChangeFieldsList, UpdateAdgroupObject: UpdateAdgroupObject):
+    def update(self, adgroupId: str, fields: ChangeFieldsList, UpdateAdgroupObject: UpdateAdgroupObject):
         change_fields_list = ",".join(fields)
         query = {'fields': change_fields_list}
         data = jsonpickle.encode(UpdateAdgroupObject, unpicklable=False)
@@ -258,7 +258,7 @@ class Adgroup:
         result = AdgroupObject(result)
         return result
 
-    def update_adgroup_entire(self, adgroupId: str, UpdateEntireAdgroupObject: UpdateEntireAdgroupObject):
+    def update_by_fields(self, adgroupId: str, UpdateEntireAdgroupObject: UpdateEntireAdgroupObject):
         data = jsonpickle.encode(UpdateEntireAdgroupObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
