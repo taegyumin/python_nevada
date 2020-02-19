@@ -130,6 +130,7 @@ class Bizmoney:
 
 
     def get_period(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyPeriodObjectList:
+        #채워야 함
         result = self.conn.get('/billing/bizmoney/histories/period{?searchStartDt,searchEndDt}')
         if format in [False, 'json']:
             return result
@@ -141,5 +142,3 @@ class Bizmoney:
             return period_list
         else:
             print('Please Check the input value of format.')
-
-

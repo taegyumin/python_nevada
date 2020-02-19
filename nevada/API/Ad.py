@@ -28,19 +28,19 @@ class AdFieldObject:
         return mobile['display']
 
 class UpdateAdObject:
-    def __init__(self, adAttr, nccAdId):
+    def __init__(self, adAttr, nccAdId, inspectRequestMsg=None, userLock = None):
         self.adAttr = adAttr
-        self.inspectRequestMsg = None
+        self.inspectRequestMsg = inspectRequestMsg
         self.nccAdId = nccAdId
-        self.userLock = None
+        self.userLock = userLock
 
 class CreateAdObject:
-    def __init__(self, adObject, nccAdgroupId, type):
+    def __init__(self, adObject, nccAdgroupId, type, inspectRequestMsg=None, userLock=None):
         self.ad = adObject
-        self.inspectRequestMsg = None
+        self.inspectRequestMsg = inspectRequestMsg
         self.nccAdgroupId = nccAdgroupId
         self.type = type
-        self.userLock = None
+        self.userLock = userLock
 
 class AdObject:
     def __init__(self, json_def):
@@ -74,8 +74,7 @@ class Ad:
         if format in [False, 'json']:
             return result
         elif format in [True, 'object']:
-            result = AdObject(result)
-            return result
+            return AdObject(result)
         else:
             print('Please Check the input value of format.')
 
@@ -107,34 +106,48 @@ class Ad:
         else:
             print('Please Check the input value of format.')
 
-    def create(self, CreateAdObject: CreateAdObject) -> AdObject:
-        data = jsonpickle.encode(CreateAdObject, unpicklable=False)
+    def create(self, adObject, nccAdgroupId, type, inspectRequestMsg, userLock, format=True) -> AdObject:
+        data = jsonpickle.encode(CreateAdObject(adObject, nccAdgroupId, type, inspectRequestMsg, userLock), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = data
         data_str = json.dumps(data_str)
         result = self.conn.post('/ncc/ads', data_str)
-        result = AdObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            return AdObject(result)
+        else:
+            print('Please Check the input value of format.')
 
-    def update(self, adId: str, fields: ChangeFieldsList, UpdateAdObject: UpdateAdObject) -> AdObject:
+    def update(self, adId: str, fields: ChangeFieldsList, adAttr, inspectRequestMsg, nccAdId, userLock, format=True) -> AdObject:
         change_fields_list = ",".join(fields)
         query = {'fields': change_fields_list}
-        data = jsonpickle.encode(UpdateAdObject, unpicklable=False)
+        data = jsonpickle.encode(UpdateAdObject(adAttr=adAttr, inspectRequestMsg=inspectRequestMsg, nccAdId=nccAdId, userLock=userLock), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = data
         data_str = json.dumps(data_str)
         result = self.conn.put('/ncc/ads/' + adId, data_str, query)
-        result = AdObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = AdObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
     def delete(self, adId: str):
         self.conn.delete('/ncc/ads/' + adId)
         return True
 
-    def copy(self, adId: str, targetAdGroupId: str, userLock: bool) -> AdObject:
+    def copy(self, adId: str, targetAdGroupId: str, userLock: bool, format=True) -> AdObject:
         query = {'ids': adId, 'targetAdgroupId': targetAdGroupId, 'userLock': userLock}
         result = self.conn.put('/ncc/ads', None, query)
-        result = AdObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = AdObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')

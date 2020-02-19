@@ -15,7 +15,7 @@
 
 ### nccAdgroupId로 광고그룹 정보 조회하기
 #### 코드 예시
-    result = adgroup.get_adgroup_by_id('grp-a001-01-000000014208744',json=False)
+    result = adgroup.get('grp-a001-01-000000014208744', format=True)
     CommonFunctions.print_all_attr(result)
 
     targets = result.targets
@@ -93,7 +93,7 @@
 	
 ### nccAdgroupId의 list로 여러 광고그룹 정보 조회하기
 #### 코드 예시
-    result_list = adgroup.get_adgroup_by_ids(['grp-a001-01-000000014208744','grp-a001-03-000000014209115'],json=False)
+    result_list = adgroup.list_by_ids(['grp-a001-01-000000014208744','grp-a001-03-000000014209115'], format=True)
     for result in result_list:
         CommonFunctions.print_all_attr(result)
 	

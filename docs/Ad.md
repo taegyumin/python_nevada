@@ -15,7 +15,7 @@
 
 ### nccAdId로 소재 정보 조회하기
 #### 코드 예시
-    CommonFunctions.print_all_attr(ad.get_ad_by_ad_id('nad-a001-03-000000086038948', json=False))
+    CommonFunctions.print_all_attr(ad.get('nad-a001-03-000000086038948', format=True))
 
 #### 결과 예시
 	ad : 
@@ -41,9 +41,9 @@
 
 ### nccAdGroupId으로 해당 Adgroup에 속한 소재 정보 조회하기
 #### 코드 예시
-    result_list = ad.get_ad_by_adgroup_id(nccAdGroupId='grp-a001-01-000000014208744',json=False)
+    result_list = ad.list_by_adgroup_id(nccAdGroupId='grp-a001-01-000000014208744',format=True)
     for result in result_list:
-      CommonFunctions.print_all_attr(result)
+        CommonFunctions.print_all_attr(result)
 
 #### 결과 예시
 	ad : 
@@ -68,9 +68,9 @@
 	
 ### nccAdId의 list로 여러 소재 정보 조회하기
 #### 코드 예시
-    result_list = ad.get_ad_by_ad_ids(['nad-a001-01-000000086037429','nad-a001-03-000000086038948'], json=False)
+    result_list = ad.list(['nad-a001-01-000000086037429','nad-a001-03-000000086038948'], format=True)
     for result in result_list:
-       CommonFunctions.print_all_attr(result)
+        CommonFunctions.print_all_attr(result)
        
 #### 결과 예시
 	ad : 
@@ -113,3 +113,11 @@
 	type : CONTENTS_AD_INFORMATION
 	userLock : False
 	
+### 소재 업데이트하기
+def update(...)
+
+### 소재 삭제하기
+def delete(...)
+
+###소재 복사하기
+def copy(...)

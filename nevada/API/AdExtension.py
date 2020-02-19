@@ -4,11 +4,11 @@ import jsonpickle
 import json
 
 class CreateAdExtensionObject:
-    def __init__(self, pcChannelId, mobileChannelId, ownerId, type, userLock):
+    def __init__(self, pcChannelId, mobileChannelId, ownerId, type, userLock, schedule=None):
         self.pcChannelId = pcChannelId
         self.mobileChannelId = mobileChannelId
         self.ownerId = ownerId
-        self.schedule = None
+        self.schedule = schedule
         self.type = type
         self.userLock = userLock
 
@@ -45,43 +45,61 @@ class AdExtension:  # 확장소재
     IdList = List[str]
     ChangeFieldsList = List[str]
 
-    def list_by_owner_id(self, ownerId: str) -> AdExtensionObjectList:
+    def list_by_owner_id(self, ownerId: str, format=True) -> AdExtensionObjectList:
         result = self.conn.get('/ncc/ad-extensions', {'ownerId': ownerId})
-        adext_list = []
-        for arr in result:
-            camp = AdExtensionObject(arr)
-            adext_list.append(camp)
-        return adext_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            adext_list = []
+            for arr in result:
+                camp = AdExtensionObject(arr)
+                adext_list.append(camp)
+            return adext_list
+        else:
+            print('Please Check the input value of format.')
 
-    def list_by_ids(self, ids: IdList) -> AdExtensionObjectList:
+    def list_by_ids(self, ids: IdList, format=True) -> AdExtensionObjectList:
         ids = ",".join(ids)
         ids = {'ids': ids}
         result = self.conn.get('/ncc/ad-extensions', ids)
-        adext_list = []
-        for arr in result:
-            camp = AdExtensionObject(arr)
-            adext_list.append(camp)
-        return adext_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            adext_list = []
+            for arr in result:
+                camp = AdExtensionObject(arr)
+                adext_list.append(camp)
+            return adext_list
+        else:
+            print('Please Check the input value of format.')
 
-    def get(self, adExtensionId: str) -> AdExtensionObject:
+    def get(self, adExtensionId: str, format=True) -> AdExtensionObject:
         result = self.conn.get('/ncc/ad-extensions/' + adExtensionId)
-        result = AdExtensionObject(result)
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = AdExtensionObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-        return result
-
-    def create(self, CreateAdExtensionObject: CreateAdExtensionObject) -> AdExtensionObject:
+    def create(self, CreateAdExtensionObject: CreateAdExtensionObject, format=True) -> AdExtensionObject:
         data = jsonpickle.encode(CreateAdExtensionObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = data
         data_str = json.dumps(data_str)
-
         result = self.conn.post('/ncc/ad-extensions', data_str)
-        result = AdExtensionObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = AdExtensionObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-    def update_ad_extensions(self, adExtensionId: str, fields: ChangeFieldsList,
-                             UpdateAdExtensionObject: UpdateAdExtensionObject) -> AdExtensionObject:
+    def update(self, adExtensionId: str, fields: ChangeFieldsList,
+                             UpdateAdExtensionObject: UpdateAdExtensionObject, format=True) -> AdExtensionObject:
         data = jsonpickle.encode(UpdateAdExtensionObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -90,8 +108,13 @@ class AdExtension:  # 확장소재
         change_fields_list = ",".join(fields)
         query = {'fields': change_fields_list}
         result = self.conn.put('/ncc/ad-extensions/' + adExtensionId, data_str, query)
-        result = AdExtensionObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = AdExtensionObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
     def delete(self, adExtensionId: str):
         self.conn.delete('/ncc/ad-extensions/' + adExtensionId)
