@@ -72,52 +72,56 @@ class BusinessChannel:
     BusinessChannelObjectList = List[BusinessChannelObject]
     BusinessChannelIdList = List[str]
 
-    def get_business_channel_json(self, businessChannelId: str):
+    def get_business_channel(self, businessChannelId: str, format=True):
         result = self.conn.get('/ncc/channels/' + businessChannelId)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object']:
+            result = BusinessChannelObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-    def get_business_channel_list(self, businessChannelId: str) -> BusinessChannelObject:
-        result = self.get_business_channel_json(businessChannelId)
-        result = BusinessChannelObject(result)
-        return result
-
-    def get_business_channel_all_json(self):
+    def get_business_channel_all(self, format=True):
         result = self.conn.get('/ncc/channels')
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            business_channel_list = []
+            for arr in result:
+                channel = BusinessChannelObject(arr)
+                business_channel_list.append(channel)
+            return business_channel_list
+        else:
+            print('Please Check the input value of format.')
 
-    def get_business_channel_all_list(self) -> BusinessChannelObjectList:
-        result = self.get_business_channel_all_json()
-        business_channel_list = []
-        for arr in result:
-            channel = BusinessChannelObject(arr)
-            business_channel_list.append(channel)
-        return business_channel_list
-
-    def get_business_channel_by_type_json(self, channelTp: str):
+    def get_business_channel_by_type(self, channelTp: str, format=True):
         result = self.conn.get('/ncc/channels', {'channelTp': channelTp})
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            business_channel_list = []
+            for arr in result:
+                channel = BusinessChannelObject(arr)
+                business_channel_list.append(channel)
+            return business_channel_list
+        else:
+            print('Please Check the input value of format.')
 
-    def get_business_channel_by_type_list(self, channelTp: str) -> BusinessChannelObjectList:
-        result = self.get_business_channel_by_type_json(channelTp)
-        business_channel_list = []
-        for arr in result:
-            channel = BusinessChannelObject(arr)
-            business_channel_list.append(channel)
-        return business_channel_list
-
-    def get_business_channel_by_ids_json(self, ids: BusinessChannelIdList):
+    def get_business_channel_by_ids(self, ids: BusinessChannelIdList):
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/channels', query)
-        return result
-
-    def get_business_channel_by_ids_list(self, ids: BusinessChannelIdList) -> BusinessChannelObjectList:
-        result = self.get_business_channel_by_ids_json(ids)
-        business_channel_list = []
-        for arr in result:
-            channel = BusinessChannelObject(arr)
-            business_channel_list.append(channel)
-        return business_channel_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            business_channel_list = []
+            for arr in result:
+                channel = BusinessChannelObject(arr)
+                business_channel_list.append(channel)
+            return business_channel_list
+        else:
+            print('Please Check the input value of format.')
 
     def create_business_channel(self, CreateBusinessChannelObject: CreateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(CreateBusinessChannelObject, unpicklable=False)

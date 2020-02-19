@@ -31,17 +31,19 @@ class IpExclusion:
 
     ExclusionIdList = List[str]
 
-    def get_ip_exclusion_json(self):
+    def get_ip_exclusion(self, format=False):
         result = self.conn.get('/tool/ip-exclusions')
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            ip_exclusion_list = []
+            for arr in result:
+                ipex = IpExclusionObject(arr)
+                ip_exclusion_list.append(ipex)
+            return ip_exclusion_list
+        else:
+            print('Please Check the input value of format.')
         return result
-
-    def get_ip_exclusion_list(self):
-        result_list = self.get_ip_exclusion_json()
-        ip_exclusion_list = []
-        for arr in result_list:
-            ipex = IpExclusionObject(arr)
-            ip_exclusion_list.append(ipex)
-        return ip_exclusion_list
 
     def create_ip_exclusion(self, filterIp, memo) -> IpExclusionObject:
         data = jsonpickle.encode(CreateIpExclusionObject(filterIp, memo), unpicklable=False)
@@ -52,7 +54,7 @@ class IpExclusion:
         result = IpExclusionObject(result)
         return result
 
-    def update_ip_exclusion(self, filterIp, ipFilterId, memo) -> UpdateIpExclusionObject:
+    def update_ip_exclusion(self, filterIp, ipFilterId, memo) -> IpExclusionObject:
         data = jsonpickle.encode(UpdateIpExclusionObject(filterIp, ipFilterId, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)

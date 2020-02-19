@@ -33,17 +33,17 @@ class ManagedKeyword:
 
     KeywordsList = List[str]
 
-    def managed_keyword_list(self, keywords: KeywordsList, json=False) -> ManagedKeywordObject:
+    def managed_keyword(self, keywords: KeywordsList, format=True) -> ManagedKeywordObject:
         keywords = ",".join(keywords)
         query = {'keywords': keywords}
         result = self.conn.get('/ncc/managedKeyword', query)
-        if json==False:
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
             managedkeyword_list = []
             for arr in result:
                 managedkeyword = ManagedKeywordObject(arr)
                 managedkeyword_list.append(managedkeyword)
             return managedkeyword_list
-        elif json==True:
-            return result
         else:
-            print('Check the type, value of input parameter json.')
+            print('Please Check the input value of format.')

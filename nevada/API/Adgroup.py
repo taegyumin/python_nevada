@@ -180,30 +180,30 @@ class Adgroup:
     RestrictedKeywordIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get_adgroup_by_id(self, adgroupId: str, json=False) -> AdgroupObject:
+    def get_adgroup_by_id(self, adgroupId: str, format=True) -> AdgroupObject:
         result = self.conn.get('/ncc/adgroups/' + adgroupId)
-        if json==False:
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object']:
             adgroup = AdgroupObject(result)
             return adgroup
-        elif json==True:
-            return result
         else:
-            print('Check the type, value of input parameter json.')
+            print('Please Check the input value of format.')
 
-    def get_adgroup_by_ids(self, ids: AdgroupIdList, json=False) -> AdgroupList:
+    def get_adgroup_by_ids(self, ids: AdgroupIdList, format=True) -> AdgroupList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/adgroups', query)
-        if json==False:
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
             adgroup_list = []
             for arr in result:
                 camp = AdgroupObject(arr)
                 adgroup_list.append(camp)
             return adgroup_list
-        elif json==True:
-            return result
         else:
-            print('Check the type, value of input parameter json.')
+            print('Please Check the input value of format.')
 
     def get_restricted_keyword(self, adgroupId: str) -> RestrictedKeywordList:
         query = {'type': 'KEYWORD_PLUS_RESTRICT'}

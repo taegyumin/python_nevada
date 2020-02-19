@@ -35,14 +35,14 @@ class RelKwdStat:
                  }
         result = self.conn.get(uri='/keywordstool', query=query)
         result = result['keywordList']
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            relstat_list = []
+            for arr in result:
+                relstat = RelKwdStatObject(arr)
+                relstat_list.append(relstat)
 
-    def get_list(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
-                              month: int = None, showDetail: str = '1') -> RelKwdStatObjectList:
-        result_json = self.get_json(siteId, biztpId, hintKeywords, event, month, showDetail)
-        relstat_list = []
-        for arr in result_json:
-            relstat = RelKwdStatObject(arr)
-            relstat_list.append(relstat)
-
-        return relstat_list
+            return relstat_list
+        else:
+            print('Please Check the input value of format.')

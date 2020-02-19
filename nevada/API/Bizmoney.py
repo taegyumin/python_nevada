@@ -81,7 +81,7 @@ class Bizmoney:
         result = self.conn.get('/billing/bizmoney')
         if format in [False, 'json']:
             return result
-        elif format in [True, 'object', 'list']:
+        elif format in [True, 'object']:
             return BizmoneyObject(result)
         else:
             print('Please Check the input value of format.')

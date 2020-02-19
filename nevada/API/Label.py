@@ -27,17 +27,18 @@ class Label:
 
     LabelObjectList = List[LabelObject]
 
-    def get_label_json(self):
+    def get_label(self, format=False):
         result = self.conn.get('/ncc/labels')
-        return result
-
-    def get_label_list(self) -> LabelObjectList:
-        result = self.get_label_json()
-        label_list = []
-        for arr in result:
-            label = LabelObject(arr)
-            label_list.append(label)
-        return label_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            label_list = []
+            for arr in result:
+                label = LabelObject(arr)
+                label_list.append(label)
+            return label_list
+        else:
+            print('Please Check the input value of format.')
 
     def update_label(self, color:str, name:str, nccLabelId:str) -> LabelObject:
         data = jsonpickle.encode(UpdateLabelObject(color, name, nccLabelId), unpicklable=False)

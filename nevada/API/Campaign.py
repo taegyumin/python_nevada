@@ -65,30 +65,30 @@ class Campaign:
     CampaignIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get_campaign_by_id(self, campaignId: str,json=False) -> CampaignObject:
+    def get_campaign_by_id(self, campaignId: str, format=True) -> CampaignObject:
         result = self.conn.get('/ncc/campaigns/' + campaignId)
-        if json==False:
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object']:
             camp = CampaignObject(result)
             return camp
-        elif json==True:
-            return result
         else:
-            print('Check the type, value of input parameter json.')
+            print('Please Check the input value of format.')
 
-    def get_campaign_by_ids(self, ids: CampaignIdList, json=False) -> CampaignList:
+    def get_campaign_by_ids(self, ids: CampaignIdList, format=True) -> CampaignList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/campaigns', query)
-        if json==False:
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object']:
             camp_list = []
             for arr in result:
                 camp = CampaignObject(arr)
                 camp_list.append(camp)
             return camp_list
-        elif json==True:
-            return result
         else:
-            print('Check the type, value of input parameter json.')
+            print('Please Check the input value of format.')
 
     def get_campaign_list(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
                           selector: str = None) -> CampaignList:
@@ -113,7 +113,7 @@ class Campaign:
         return camp
 
     def update_campaign(self, campaign_update_object: CampaignUpdateObject, campaignId: str,
-                        fields: ChangeFieldsList) -> CampaignList:
+                        fields: ChangeFieldsList) -> CampaignObject:
         fields = ",".join(fields)
         fields = {'fields': fields}
         data = jsonpickle.encode(campaign_update_object, unpicklable=False)

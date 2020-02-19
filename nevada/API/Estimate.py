@@ -98,7 +98,7 @@ class Estimate:
     GetPerformanceObjectList = List[GetPerformanceObject]
     GetPerformanceBulkObjectList = List[GetPerformanceBulkObject]
 
-    def get_avg_position_bid_json(self, type, device, key_and_position_list):
+    def get_avg_position_bid(self, type, device, key_and_position_list, format=True):
         temp = []
         for key_and_position in key_and_position_list:
              temp.append(KeyAndPositionObject(key_and_position[0],key_and_position[1]))
@@ -108,51 +108,53 @@ class Estimate:
         data_str = json.dumps(data)
         result = self.conn.post('/estimate/average-position-bid/' + type, data_str)
         result = result['estimate']
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            estimate_list = []
+            for arr in result:
+                estimate = EstimateAvgObject(arr)
+                estimate_list.append(estimate)
+        else:
+            print('Please Check the input value of format.')
 
-    def get_avg_position_bid_list(self, type, device, key_and_position_list) -> EstimateAvgObjectList:
-        result_json = self.get_avg_position_bid_json(type, device, key_and_position_list)
-        estimate_list = []
-        for arr in result_json:
-            estimate = EstimateAvgObject(arr)
-            estimate_list.append(estimate)
-        return estimate_list
-
-    def get_exposure_mini_bid_json(self, type: str, device, period, keys):
+    def get_exposure_mini_bid(self, type: str, device, period, keys, format=True):
         data = jsonpickle.encode(GetExposureMiniBidObject(device, period, keys), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/estimate/exposure-minimum-bid/' + type, data_str)
         result = result['estimate']
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            estimate_list = []
+            for arr in result:
+                estimate = EstimateExposureMiniObject(arr)
+                estimate_list.append(estimate)
+            return estimate_list
+        else:
+            print('Please Check the input value of format.')
 
-    def get_exposure_mini_bid_list(self, type: str, device, period, keys) -> EstimateExposureMiniObjectList:
-        result_json = self.get_exposure_mini_bid_json(type, device, period, keys)
-        estimate_list = []
-        for arr in result_json:
-            estimate = EstimateExposureMiniObject(arr)
-            estimate_list.append(estimate)
-        return estimate_list
-
-    def get_median_bid_json(self, type: str, device, period, keys):
+    def get_median_bid(self, type: str, device, period, keys, format=True):
         data = jsonpickle.encode(GetMedianBidObject(device, period, keys), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/estimate/median-bid/' + type, data_str)
         result = result['estimate']
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            estimate_list = []
+            for arr in result:
+                estimate = EstimateMedianObject(arr)
+                estimate_list.append(estimate)
+            return estimate_list
+        else:
+            print('Please Check the input value of format.')
 
-    def get_median_bid_list(self, type: str, device, period, keys) -> EstimateMedianObjectList:
-        result_json = self.get_median_bid_json(type, device, period, keys)
-        estimate_list = []
-        for arr in result_json:
-            estimate = EstimateMedianObject(arr)
-            estimate_list.append(estimate)
-        return estimate_list
-
-    def get_performance_json(self, type: str, device, keywordplus, key, bids):
+    def get_performance(self, type: str, device, keywordplus, key, bids, format=True):
         data = jsonpickle.encode(GetPerformanceObject(device, keywordplus, key, bids), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -160,15 +162,16 @@ class Estimate:
         query = {'items': data_str}
         result = self.conn.post('/estimate/performance/' + type, data_str, query=query)
         result = result['estimate']
-        return result
-
-    def get_performance_list(self, type: str, device, keywordplus, key, bids) -> EstimatePerformanceObjectList:
-        result_json = self.get_performance_json(type, device, keywordplus, key, bids)
-        estimate_list = []
-        for arr in result_json:
-            estimate = EstimatePerformanceObject(arr)
-            estimate_list.append(estimate)
-        return estimate_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            estimate_list = []
+            for arr in result_json:
+                estimate = EstimatePerformanceObject(arr)
+                estimate_list.append(estimate)
+            return estimate_list
+        else:
+            print('Please Check the input value of format.')
 
     # def get_performance_many_json(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
     #     data = jsonpickle.encode(GetPerformanceObjectList, unpicklable=False)
@@ -181,7 +184,7 @@ class Estimate:
     #     result = result['estimate']
     #     return result
 
-    def get_performance_bulk_json(self, type: str, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList):
+    def get_performance_bulk(self, type: str, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList, format=False):
         data = jsonpickle.encode(GetPerformanceBulkObjectList, unpicklable=False)
         data = json.loads(data)
         #data = CommonFunctions.dropna(data)
@@ -189,12 +192,13 @@ class Estimate:
         print(data_str)
         result = self.conn.post('/estimate/performance-bulk', data_str)
         result = result['estimate']
-        return result
-
-    def get_performance_bulk_list(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
-        result_json = self.get_performance_bulk_json(type, GetPerformanceObjectList)
-        estimate_list = []
-        for arr in result_json:
-            estimate = EstimatePerformanceObject(arr)
-            estimate_list.append(estimate)
-        return estimate_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            estimate_list = []
+            for arr in result:
+                estimate = EstimatePerformanceObject(arr)
+                estimate_list.append(estimate)
+            return estimate_list
+        else:
+            print('Please Check the input value of format.')
