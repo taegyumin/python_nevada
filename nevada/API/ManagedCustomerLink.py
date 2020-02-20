@@ -32,7 +32,7 @@ class ManagedCustomerLink:
 
     ManagedCustomerLinkObjectList = List[ManagedCustomerLinkObject]
 
-    def list(self, rel_type: str = None) -> ManagedCustomerLinkObjectList:
+    def list(self, rel_type: str = None, format=True) -> ManagedCustomerLinkObjectList:
         query = {'type': rel_type}
         result = self.conn.get('/customer-links', query)
         if format in [False, 'json']:
