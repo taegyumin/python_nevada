@@ -37,7 +37,7 @@
         
 ### 광고노출제한 IP 추가하기
 #### 코드 예시
-    result = ipExclusion.create(filterIp='111.111.111.113', memo='추가 된 IP', format=False)
+    result = ipExclusion.create(filterIp='111.111.111.113', memo='추가 된 IP', format=True)
     
     print('customer_id :', result.customerId)
     print('filterIp :', result.filterIp)
@@ -54,7 +54,7 @@
     
 ### 광고노출제한 IP 수정하기
 #### 코드 예시
-    result = ipExclusion.update(filterIp='111.111.111.113', ipFilterId='6777032', memo='변경 된 메모', format=False)
+    result = ipExclusion.update(filterIp='111.111.111.113', ipFilterId='6777032', memo='변경 된 메모', format=True)
     
     print('customer_id :', result.customerId)
     print('filterIp :', result.filterIp)
