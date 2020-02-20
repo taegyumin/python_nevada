@@ -2,7 +2,6 @@
 
 `ManagedKeyword.py`는 광고 키워드의 상세 정보를 보여줍니다. <br>
 
-
 ### ManagedKeyword 객체 생성하기
 	from nevada.API.ManagedKeyword import *
 	
@@ -16,18 +15,11 @@
 ### 키워드 정보 조회하기
 #### 코드 예시
     keywords = ['스테인레스빨대', '종이빨대']
-
-    result = mk.managed_keyword_list(keywords, json=True)
-    print(result)
-    print()
-
-    result_list = mk.managed_keyword_list(keywords, json=False)
+    result_list = mk.list_by_keywords(keywords, format=True)
     for result in result_list:
         CommonFunctions.print_all_attr(result)
 
 #### 결과 예시
-	[{'keyword': '스테인레스빨대', 'managedKeyword': {'keyword': '스테인레스빨대', 'isAdult': False, 'isRestricted': False, 'isSeason': False, 'isSellProhibit': False, 'isLowSearchVolume': False, 'regTm': '2016-03-07T18:34:30.000Z', 'editTm': '2017-09-19T20:59:03.000Z', 'PCPLMaxDepth': 15}}, {'keyword': '종이빨대', 'managedKeyword': {'keyword': '종이빨대', 'isAdult': False, 'isRestricted': False, 'isSeason': False, 'isSellProhibit': False, 'isLowSearchVolume': False, 'regTm': '2016-03-07T18:34:30.000Z', 'editTm': '2016-11-02T05:51:17.000Z', 'PCPLMaxDepth': 15}}]
-	
 	keyword : 스테인레스빨대
 	managedKeyword : 
 	 L  PCPLMaxDepth : 15

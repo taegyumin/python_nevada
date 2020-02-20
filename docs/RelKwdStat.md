@@ -16,16 +16,11 @@
 
 ### 연관키워드, 월간검색수(PC/모바일), 월평균클릭수(PC/모바일) 등 구하기
 #### 코드 예시
-    result = rel_kwd_stat.get_json(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')
-    print(result, "\n")
-
-    result_list = rel_kwd_stat.get_list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')    
-    for i in result_list:
-        CommonFunctions.print_all_attr(i) # from nevada.Common.Connector import * 를 해줘야 함.
+    result_list = rel_kwd_stat.list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1', format=True)    
+    for result in result_list:
+        CommonFunctions.print_all_attr(result) # from nevada.Common.Connector import * 를 해줘야 함.
 
 #### 결과 예시
-    [{'relKeyword': '스테인레스빨대', 'monthlyPcQcCnt': 550, 'monthlyMobileQcCnt': 2350, 'monthlyAvePcClkCnt': 1.3, 'monthlyAveMobileClkCnt': 0.0, 'monthlyAvePcCtr': 0.25, 'monthlyAveMobileCtr': 0.0, 'plAvgDepth': 15, 'compIdx': '높음'}, {'relKeyword': '스텐빨대', 'monthlyPcQcCnt': 480, 'monthlyMobileQcCnt': 2150, 'monthlyAvePcClkCnt': 2.0, 'monthlyAveMobileClkCnt': 6.0, 'monthlyAvePcCtr': 0.43, 'monthlyAveMobileCtr': 0.29, 'plAvgDepth': 15, 'compIdx': '높음'}, {'relKeyword': '미니화로', 'monthlyPcQcCnt': 8200, 'monthlyMobileQcCnt': 25200, 'monthlyAvePcClkCnt': 55.2, 'monthlyAveMobileClkCnt': 35.3, 'monthlyAvePcCtr': 0.75, 'monthlyAveMobileCtr': 0.15, 'plAvgDepth': 15, 'compIdx': '높음'}...생략]
-    
     relKeyword : 스테인레스빨대
     monthlyPcQcCnt : 660
     monthlyMobileQcCnt : 3040

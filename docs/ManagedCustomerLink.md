@@ -15,7 +15,7 @@
 
 ### Customer 정보 조회하기: Clients
 #### 코드 예시
-    result = mcl.get_managed_customer_link_list(rel_type='MYCLIENTS')
+    result = mcl.list(rel_type='MYCLIENTS', format=True)
     CommonFunctions.print_all_attr(result)
 
 #### 결과 예시
@@ -23,7 +23,7 @@
 	
 ### Customer 정보 조회하기: Managers
 #### 코드 예시
-    result = mcl.get_managed_customer_link_list(rel_type='MYMANAGERS')
+    result = mcl.list(rel_type='MYMANAGERS', format=True)
     CommonFunctions.print_all_attr(result)
 
 #### 결과 예시

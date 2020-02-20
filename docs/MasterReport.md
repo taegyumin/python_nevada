@@ -13,7 +13,6 @@
 	
 	mr = MasterReport(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
 
-
 ### 전체 보고서 조회하기
 #### 코드 예시
     result_list = mr.list(format=True)
@@ -73,7 +72,7 @@
 
 ### 보고서 생성하기
 #### 코드 예시
-    result = mr.create(item='Adgroup', fromTime="2020-01-15")
+    result = mr.create(item='Adgroup', fromTime="2020-01-15", format=True)
     CommonFunctions.print_all_attr(result)
 #### 결과 예시
 	clientCustomerId : 1810030
