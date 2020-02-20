@@ -25,7 +25,7 @@ class RelKwdStat:
     RelKwdStatObjectList = List[RelKwdStatObject]
 
     def list(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
-                              month: int = None, showDetail: str = '1'):
+                              month: int = None, showDetail: str = '1', format=True):
         query = {'siteId': siteId,
                  'biztpId': biztpId,
                  'hintKeywords': hintKeywords,
