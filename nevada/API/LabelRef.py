@@ -30,7 +30,7 @@ class LabelRef:
 
     LabelRefObjectList = List[LabelRefObject]
 
-    def update(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None, format=False) -> LabelRefObjectList:
+    def update(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None, format=True) -> LabelRefObjectList:
         data = jsonpickle.encode(UpdateLabelRefObject(editTm, customerId, enable, nccLabelId, refId, refTp, regTm),
                                  unpicklable=False)
         data = json.loads(data)
