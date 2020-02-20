@@ -108,7 +108,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def list_by_ids(self, ids: BusinessChannelIdList):
+    def list_by_ids(self, ids: BusinessChannelIdList, format=True):
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/channels', query)
@@ -123,7 +123,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def create(self, CreateBusinessChannelObject: CreateBusinessChannelObject) -> BusinessChannelObject:
+    def create(self, CreateBusinessChannelObject: CreateBusinessChannelObject, format=True) -> BusinessChannelObject:
         data = jsonpickle.encode(CreateBusinessChannelObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -137,7 +137,7 @@ class BusinessChannel:
         else:
             print('Please Check the input value of format.')
 
-    def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject) -> BusinessChannelObject:
+    def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject, format=True) -> BusinessChannelObject:
         data = jsonpickle.encode(UpdateBusinessChannelObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
