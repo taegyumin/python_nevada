@@ -43,27 +43,36 @@ class IpExclusion:
             return ip_exclusion_list
         else:
             print('Please Check the input value of format.')
-        return result
 
-    def create(self, filterIp, memo) -> IpExclusionObject:
+    def create(self, filterIp, memo, format=True) -> IpExclusionObject:
         data = jsonpickle.encode(CreateIpExclusionObject(filterIp, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/tool/ip-exclusions', data_str)
-        result = IpExclusionObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = IpExclusionObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-    def update(self, filterIp, ipFilterId, memo) -> IpExclusionObject:
+    def update(self, filterIp, ipFilterId, memo, format=True) -> IpExclusionObject:
         data = jsonpickle.encode(UpdateIpExclusionObject(filterIp, ipFilterId, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/tool/ip-exclusions', data_str)
-        result = IpExclusionObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = IpExclusionObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-    def delete_by_id(self, id: str):
+    def delete(self, id: str):
         result = self.conn.delete('/tool/ip-exclusions/' + id)
         result = IpExclusionObject(result)
         return result

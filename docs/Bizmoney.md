@@ -15,19 +15,9 @@
     
 ### 비즈머니 잔액 조회하기
 #### 코드 예시
-	result = bizmoney.get_biz_money_json()
-	print(result, "\n")
-	
-	result = bizmoney.get_biz_money_list()
-	
-	print('customerId :', result.customerId)
-	print('bizmoney :', result.bizmoney)
-	print('budgetLock :', result.budgetLock)
-	print('refundLock :', result.refundLock)
+	result = bizmoney.get(format=True)
 	
 #### 결과 예시
-	{'customerId': 1810030, 'bizmoney': 1000, 'budgetLock': False, 'refundLock': False}
-	
 	customerId : 1810030
 	bizmoney : 1000
 	budgetLock : False
@@ -35,20 +25,7 @@
 	
 ### 비즈머니 소진 내역 조회하기
 #### 코드 예시
-    result = bizmoney.get_biz_money_cost_json(statDt='20200118') # 'yyyymmdd'
-    print(result)
-
-    result_list = bizmoney.get_biz_money_cost_list(statDt='20191219') #'yyyymmdd'
-    for result in result_list:
-        print(result.adjustedNonRefundableAmt)
-        print(result.adjustedRefundableAmt)
-        print(result.customer_id)
-        print(result.date)
-        print(result.device)
-        print(result.networkType)
-        print(result.nonRefundableAmt)
-        print(result.productCode)
-        print(result.refundableAmt)
+    result = bizmoney.get_cost(statDt='20200118', format=True) # 'yyyymmdd'
         
 #### 결과 예시
 	추가 예정

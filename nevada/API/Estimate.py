@@ -184,7 +184,7 @@ class Estimate:
     #     result = result['estimate']
     #     return result
 
-    def get_performance_bulk(self, type: str, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList, format=False):
+    def get_performance_bulk(self, type: str, GetPerformanceBulkObjectList: GetPerformanceBulkObjectList, format=True):
         data = jsonpickle.encode(GetPerformanceBulkObjectList, unpicklable=False)
         data = json.loads(data)
         #data = CommonFunctions.dropna(data)

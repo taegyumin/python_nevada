@@ -14,15 +14,11 @@
 
 ### 비즈니스 채널 전체 조회하기
 #### 코드 예시
-    result = bc.get_business_channel_all_json()
-    print(result, end='\n\n')
-
-    result_list = bc.get_business_channel_all_list()
+    result_list = bc.get(format=True)
     for result in result_list:
         CommonFunctions.print_all_attr(result) 
        
 #### 결과 예시
-	[{'nccBusinessChannelId': 'bsn-a001-00-000000003298108', 'customerId': 1839303, 'channelTp': 'SITE', 'name': 'nevada', 'channelKey': 'https://github.com/taegyumin/python_nevada', 'businessInfo': {'site': 'https://github.com/taegyumin/python_nevada', 'isNaverPay': 0, 'isMobileNaverPay': 0, 'isStoreFarm': 0, 'isNaverLogin': 0, 'isMobileNaverLogin': 0, 'isNaverTalkTalk': 0, 'isMobileNaverTalkTalk': 0, 'useSaNaScript': 0, 'useNaverPayNaScript': 0, 'useStoreFarmNaScript': 0, 'naAccountId': '', 'naAccountType': 0, 'mobileCertStatus': 20, 'isMedical': 0, 'inspectId': '', 'inspectPw': ''}, 'delFlag': False, 'regTm': '2020-02-08T10:37:41.000Z', 'editTm': '2020-02-15T10:46:36.000Z', 'firstChargeTm': '2020-02-15T11:19:32.000Z', 'inspectTm': '2020-02-10T06:32:01.000Z', 'pcInspectStatus': 'PENDING', 'mobileInspectStatus': 'PENDING', 'status': 'PAUSED', 'statusReason': 'BUSINESS_CHANNEL_DISAPPROVED', 'adultStatus': 'NOT_ADULT_URL', 'enabled': True, 'blackStatus': 'WHITE_URL'}, {'nccBusinessChannelId': 'bsn-a001-00-000000003333742', 'customerId': 1839303, 'channelTp': 'CONTENTS', 'name': 'JunhoSong', 'channelKey': 'https://github.com/6-6ho', 'businessInfo': {'site': 'http://github.com/6-6ho', 'contentsUrl': 'https://github.com/6-6ho', 'contentsChannelType': 'BLOG'}, 'delFlag': False, 'regTm': '2020-02-15T10:42:48.000Z', 'editTm': '2020-02-15T10:45:53.000Z', 'firstChargeTm': '2020-02-15T11:19:32.000Z', 'inspectRequestTm': '2020-02-15T10:42:48.000Z', 'pcInspectStatus': 'UNDER_REVIEW', 'mobileInspectStatus': 'UNDER_REVIEW', 'status': 'PAUSED', 'statusReason': 'BUSINESS_CHANNEL_UNDER_REVIEW', 'adultStatus': 'NOT_ADULT_URL', 'enabled': True, 'blackStatus': 'WHITE_URL'}, {'nccBusinessChannelId': 'bsn-a001-00-000000003333743', 'customerId': 1839303, 'channelTp': 'PHONE', 'name': "Junho's_favorite_food", 'channelKey': '07070170385', 'businessInfo': {'phone': '07070170385', 'primary': None, 'secondary': None, 'countryCallingCode': '+82', 'phoneTp': 'NORMAL', 'mobileCertStatus': None}, 'delFlag': False, 'regTm': '2020-02-15T10:44:22.000Z', 'editTm': '2020-02-15T10:45:24.000Z', 'firstChargeTm': '2020-02-15T11:19:32.000Z', 'inspectTm': '2020-02-15T10:45:24.000Z', 'pcInspectStatus': 'APPROVED', 'mobileInspectStatus': 'APPROVED', 'status': 'ELIGIBLE', 'statusReason': 'ELIGIBLE', 'adultStatus': 'NOT_ADULT_URL', 'enabled': True, 'blackStatus': 'WHITE_URL'}, {'nccBusinessChannelId': 'bsn-a001-00-000000003333745', 'customerId': 1839303, 'channelTp': 'ADDRESS', 'name': '프로젝트얼스', 'channelKey': '서울특별시 성북구 성북로15길 21 (성북동)1층', 'businessInfo': {'roadNameAddress': '서울특별시 성북구 성북로15길 21 (성북동)', 'roadNameExtendAddress': '1층', 'lotNumberAddress': '서울특별시 성북구 성북동 126-31', 'lotNumberExtendAddress': '1층', 'mapZoomLevelV5': 16, 'latitude': 37.592787, 'longitude': 126.9998168, 'zipCode': '136-824', 'mapZoomLevel': 12, 'mobileCertStatus': None}, 'delFlag': False, 'regTm': '2020-02-15T10:45:17.000Z', 'editTm': '2020-02-15T10:45:24.000Z', 'firstChargeTm': '2020-02-15T11:19:32.000Z', 'inspectTm': '2020-02-15T10:45:24.000Z', 'pcInspectStatus': 'APPROVED', 'mobileInspectStatus': 'APPROVED', 'status': 'ELIGIBLE', 'statusReason': 'ELIGIBLE', 'adultStatus': 'NOT_ADULT_URL', 'enabled': True, 'blackStatus': 'WHITE_URL'}]
 
 	adultStatus : NOT_ADULT_URL
 	blackStatus : WHITE_URL
@@ -166,27 +162,18 @@
 
 ### channel Type으로 비즈니스 채널 조회하기
 #### 코드 예시
-    result_list = bc.get_business_channel_by_type_json('SITE')
+    result_list = bc.list_by_channel_type('SITE', format=True)
     for result in result_list:
         print(result['nccBusinessChannelId'])
-
-    print()
-
-    result_list = bc.get_business_channel_by_type_list('SITE')
-    for result in result_list:
-        print(result.nccBusinessChannelId)
         
 #### 결과 예시
-    bsn-a001-00-000000003298108
-
     bsn-a001-00-000000003298108
     
     
 ### ids로 여러 비즈니스 채널 조회하기
 #### 코드 예시
     ids = ['bsn-a001-00-000000003298108','bsn-a001-00-000000003333742']
-    # result_list = bc.get_business_channel_by_ids_json(ids) 도 있음.
-    result_list = bc.get_business_channel_by_ids_list(ids)
+    result_list = bc.list_by_ids(ids, format=True)
     for result in result_list:
         print(result.nccBusinessChannelId,', ',result.name)
         
@@ -194,25 +181,11 @@
     bsn-a001-00-000000003298108 ,  nevada
     bsn-a001-00-000000003333742 ,  JunhoSong
 
-### id로 특정 비즈니스 채널 검색하기
-#### 코드 예시
-	result = bc.get_business_channel_json('bsn-a001-00-000000003298108')
-    print(result)
-    print()
-    
-    result = bc.get_business_channel_list('bsn-a001-00-000000003298108')
-    print(result.nccBusinessChannelId, result.name)
-
-#### 결과 예시
-	{'nccBusinessChannelId': 'bsn-a001-00-000000003298108', 'customerId': 1839303, 'channelTp': 'SITE', 'name': 'nevada', 'channelKey': 'https://github.com/taegyumin/python_nevada', 'businessInfo': {'site': 'https://github.com/taegyumin/python_nevada', 'isNaverPay': 0, 'isMobileNaverPay': 0, 'isStoreFarm': 0, 'isNaverLogin': 0, 'isMobileNaverLogin': 0, 'isNaverTalkTalk': 0, 'isMobileNaverTalkTalk': 0, 'useSaNaScript': 0, 'useNaverPayNaScript': 0, 'useStoreFarmNaScript': 0, 'naAccountId': '', 'naAccountType': 0, 'mobileCertStatus': 20, 'isMedical': 0, 'inspectId': '', 'inspectPw': ''}, 'delFlag': False, 'regTm': '2020-02-08T10:37:41.000Z', 'editTm': '2020-02-15T10:46:36.000Z', 'firstChargeTm': '2020-02-16T05:16:21.000Z', 'inspectTm': '2020-02-10T06:32:01.000Z', 'pcInspectStatus': 'PENDING', 'mobileInspectStatus': 'PENDING', 'status': 'PAUSED', 'statusReason': 'BUSINESS_CHANNEL_DISAPPROVED', 'adultStatus': 'NOT_ADULT_URL', 'enabled': True, 'blackStatus': 'WHITE_URL'}
-	
-    bsn-a001-00-000000003298108 nevada
-    
 ### id로 특정 비즈니스 채널 삭제하기
 #### 코드 예시
-    print(len(bc.get_business_channel_all_json()))
-    bc.delete_business_channel('bsn-a001-00-000000003333742')
-    print(len(bc.get_business_channel_all_json()))
+    print(len(bc.get(format=True)))
+    bc.delete('bsn-a001-00-000000003333742')
+    print(len(bc.get(format=True)))
 
 #### 결과 예시
     4
@@ -221,10 +194,10 @@
     
 ### ids로 여러 비즈니스 채널 삭제하기
 #### 코드 예시
-    print(len(bc.get_business_channel_json()))
+    print(len(bc.get(format=True)))
     ids = ['bsn-a001-00-000000003333743', 'bsn-a001-00-000000003333745']
-    bc.delete_business_channel_by_ids(ids)
-    print(len(bc.get_business_channel_json()))
+    bc.delete_by_ids(ids)
+    print(len(bc.get(format=True)))
     
 #### 결과 예시
     3

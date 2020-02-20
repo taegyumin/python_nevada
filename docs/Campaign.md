@@ -15,7 +15,7 @@
 
 ### nccCampaignId로 캠페인 정보 조회하기
 #### 코드 예시
-	CommonFunctions.print_all_attr(campaign.get_campaign_by_id('cmp-a001-01-000000002696103'))
+	CommonFunctions.print_all_attr(campaign.get('cmp-a001-01-000000002696103', format=True))
 
 #### 결과 예시
 	campaignTp : WEB_SITE
@@ -41,7 +41,7 @@
 	
 ### nccCampaignId의 list로 여러 캠페인 정보 조회하기
 #### 코드 예시
-    result_list = campaign.get_campaign_by_ids(['cmp-a001-01-000000002696103','cmp-a001-03-000000002696246'], json=False)
+    result_list = campaign.list_by_ids(['cmp-a001-01-000000002696103','cmp-a001-03-000000002696246'], format=True)
     for result in result_list:
         CommonFunctions.print_all_attr(result)
       

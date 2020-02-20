@@ -77,7 +77,7 @@ class Bizmoney:
     BizmoneyExhaustObjectList = List[BizmoneyExhaustObject]
     BizmoneyPeriodObjectList = List[BizmoneyPeriodObject]
 
-    def get_biz_money(self, format=True) -> BizmoneyObject:
+    def get(self, format=True) -> BizmoneyObject:
         result = self.conn.get('/billing/bizmoney')
         if format in [False, 'json']:
             return result

@@ -16,15 +16,11 @@
     
 ### 광고노출제한 IP 조회하기
 #### 코드 예시
-	result = ipExclusion.get_ip_exclusion_json()
-    print(result, "\n")
-	    
-	result_list = ipExclusion.get_ip_exclusion_list()
+	result_list = ipExclusion.get(format=True)
 	for i in result_list:
         CommonFunctions.print_all_attr(i) # from nevada.Common.Connector import * 를 해줘야 함.
 	    
-#### 결과 예시
-	[{'ipFilterId': 6777029, 'customerId': 1839303, 'filterIp': '111.111.111.112', 'regTm': 1581829891000, 'memo': '테스트2'}, {'ipFilterId': 6776978, 'customerId': 1839303, 'filterIp': '111.111.111.111', 'regTm': 1581828179000, 'memo': '테스트'}] 
+#### 결과 예시 
 
     customerId : 1839303
     filterIp : 111.111.111.112
@@ -41,7 +37,7 @@
         
 ### 광고노출제한 IP 추가하기
 #### 코드 예시
-    result = ipExclusion.create_ip_exclusion(filterIp='111.111.111.113', memo='추가 된 IP')
+    result = ipExclusion.create(filterIp='111.111.111.113', memo='추가 된 IP', format=False)
     
     print('customer_id :', result.customerId)
     print('filterIp :', result.filterIp)
@@ -58,7 +54,7 @@
     
 ### 광고노출제한 IP 수정하기
 #### 코드 예시
-    result = ipExclusion.update_ip_exclusion(filterIp='111.111.111.113', ipFilterId='6777032', memo='변경 된 메모')
+    result = ipExclusion.update(filterIp='111.111.111.113', ipFilterId='6777032', memo='변경 된 메모', format=False)
     
     print('customer_id :', result.customerId)
     print('filterIp :', result.filterIp)
@@ -76,11 +72,11 @@
 
 ### 광고노출제한 IP 삭제하기
 #### 코드 예시
-    ipExclusion.delete_ip_exclusion(id='6777032')
+    ipExclusion.delete(id='6777032')
 
-    result_list = ipExclusion.get_ip_exclusion_list()
-    for i in result_list:
-        CommonFunctions.print_all_attr(i)  # from nevada.Common.Connector import * 를 해줘야 함.
+	result_list = ipExclusion.get(format=True)
+	for i in result_list:
+        CommonFunctions.print_all_attr(i) # from nevada.Common.Connector import * 를 해줘야 함.
 
 
 #### 결과 예시
@@ -105,10 +101,11 @@ memo가 '변경 된 메모'였던 ip주소가 목록에서 삭제된 것을 확�
 
     id_array = ['6777029', '6776978']
     
-    ipExclusion.delete_ip_exclusion_many(id_array)
+    ipExclusion.delete_by_ids(id_array)
     
-    result = ipExclusion.get_ip_exclusion_json()
-    print(result)
+	result_list = ipExclusion.get(format=True)
+	for i in result_list:
+        CommonFunctions.print_all_attr(i) # from nevada.Common.Connector import * 를 해줘야 함.
 
 #### 결과 예시
 ipFilterId가 6777029인 ip, 6776978인 ip를 각각 삭제하였으므로, <br> 광고노출제한 IP을 다시 조회하면 empty list가 반환된다.

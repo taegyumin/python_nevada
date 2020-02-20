@@ -129,8 +129,13 @@ class BusinessChannel:
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/ncc/channels', data_str)
-        result = BusinessChannelObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object']:
+            result = BusinessChannelObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
     def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(UpdateBusinessChannelObject, unpicklable=False)
@@ -138,10 +143,15 @@ class BusinessChannel:
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/channels', data_str, fields)
-        result = BusinessChannelObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object']:
+            result = BusinessChannelObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-    def delete_by_id(self, businessChannelId: str):
+    def delete(self, businessChannelId: str):
         self.conn.delete('/ncc/channels/' + businessChannelId)
         return True
 

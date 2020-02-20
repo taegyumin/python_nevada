@@ -65,7 +65,7 @@ class Campaign:
     CampaignIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get_by_id(self, campaignId: str, format=True) -> CampaignObject:
+    def get(self, campaignId: str, format=True) -> CampaignObject:
         result = self.conn.get('/ncc/campaigns/' + campaignId)
         if format in [False, 'json']:
             return result
@@ -91,16 +91,20 @@ class Campaign:
             print('Please Check the input value of format.')
 
     def list_by_customer_id_or_campaign_type(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
-                          selector: str = None) -> CampaignList:
+                          selector: str = None, format=True) -> CampaignList:
         query = {'campaignType': campaignType, 'baseSearchId': baseSearchId, 'recordSize': recordSize,
                  'selector': selector}
         result = self.conn.get('/ncc/campaigns', query)
-
-        camp_list = []
-        for arr in result:
-            camp = CampaignObject(arr)
-            camp_list.append(camp)
-        return camp_list
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            camp_list = []
+            for arr in result:
+                camp = CampaignObject(arr)
+                camp_list.append(camp)
+            return camp_list
+        else:
+            print('Please Check the input value of format.')
 
     def create(self, campaign_add_object: CampaignAddObject):
 

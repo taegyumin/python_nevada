@@ -19,16 +19,12 @@
     
 ### average position bid (입찰가 평균) 구하기
 #### 코드 예시
-    result = estimate.get_avg_position_bid_json(type='keyword',device='PC',key_and_position_list=[('종이빨대',15),('스테인레스빨대',3)])
-    print(result, "\n")
-    
-    result_list = estimate.get_avg_position_bid_list(type='keyword',device='PC',key_and_position_list=[('종이빨대',15),('스테인레스빨대',3)])
+    result_list = estimate.get_avg_position_bid(type='keyword',device='PC',key_and_position_list=[('종이빨대',15),('스테인레스빨대',3)], format=True)
     for i in result_list:
         CommonFunctions.print_all_attr(i)  # from nevada.Common.Connector import * 를 해줘야 함.
 
 
 #### 결과 예시
-	[{'bid': 330, 'keyword': '종이빨대', 'position': 15}, {'bid': 310, 'keyword': '스테인레스빨대', 'position': 3}] 
 
     bid : 330
     keyword : 종이빨대
@@ -40,15 +36,11 @@
     
 ### exposure minimum bid (광고 노출을 위한 최소 입찰가) 구하기
 #### 코드 예시
-    result = estimate.get_exposure_mini_bid_json(type='keyword', device='PC', period='DAY', keys=['종이빨대', '스테인레스빨대', '옥수수빨대'])
-    print(result, "\n")
-    
-    result_list = estimate.get_exposure_mini_bid_list(type='keyword', device='PC', period='DAY', keys=['종이빨대', '스테인레스빨대', '옥수수빨대'])
+    result_list = estimate.get_exposure_mini_bid(type='keyword', device='PC', period='DAY', keys=['종이빨대', '스테인레스빨대', '옥수수빨대'], format=True)
     for i in result_list:
         CommonFunctions.print_all_attr(i)  # from nevada.Common.Connector import * 를 해줘야 함.
 		
 #### 결과 예시
-    [{'bid': 370, 'keyword': '종이빨대'}, {'bid': 70, 'keyword': '스테인레스빨대'}, {'bid': 70, 'keyword': '옥수수빨대'}] 
     
     bid : 370
     keyword : 종이빨대
@@ -61,10 +53,7 @@
 
 ### median bid (입찰가 중앙값) 구하기
 #### 코드 예시
-    result = estimate.get_median_bid_json(type='keyword', device='MOBILE', period='MONTH', keys=['종이빨대','스테인레스빨대','옥수수빨대'])
-    print(result, "\n")
-
-    result_list = estimate.get_median_bid_list(type='keyword', device='MOBILE', period='MONTH', keys=['종이빨대','스테인레스빨대','옥수수빨대'])
+    result_list = estimate.get_median_bid(type='keyword', device='MOBILE', period='MONTH', keys=['종이빨대','스테인레스빨대','옥수수빨대'], format=True)
     for i in result_list:
         CommonFunctions.print_all_attr(i)  # from nevada.Common.Connector import * 를 해줘야 함.
     
@@ -83,16 +72,13 @@
     
 ### performance (예상 노출수, 예상 클릭수, 예상 평균클릭비용, 예상 비용) 구하기
 #### 코드 예시
-    result = estimate.get_performance_json(type='keyword', device='BOTH', keywordplus=False, key='종이빨대', bids=[100, 200, 300])
-    print(result, "\n")
     
-    result_list = estimate.get_performance_list(type='keyword', device='BOTH', keywordplus=False, key='종이빨대', bids=[100, 200, 300])
+    result_list = estimate.get_performance(type='keyword', device='BOTH', keywordplus=False, key='종이빨대', bids=[100, 200, 300], format=True)
     for i in result_list:
         print("종이빨대")
         CommonFunctions.print_all_attr(i)  # from nevada.Common.Connector import * 를 해줘야 함.
 
 #### 결과 예시
-	[{'bid': 100, 'clicks': 1, 'impressions': 642, 'cost': 88}, {'bid': 200, 'clicks': 1, 'impressions': 1815, 'cost': 172}, {'bid': 300, 'clicks': 2, 'impressions': 2803, 'cost': 512}] 
 
 	종이빨대
 	bid : 100
