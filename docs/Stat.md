@@ -12,18 +12,20 @@
 	
 	stat = Stat(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
 
-
 ### Id로 특정 보고서 조회하기
 #### 코드 예시
 
 #### 결과 예시
+생략
 
 ### Id의 list로 여러 보고서 조회하기
 #### 코드 예시
 
 #### 결과 예시
+생략
 
 ### 보고서 종류(광고 정보)에 따른 보고서 조회하기
 #### 코드 예시
 
 #### 결과 예시
+생략
