@@ -58,23 +58,40 @@ class Stat:
     StatIdList = List[str]
 
     def get_by_id(self, id: str, fields: str, timeRange: str, dataPreset: str = None, timeIncrement: str = None,
-                       breakdown: str = None) -> StatObject:
+                       breakdown: str = None, format=True) -> StatObject:
         query = {'id': id, 'fields': fields, 'timeRange': timeRange, 'dataPreset': dataPreset,
                  'timeIncrement': timeIncrement, 'breakdown': breakdown}
         result = self.conn.get('/stats', query)
-        result = StatObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = StatObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
+
 
     def get_by_ids(self, ids: StatIdList, fields: str, timeRange: str, dataPreset: str = None,
-                        timeIncrement: str = None, breakdown: str = None) -> StatObject:
+                        timeIncrement: str = None, breakdown: str = None, format=True) -> StatObject:
         query = {'ids': ids, 'fields': fields, 'timeRange': timeRange, 'dataPreset': dataPreset,
                  'timeIncrement': timeIncrement, 'breakdown': breakdown}
         result = self.conn.get('/stats', query)
-        result = StatObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = StatObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
 
-    def get_by_stat_type(self, id: str, statType: str) -> StatTypeObject:
+
+    def get_by_stat_type(self, id: str, statType: str, format=True) -> StatTypeObject:
         query = {'id': id, 'statType': statType}
         result = self.conn.get('/stats', query)
-        result = StatTypeObject(result)
-        return result
+        if format in [False, 'json']:
+            return result
+        elif format in [True, 'object', 'list']:
+            result = StatTypeObject(result)
+            return result
+        else:
+            print('Please Check the input value of format.')
