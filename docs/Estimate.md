@@ -1,5 +1,4 @@
-**# API/Estimate.py
-
+# API/Estimate.py
 `Estimate.py`는 `광고시스템 > 도구 > 키워드 도구 > 월간 예상 실적 보기`의 기능들을 담고 있습니다.
 
 ## Example

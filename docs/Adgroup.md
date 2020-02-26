@@ -1,10 +1,8 @@
 # API/Adgroup.py
-
 `Adgroup.py`는 `광고시스템 > 광고관리 > 광고그룹`의 기능을 담고 있습니다. <br>
 
-
 ### Adgroup 객체 생성하기
-	from nevada.API.ManagedKeyword import *
+	from nevada.API.Adgroup import *
 	
 	base_url = 'https://api.naver.com' #그대로 두세요.
 	api_key = "Naver-search_AD_ACCESS_LICCENSE" #변경하세요.

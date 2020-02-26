@@ -1,5 +1,4 @@
 # API/BusinessChannel.py
-
 `BusinessChannel.py`는 `광고시스템 > 도구 > 비즈채널 관리`의 기능들을 담고 있습니다. <br>
 
 ### BusinessChannel 객체 생성하기

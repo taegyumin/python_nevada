@@ -1,5 +1,4 @@
 # API/Bizmoney.py
-
 `Bizmoney.py`는 `광고시스템 > 비즈머니`의 기능들을 담고 있습니다.
 
 ### Bizmoney 객체 생성하기
@@ -16,6 +15,7 @@
 ### 비즈머니 잔액 조회하기
 #### 코드 예시
 	result = bizmoney.get(format=True)
+	CommonFunctions.get_all_attr(result)
 	
 #### 결과 예시
 	customerId : 1810030
