@@ -10,6 +10,11 @@ from datetime import datetime
 class CommonFunctions:
 
     @staticmethod
+    def error_message(error_code):
+        if error_code=='001':
+            return 'Please Check the input value of format.'
+
+    @staticmethod
     def print_all_attr(obj: object):
         type_list = [type(True), type('str'), type(0), type(None), type({'0':0}), type(0.1), type([])]
 
