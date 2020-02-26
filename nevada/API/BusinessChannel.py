@@ -80,7 +80,7 @@ class BusinessChannel:
             result = BusinessChannelObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list(self, format=True):
         result = self.conn.get('/ncc/channels')
@@ -93,7 +93,7 @@ class BusinessChannel:
                 business_channel_list.append(channel)
             return business_channel_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_channel_type(self, channelTp: str, format=True):
         result = self.conn.get('/ncc/channels', {'channelTp': channelTp})
@@ -106,7 +106,7 @@ class BusinessChannel:
                 business_channel_list.append(channel)
             return business_channel_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_ids(self, ids: BusinessChannelIdList, format=True):
         ids = ",".join(ids)
@@ -121,7 +121,7 @@ class BusinessChannel:
                 business_channel_list.append(channel)
             return business_channel_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, CreateBusinessChannelObject: CreateBusinessChannelObject, format=True) -> BusinessChannelObject:
         data = jsonpickle.encode(CreateBusinessChannelObject, unpicklable=False)
@@ -135,7 +135,7 @@ class BusinessChannel:
             result = BusinessChannelObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject, format=True) -> BusinessChannelObject:
         data = jsonpickle.encode(UpdateBusinessChannelObject, unpicklable=False)
@@ -149,7 +149,7 @@ class BusinessChannel:
             result = BusinessChannelObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete(self, businessChannelId: str):
         self.conn.delete('/ncc/channels/' + businessChannelId)
