@@ -187,7 +187,7 @@ class Adgroup:
             adgroup = AdgroupObject(result)
             return adgroup
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_ids(self, ids: AdgroupIdList, format=True) -> AdgroupList:
         ids = ",".join(ids)
@@ -202,7 +202,7 @@ class Adgroup:
                 adgroup_list.append(camp)
             return adgroup_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_keyword_plus_restricted_keywords(self, adgroupId: str, format=True) -> RestrictedKeywordList:
         query = {'type': 'KEYWORD_PLUS_RESTRICT'}
@@ -216,7 +216,7 @@ class Adgroup:
                 restricted_list.append(restricted_keyword)
             return restricted_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_campaign_id(self, nccCampaignId: str = None, baseSearchId: str = None,
                          recordSize: int = None, selector: str = None, format=True) -> AdgroupList:
@@ -232,7 +232,7 @@ class Adgroup:
                 adgroup_list.append(camp)
             return adgroup_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create_keyword_plus_restricted_keywords(self, adgroupId: str,
                                   restricted_keywords_object: RestrictedKeywordsAddObject, format=True) -> RestrictedKeyword:
@@ -248,7 +248,7 @@ class Adgroup:
             restrict_keyword = RestrictedKeyword(result)
             return restrict_keyword
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, create_adgroup_object: CreateAdgroupObject, format=True):
         data = jsonpickle.encode(create_adgroup_object, unpicklable=False)
@@ -262,7 +262,7 @@ class Adgroup:
             result = AdgroupObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update(self, adgroupId: str, fields: ChangeFieldsList, UpdateAdgroupObject: UpdateAdgroupObject, format=True):
         change_fields_list = ",".join(fields)
@@ -278,7 +278,7 @@ class Adgroup:
             result = AdgroupObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update_by_fields(self, adgroupId: str, UpdateEntireAdgroupObject: UpdateEntireAdgroupObject, format=True):
         data = jsonpickle.encode(UpdateEntireAdgroupObject, unpicklable=False)
@@ -292,7 +292,7 @@ class Adgroup:
             result = AdgroupObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete_keyword_plus_restricted_keywords(self, adgroupId: str, res_keyword_ids: RestrictedKeywordIdList):
         res_keyword_ids = ",".join(res_keyword_ids)
