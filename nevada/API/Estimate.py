@@ -116,7 +116,7 @@ class Estimate:
                 estimate = EstimateAvgObject(arr)
                 estimate_list.append(estimate)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_exposure_minimum_bid(self, type: str, device, period, keys, format=True):
         data = jsonpickle.encode(GetExposureMiniBidObject(device, period, keys), unpicklable=False)
@@ -134,7 +134,7 @@ class Estimate:
                 estimate_list.append(estimate)
             return estimate_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_median_bid(self, type: str, device, period, keys, format=True):
         data = jsonpickle.encode(GetMedianBidObject(device, period, keys), unpicklable=False)
@@ -152,7 +152,7 @@ class Estimate:
                 estimate_list.append(estimate)
             return estimate_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_performance(self, type: str, device, keywordplus, key, bids, format=True):
         data = jsonpickle.encode(GetPerformanceObject(device, keywordplus, key, bids), unpicklable=False)
@@ -171,7 +171,7 @@ class Estimate:
                 estimate_list.append(estimate)
             return estimate_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     # def get_performance_many_json(self, type: str, GetPerformanceObjectList: GetPerformanceObjectList):
     #     data = jsonpickle.encode(GetPerformanceObjectList, unpicklable=False)
@@ -201,4 +201,4 @@ class Estimate:
                 estimate_list.append(estimate)
             return estimate_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
