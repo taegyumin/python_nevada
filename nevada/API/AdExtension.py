@@ -56,7 +56,7 @@ class AdExtension:  # 확장소재
                 adext_list.append(camp)
             return adext_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_ids(self, ids: IdList, format=True) -> AdExtensionObjectList:
         ids = ",".join(ids)
@@ -71,7 +71,7 @@ class AdExtension:  # 확장소재
                 adext_list.append(camp)
             return adext_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get(self, adExtensionId: str, format=True) -> AdExtensionObject:
         result = self.conn.get('/ncc/ad-extensions/' + adExtensionId)
@@ -81,7 +81,7 @@ class AdExtension:  # 확장소재
             result = AdExtensionObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, CreateAdExtensionObject: CreateAdExtensionObject, format=True) -> AdExtensionObject:
         data = jsonpickle.encode(CreateAdExtensionObject, unpicklable=False)
@@ -96,7 +96,7 @@ class AdExtension:  # 확장소재
             result = AdExtensionObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update(self, adExtensionId: str, fields: ChangeFieldsList,
                              UpdateAdExtensionObject: UpdateAdExtensionObject, format=True) -> AdExtensionObject:
@@ -114,7 +114,7 @@ class AdExtension:  # 확장소재
             result = AdExtensionObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete(self, adExtensionId: str):
         self.conn.delete('/ncc/ad-extensions/' + adExtensionId)
