@@ -1,12 +1,11 @@
 # API/Campaign.py
-
 `Campaign.py`는 `광고시스템 > 광고관리 > 캠페인`의 기능을 담고 있습니다. <br>
 
 
 ### Campaign 객체 생성하기
-	from nevada.API.ManagedKeyword import *
+	from nevada.API.Campaign import *
 	
-	base_url = 'https://api.naver.com' #그대로 두세요.
+	base_url = "https://api.naver.com" #그대로 두세요.
 	api_key = "Naver-search_AD_ACCESS_LICCENSE" #변경하세요.
 	secret_key = "Naver-search_AD_SECRET_KEY" #변경하세요.
 	customer_id = "Naver-search_AD_CUSTOMER_ID" #변경하세요.
