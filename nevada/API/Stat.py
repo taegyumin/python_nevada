@@ -68,7 +68,7 @@ class Stat:
             result = StatObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
 
     def get_by_ids(self, ids: StatIdList, fields: str, timeRange: str, dataPreset: str = None,
@@ -82,7 +82,7 @@ class Stat:
             result = StatObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
 
     def get_by_stat_type(self, id: str, statType: str, format=True) -> StatTypeObject:
@@ -94,4 +94,4 @@ class Stat:
             result = StatTypeObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
