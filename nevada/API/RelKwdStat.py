@@ -44,4 +44,4 @@ class RelKwdStat:
                 relstat_list.append(relstat)
             return relstat_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
