@@ -76,7 +76,7 @@ class Ad:
         elif format in [True, 'object']:
             return AdObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_adgroup_id(self, nccAdGroupId: str, format=True) -> AdObjectList:
         result = self.conn.get('/ncc/ads', {'nccAdgroupId': nccAdGroupId})
@@ -89,7 +89,7 @@ class Ad:
                 adobj_list.append(ad_obj)
             return adobj_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list(self, ids: AdIdList, format=True) -> AdObjectList:
         ids = ",".join(ids)
@@ -104,7 +104,7 @@ class Ad:
                 ad_obj_list.append(ad_obj)
             return ad_obj_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, adObject, nccAdgroupId, type, inspectRequestMsg, userLock, format=True) -> AdObject:
         data = jsonpickle.encode(CreateAdObject(adObject, nccAdgroupId, type, inspectRequestMsg, userLock), unpicklable=False)
@@ -118,7 +118,7 @@ class Ad:
         elif format in [True, 'object', 'list']:
             return AdObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update(self, adId: str, fields: ChangeFieldsList, adAttr, inspectRequestMsg, nccAdId, userLock, format=True) -> AdObject:
         change_fields_list = ",".join(fields)
@@ -135,7 +135,7 @@ class Ad:
             result = AdObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete(self, adId: str):
         self.conn.delete('/ncc/ads/' + adId)
@@ -150,4 +150,4 @@ class Ad:
             result = AdObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
