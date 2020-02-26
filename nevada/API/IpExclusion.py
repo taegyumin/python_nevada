@@ -42,7 +42,7 @@ class IpExclusion:
                 ip_exclusion_list.append(ipex)
             return ip_exclusion_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, filterIp, memo, format=True) -> IpExclusionObject:
         data = jsonpickle.encode(CreateIpExclusionObject(filterIp, memo), unpicklable=False)
@@ -56,7 +56,7 @@ class IpExclusion:
             result = IpExclusionObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update(self, filterIp, ipFilterId, memo, format=True) -> IpExclusionObject:
         data = jsonpickle.encode(UpdateIpExclusionObject(filterIp, ipFilterId, memo), unpicklable=False)
@@ -70,7 +70,7 @@ class IpExclusion:
             result = IpExclusionObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete(self, id: str):
         result = self.conn.delete('/tool/ip-exclusions/' + id)
