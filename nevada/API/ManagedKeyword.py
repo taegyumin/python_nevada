@@ -46,4 +46,4 @@ class ManagedKeyword:
                 managedkeyword_list.append(managedkeyword)
             return managedkeyword_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
