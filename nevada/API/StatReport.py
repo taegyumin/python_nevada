@@ -39,7 +39,7 @@ class StatReport:  #대용량 다운로드 보고서
                 stat_list.append(stat)
             return stat_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get(self, reportJobId: str, format=True) -> StatReportObject:
         result = self.conn.get('/stat-reports/' + reportJobId)
@@ -48,7 +48,7 @@ class StatReport:  #대용량 다운로드 보고서
         elif format in [True, 'object', 'list']:
             return StatReportObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, reportTp, statDt, format=True) -> StatReportObject:
         data = jsonpickle.encode(CreateStatReportObject(reportTp, statDt), unpicklable=False)
@@ -61,7 +61,7 @@ class StatReport:  #대용량 다운로드 보고서
         elif format in [True, 'object', 'list']:
             return StatReportObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete_all(self):
         self.conn.delete('/stat-reports/')
