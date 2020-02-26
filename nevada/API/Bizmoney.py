@@ -84,7 +84,7 @@ class Bizmoney:
         elif format in [True, 'object']:
             return BizmoneyObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_cost(self, statDt: str, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyCostObjectList:
         ## 채워야 함
@@ -98,7 +98,7 @@ class Bizmoney:
                 cost_list.append(cost)
             return cost_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_charge(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyChargeObjectList:
         ## 채워야 함
@@ -112,7 +112,7 @@ class Bizmoney:
                 charge_list.append(charge)
             return charge_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_exhaust(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyExhaustObjectList:
         ## 채워야 함
@@ -126,7 +126,7 @@ class Bizmoney:
                 exhaust_list.append(exhaust)
             return exhaust_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
 
     def get_period(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyPeriodObjectList:
@@ -141,4 +141,4 @@ class Bizmoney:
                 period_list.append(period)
             return period_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
