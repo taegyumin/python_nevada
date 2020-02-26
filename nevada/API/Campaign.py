@@ -73,7 +73,7 @@ class Campaign:
             camp = CampaignObject(result)
             return camp
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_ids(self, ids: CampaignIdList, format=True) -> CampaignList:
         ids = ",".join(ids)
@@ -88,7 +88,7 @@ class Campaign:
                 camp_list.append(camp)
             return camp_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_customer_id_or_campaign_type(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
                           selector: str = None, format=True) -> CampaignList:
@@ -104,7 +104,7 @@ class Campaign:
                 camp_list.append(camp)
             return camp_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, campaign_add_object: CampaignAddObject):
 
