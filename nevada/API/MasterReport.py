@@ -41,7 +41,7 @@ class MasterReport: #광고 정보 일괄 다운로드
                 report_list.append(report)
             return report_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get_by_id(self, id:str, format=True) -> MasterReportObject:
         result = self.conn.get('/master-reports/' + id)
@@ -50,7 +50,7 @@ class MasterReport: #광고 정보 일괄 다운로드
         elif format in [True, 'object', 'list']:
             return MasterReportObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, item:str, fromTime:str, format=True) -> MasterReportObject:
         data = jsonpickle.encode(CreateMasterReportObject(item, fromTime), unpicklable=False)
@@ -63,7 +63,7 @@ class MasterReport: #광고 정보 일괄 다운로드
         elif format in [True, 'object', 'list']:
             return MasterReportObject(result)
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete_all(self):
         self.conn.delete('/master-reports')
