@@ -60,7 +60,7 @@ class AdKeyword:
                 adkeyword_list.append(keyword)
             return adkeyword_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_ids(self, ids: AdKeywordIdList, format=True) -> AdKeywordList:
         ids = ",".join(ids)
@@ -75,7 +75,7 @@ class AdKeyword:
                 adkeyword_list.append(keyword)
             return adkeyword_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def list_by_group_id(self, nccAdgroupId: str = None, baseSearchId: str = None,
                                        recordSize: int = None, selector: str = None, format=True) -> AdKeywordList:
@@ -92,7 +92,7 @@ class AdKeyword:
                 adkeyword_list.append(keyword)
             return adkeyword_list
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def get(self, nccKeywordId, format=True) -> AdKeywordObject:
         result = self.conn.get('/ncc/keywords/' + nccKeywordId)
@@ -102,7 +102,7 @@ class AdKeyword:
             result = AdKeywordObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def create(self, nccAdgroupId, CreateAdKeywordObject, format=True) -> AdKeywordObject:
         data = jsonpickle.encode(CreateAdKeywordObject, unpicklable=False)
@@ -117,7 +117,7 @@ class AdKeyword:
             result = AdKeywordObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def update(self, nccKeywordId, fields, UpdateAdKeywordObject, format=True) -> AdKeywordObject:
         data = jsonpickle.encode(UpdateAdKeywordObject, unpicklable=False)
@@ -134,7 +134,7 @@ class AdKeyword:
             result = AdKeywordObject(result)
             return result
         else:
-            print('Please Check the input value of format.')
+            print(CommonFunctions.error_message('001'))
 
     def delete(self, nccKeywordId: str):
         self.conn.delete('/ncc/keywords/' + nccKeywordId)
