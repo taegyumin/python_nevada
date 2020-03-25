@@ -16,29 +16,31 @@ class CommonFunctions:
 
     @staticmethod
     def print_all_attr(obj: object):
-        type_list = [type(True), type('str'), type(0), type(None), type({'0':0}), type(0.1), type([])]
 
-        def print_all_attr_copy(obj: object, temp):
+        def print_all_attr_copy(obj: object, depth):
+
             for key in obj.__dict__.keys():
-                if temp == 1:
-                    print(' L  ', end='')
-                elif temp == 2:
-                    print('     L  ', end='')
-                elif temp == 3:
-                    print('         L  ', end='')
+
+                if depth > 0:
+                    print(tab * (depth - 1) + sub, end='')
 
                 print(key, ': ', end='')
+                attr = obj.__getattribute__(key)
 
-                if type(obj.__getattribute__(key)) in type_list:
-                    print(obj.__getattribute__(key))
+                if type(attr) in type_list:
+                    print(attr)
                 else:
                     print()
-                    temp += 1
-                    print_all_attr_copy(obj.__getattribute__(key), temp)
-                    temp -= 1
+                    depth += 1
+                    print_all_attr_copy(obj.__getattribute__(key), depth)
+                    depth -= 1
+
+        tab = '    '
+        sub = '  L '
+        primitive_values = ('str', 0, 0.0, True, None, {}, [], ())
+        type_list = [type(value) for value in primitive_values]
 
         print_all_attr_copy(obj, 0)
-        print()
 
     @staticmethod
     def dropna(input_dict):
