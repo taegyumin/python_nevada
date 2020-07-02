@@ -28,40 +28,22 @@ class StatReport:  #대용량 다운로드 보고서
 
     StatReportObjectList = List[StatReportObject]
 
-    def list(self, format=True) -> StatReportObjectList:
+    def list(self) -> StatReportObjectList:
         result = self.conn.get('/stat-reports')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            stat_list = []
-            for arr in result:
-                stat = StatReportObject(arr)
-                stat_list.append(stat)
-            return stat_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def get(self, reportJobId: str, format=True) -> StatReportObject:
+    def get(self, reportJobId: str) -> StatReportObject:
         result = self.conn.get('/stat-reports/' + reportJobId)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            return StatReportObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, reportTp, statDt, format=True) -> StatReportObject:
+    def create(self, reportTp, statDt) -> StatReportObject:
         data = jsonpickle.encode(CreateStatReportObject(reportTp, statDt), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/stat-reports', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            return StatReportObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+
+        return result
 
     def delete_all(self):
         self.conn.delete('/stat-reports/')

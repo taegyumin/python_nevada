@@ -30,7 +30,7 @@ class LabelRef:
 
     LabelRefObjectList = List[LabelRefObject]
 
-    def update(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None, format=True) -> LabelRefObjectList:
+    def update(self, customerId, enable, nccLabelId, refId, refTp, editTm=None, regTm=None) -> LabelRefObjectList:
         data = jsonpickle.encode(UpdateLabelRefObject(editTm, customerId, enable, nccLabelId, refId, refTp, regTm),
                                  unpicklable=False)
         data = json.loads(data)
@@ -39,13 +39,4 @@ class LabelRef:
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/label-refs/', data_str)
 
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            labelref_list = []
-            for arr in result:
-                labelref = LabelRefObject(arr)
-                labelref_list.append(labelref)
-            return labelref_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result

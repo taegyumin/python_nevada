@@ -65,46 +65,22 @@ class Campaign:
     CampaignIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get(self, campaignId: str, format=True) -> CampaignObject:
+    def get(self, campaignId: str) -> CampaignObject:
         result = self.conn.get('/ncc/campaigns/' + campaignId)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            camp = CampaignObject(result)
-            return camp
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_by_ids(self, ids: CampaignIdList, format=True) -> CampaignList:
+    def list_by_ids(self, ids: CampaignIdList) -> CampaignList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/campaigns', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            camp_list = []
-            for arr in result:
-                camp = CampaignObject(arr)
-                camp_list.append(camp)
-            return camp_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def list_by_customer_id_or_campaign_type(self, campaignType: str = None, baseSearchId: str = None, recordSize: int = None,
-                          selector: str = None, format=True) -> CampaignList:
+                          selector: str = None) -> CampaignList:
         query = {'campaignType': campaignType, 'baseSearchId': baseSearchId, 'recordSize': recordSize,
                  'selector': selector}
         result = self.conn.get('/ncc/campaigns', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            camp_list = []
-            for arr in result:
-                camp = CampaignObject(arr)
-                camp_list.append(camp)
-            return camp_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def create(self, campaign_add_object: CampaignAddObject):
 

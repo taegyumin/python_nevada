@@ -25,7 +25,7 @@ class RelKwdStat:
     RelKwdStatObjectList = List[RelKwdStatObject]
 
     def list(self, siteId: str = None, biztpId: int = None, hintKeywords: str = None, event: int = None,
-                              month: int = None, showDetail: str = '1', format=True):
+                              month: int = None, showDetail: str = '1'):
         query = {'siteId': siteId,
                  'biztpId': biztpId,
                  'hintKeywords': hintKeywords,
@@ -35,13 +35,5 @@ class RelKwdStat:
                  }
         result = self.conn.get(uri='/keywordstool', query=query)
         result = result['keywordList']
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            relstat_list = []
-            for arr in result:
-                relstat = RelKwdStatObject(arr)
-                relstat_list.append(relstat)
-            return relstat_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
+

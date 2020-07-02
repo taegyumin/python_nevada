@@ -77,68 +77,27 @@ class Bizmoney:
     BizmoneyExhaustObjectList = List[BizmoneyExhaustObject]
     BizmoneyPeriodObjectList = List[BizmoneyPeriodObject]
 
-    def get(self, format=True) -> BizmoneyObject:
+    def get(self) -> BizmoneyObject:
         result = self.conn.get('/billing/bizmoney')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object']:
-            return BizmoneyObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def get_cost(self, statDt: str, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyCostObjectList:
+    def get_cost(self, statDt: str, searchStartDt:str, searchEndDt:str) -> BizmoneyCostObjectList:
         ## 채워야 함
         result = self.conn.get('/billing/bizmoney/cost/' + statDt)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            cost_list = []
-            for arr in result:
-                cost = BizmoneyCostObject(arr)
-                cost_list.append(cost)
-            return cost_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def get_charge(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyChargeObjectList:
+    def get_charge(self, searchStartDt:str, searchEndDt:str) -> BizmoneyChargeObjectList:
         ## 채워야 함
         result = self.conn.get('/billing/bizmoney/histories/charge{?searchStartDt,searchEndDt}')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            charge_list = []
-            for arr in result:
-                charge = BizmoneyChargeObject(arr)
-                charge_list.append(charge)
-            return charge_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def get_exhaust(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyExhaustObjectList:
+    def get_exhaust(self, searchStartDt:str, searchEndDt:str) -> BizmoneyExhaustObjectList:
         ## 채워야 함
         result = self.conn.get('/billing/bizmoney/histories/exhaust{?searchStartDt,searchEndDt}')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            exhaust_list = []
-            for arr in result:
-                exhaust = BizmoneyExhaustObject(arr)
-                exhaust_list.append(exhaust)
-            return exhaust_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
 
-    def get_period(self, searchStartDt:str, searchEndDt:str, format=True) -> BizmoneyPeriodObjectList:
+    def get_period(self, searchStartDt:str, searchEndDt:str) -> BizmoneyPeriodObjectList:
         #채워야 함
         result = self.conn.get('/billing/bizmoney/histories/period{?searchStartDt,searchEndDt}')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            period_list = []
-            for arr in result:
-                period = BizmoneyPeriodObject(arr)
-                period_list.append(period)
-            return period_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
