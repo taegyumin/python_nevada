@@ -10,6 +10,19 @@ from datetime import datetime
 class CommonFunctions:
 
     @staticmethod
+    def json_to_object(json_result, obj):
+
+        if type(json_result) == dict:
+            return obj(json_result)
+
+        else:
+            object_list = []
+            for arr in json_result:
+                json_object = obj(arr)
+                object_list.append(json_object)
+            return object_list
+
+    @staticmethod
     def error_message(error_code):
         if error_code=='001':
             return 'Please Check the input value of format.'
