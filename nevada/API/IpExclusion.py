@@ -31,46 +31,25 @@ class IpExclusion:
 
     ExclusionIdList = List[str]
 
-    def get(self, format=True):
+    def get(self):
         result = self.conn.get('/tool/ip-exclusions')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            ip_exclusion_list = []
-            for arr in result:
-                ipex = IpExclusionObject(arr)
-                ip_exclusion_list.append(ipex)
-            return ip_exclusion_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, filterIp, memo, format=True) -> IpExclusionObject:
+    def create(self, filterIp, memo) -> IpExclusionObject:
         data = jsonpickle.encode(CreateIpExclusionObject(filterIp, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/tool/ip-exclusions', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = IpExclusionObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def update(self, filterIp, ipFilterId, memo, format=True) -> IpExclusionObject:
+    def update(self, filterIp, ipFilterId, memo) -> IpExclusionObject:
         data = jsonpickle.encode(UpdateIpExclusionObject(filterIp, ipFilterId, memo), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/tool/ip-exclusions', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = IpExclusionObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def delete(self, id: str):
         result = self.conn.delete('/tool/ip-exclusions/' + id)

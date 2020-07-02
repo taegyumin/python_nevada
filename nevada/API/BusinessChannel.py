@@ -72,84 +72,39 @@ class BusinessChannel:
     BusinessChannelObjectList = List[BusinessChannelObject]
     BusinessChannelIdList = List[str]
 
-    def get(self, businessChannelId: str, format=True):
+    def get(self, businessChannelId: str):
         result = self.conn.get('/ncc/channels/' + businessChannelId)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object']:
-            result = BusinessChannelObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list(self, format=True):
+    def list(self):
         result = self.conn.get('/ncc/channels')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            business_channel_list = []
-            for arr in result:
-                channel = BusinessChannelObject(arr)
-                business_channel_list.append(channel)
-            return business_channel_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_by_channel_type(self, channelTp: str, format=True):
+    def list_by_channel_type(self, channelTp: str):
         result = self.conn.get('/ncc/channels', {'channelTp': channelTp})
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            business_channel_list = []
-            for arr in result:
-                channel = BusinessChannelObject(arr)
-                business_channel_list.append(channel)
-            return business_channel_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_by_ids(self, ids: BusinessChannelIdList, format=True):
+    def list_by_ids(self, ids: BusinessChannelIdList):
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/channels', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            business_channel_list = []
-            for arr in result:
-                channel = BusinessChannelObject(arr)
-                business_channel_list.append(channel)
-            return business_channel_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, CreateBusinessChannelObject: CreateBusinessChannelObject, format=True) -> BusinessChannelObject:
+    def create(self, CreateBusinessChannelObject: CreateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(CreateBusinessChannelObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/ncc/channels', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object']:
-            result = BusinessChannelObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject, format=True) -> BusinessChannelObject:
+    def update(self, fields, UpdateBusinessChannelObject: UpdateBusinessChannelObject) -> BusinessChannelObject:
         data = jsonpickle.encode(UpdateBusinessChannelObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/channels', data_str, fields)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object']:
-            result = BusinessChannelObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def delete(self, businessChannelId: str):
         self.conn.delete('/ncc/channels/' + businessChannelId)

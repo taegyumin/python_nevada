@@ -179,92 +179,47 @@ class Adgroup:
     RestrictedKeywordIdList = List[str]
     ChangeFieldsList = List[str]
 
-    def get(self, adgroupId: str, format=True) -> AdgroupObject:
+    def get(self, adgroupId: str) -> AdgroupObject:
         result = self.conn.get('/ncc/adgroups/' + adgroupId)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object']:
-            adgroup = AdgroupObject(result)
-            return adgroup
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_by_ids(self, ids: AdgroupIdList, format=True) -> AdgroupList:
+    def list_by_ids(self, ids: AdgroupIdList) -> AdgroupList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/adgroups', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            adgroup_list = []
-            for arr in result:
-                camp = AdgroupObject(arr)
-                adgroup_list.append(camp)
-            return adgroup_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_keyword_plus_restricted_keywords(self, adgroupId: str, format=True) -> RestrictedKeywordList:
+    def list_keyword_plus_restricted_keywords(self, adgroupId: str) -> RestrictedKeywordList:
         query = {'type': 'KEYWORD_PLUS_RESTRICT'}
         result = self.conn.get('/ncc/adgroups/' + adgroupId + "/restricted-keywords", query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            restricted_list = []
-            for arr in result:
-                restricted_keyword = RestrictedKeyword(arr)
-                restricted_list.append(restricted_keyword)
-            return restricted_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def list_by_campaign_id(self, nccCampaignId: str = None, baseSearchId: str = None,
-                         recordSize: int = None, selector: str = None, format=True) -> AdgroupList:
+                         recordSize: int = None, selector: str = None) -> AdgroupList:
         query = {'nccCampaignId': nccCampaignId, 'baseSearchId': baseSearchId,
                  'record_size': recordSize, 'selector': selector}
         result = self.conn.get('/ncc/adgroups', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            adgroup_list = []
-            for arr in result:
-                camp = AdgroupObject(arr)
-                adgroup_list.append(camp)
-            return adgroup_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def create_keyword_plus_restricted_keywords(self, adgroupId: str,
-                                  restricted_keywords_object: RestrictedKeywordsAddObject, format=True) -> RestrictedKeyword:
+                                  restricted_keywords_object: RestrictedKeywordsAddObject) -> RestrictedKeyword:
         data = jsonpickle.encode(restricted_keywords_object, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = [data]
         data_str = json.dumps(data_str);
         result = self.conn.post('/ncc/adgroups/%s/restricted-keywords' % str(adgroupId), data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            restrict_keyword = RestrictedKeyword(result)
-            return restrict_keyword
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, create_adgroup_object: CreateAdgroupObject, format=True):
+    def create(self, create_adgroup_object: CreateAdgroupObject):
         data = jsonpickle.encode(create_adgroup_object, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/ncc/adgroups', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdgroupObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def update(self, adgroupId: str, fields: ChangeFieldsList, UpdateAdgroupObject: UpdateAdgroupObject, format=True):
+    def update(self, adgroupId: str, fields: ChangeFieldsList, UpdateAdgroupObject: UpdateAdgroupObject):
         change_fields_list = ",".join(fields)
         query = {'fields': change_fields_list}
         data = jsonpickle.encode(UpdateAdgroupObject, unpicklable=False)
@@ -272,27 +227,15 @@ class Adgroup:
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/adgroups/' + adgroupId, data_str, query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdgroupObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def update_by_fields(self, adgroupId: str, UpdateEntireAdgroupObject: UpdateEntireAdgroupObject, format=True):
+    def update_by_fields(self, adgroupId: str, UpdateEntireAdgroupObject: UpdateEntireAdgroupObject):
         data = jsonpickle.encode(UpdateEntireAdgroupObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.put('/ncc/adgroups/' + adgroupId, data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdgroupObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def delete_keyword_plus_restricted_keywords(self, adgroupId: str, res_keyword_ids: RestrictedKeywordIdList):
         res_keyword_ids = ",".join(res_keyword_ids)

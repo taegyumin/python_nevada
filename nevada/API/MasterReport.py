@@ -30,40 +30,21 @@ class MasterReport: #광고 정보 일괄 다운로드
 
     MasterReportObjectList = List[MasterReportObject]
 
-    def list(self, format=True) -> MasterReportObjectList:
+    def list(self) -> MasterReportObjectList:
         result = self.conn.get('/master-reports')
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            report_list = []
-            for arr in result:
-                report = MasterReportObject(arr)
-                report_list.append(report)
-            return report_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def get_by_id(self, id:str, format=True) -> MasterReportObject:
+    def get_by_id(self, id:str) -> MasterReportObject:
         result = self.conn.get('/master-reports/' + id)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            return MasterReportObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, item:str, fromTime:str, format=True) -> MasterReportObject:
+    def create(self, item:str, fromTime:str) -> MasterReportObject:
         data = jsonpickle.encode(CreateMasterReportObject(item, fromTime), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = json.dumps(data)
         result = self.conn.post('/master-reports', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            return MasterReportObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def delete_all(self):
         self.conn.delete('/master-reports')

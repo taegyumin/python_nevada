@@ -48,78 +48,39 @@ class AdKeyword:
     AdKeywordList = List[AdKeywordObject]
     AdKeywordIdList = List[str]
 
-    def list_by_label_id(self, nccLabelId: str, format=True) -> AdKeywordList:
+    def list_by_label_id(self, nccLabelId: str) -> AdKeywordList:
         query = {'nccLabelId': nccLabelId}
         result = self.conn.get('/ncc/keywords', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            adkeyword_list = []
-            for arr in result:
-                keyword = AdKeywordObject(arr)
-                adkeyword_list.append(keyword)
-            return adkeyword_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_by_ids(self, ids: AdKeywordIdList, format=True) -> AdKeywordList:
+    def list_by_ids(self, ids: AdKeywordIdList) -> AdKeywordList:
         ids = ",".join(ids)
         query = {'ids': ids}
         result = self.conn.get('/ncc/keywords', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            adkeyword_list = []
-            for arr in result:
-                keyword = AdKeywordObject(arr)
-                adkeyword_list.append(keyword)
-            return adkeyword_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def list_by_group_id(self, nccAdgroupId: str = None, baseSearchId: str = None,
-                                       recordSize: int = None, selector: str = None, format=True) -> AdKeywordList:
+                                       recordSize: int = None, selector: str = None) -> AdKeywordList:
 
         query = {'nccAdgroupId': nccAdgroupId, 'baseSearchId': baseSearchId, 'recordSize': recordSize,
                  'selector': selector}
         result = self.conn.get('/ncc/keywords', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            adkeyword_list = []
-            for arr in result:
-                keyword = AdKeywordObject(arr)
-                adkeyword_list.append(keyword)
-            return adkeyword_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def get(self, nccKeywordId, format=True) -> AdKeywordObject:
+    def get(self, nccKeywordId) -> AdKeywordObject:
         result = self.conn.get('/ncc/keywords/' + nccKeywordId)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdKeywordObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, nccAdgroupId, CreateAdKeywordObject, format=True) -> AdKeywordObject:
+    def create(self, nccAdgroupId, CreateAdKeywordObject) -> AdKeywordObject:
         data = jsonpickle.encode(CreateAdKeywordObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data = [data]
         data_str = json.dumps(data)
         result = self.conn.post('/ncc/keywords', data_str, {'nccAdgroupId': nccAdgroupId})
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdKeywordObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def update(self, nccKeywordId, fields, UpdateAdKeywordObject, format=True) -> AdKeywordObject:
+    def update(self, nccKeywordId, fields, UpdateAdKeywordObject) -> AdKeywordObject:
         data = jsonpickle.encode(UpdateAdKeywordObject, unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
@@ -128,13 +89,7 @@ class AdKeyword:
         query = {'fields': fields}
 
         result = self.conn.put('/ncc/keywords/' + nccKeywordId, data_str, query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdKeywordObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def delete(self, nccKeywordId: str):
         self.conn.delete('/ncc/keywords/' + nccKeywordId)

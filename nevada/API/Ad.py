@@ -69,58 +69,30 @@ class Ad:
     AdObjectList = List[AdObject]
     ChangeFieldsList = List[str]
 
-    def get(self, adId: str, format=True) -> AdObject:
+    def get(self, adId: str) -> AdObject:
         result = self.conn.get('/ncc/ads/' + adId)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object']:
-            return AdObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list_by_adgroup_id(self, nccAdGroupId: str, format=True) -> AdObjectList:
+    def list_by_adgroup_id(self, nccAdGroupId: str) -> AdObjectList:
         result = self.conn.get('/ncc/ads', {'nccAdgroupId': nccAdGroupId})
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            adobj_list = []
-            for arr in result:
-                ad_obj = AdObject(arr)
-                adobj_list.append(ad_obj)
-            return adobj_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def list(self, ids: AdIdList, format=True) -> AdObjectList:
+    def list(self, ids: AdIdList) -> AdObjectList:
         ids = ",".join(ids)
         ids = {'ids': ids}
         result = self.conn.get('/ncc/ads', ids)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            ad_obj_list = []
-            for arr in result:
-                ad_obj = AdObject(arr)
-                ad_obj_list.append(ad_obj)
-            return ad_obj_list
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def create(self, adObject, nccAdgroupId, type, inspectRequestMsg, userLock, format=True) -> AdObject:
+    def create(self, adObject, nccAdgroupId, type, inspectRequestMsg, userLock) -> AdObject:
         data = jsonpickle.encode(CreateAdObject(adObject, nccAdgroupId, type, inspectRequestMsg, userLock), unpicklable=False)
         data = json.loads(data)
         data = CommonFunctions.dropna(data)
         data_str = data
         data_str = json.dumps(data_str)
         result = self.conn.post('/ncc/ads', data_str)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            return AdObject(result)
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
-    def update(self, adId: str, fields: ChangeFieldsList, adAttr, inspectRequestMsg, nccAdId, userLock, format=True) -> AdObject:
+    def update(self, adId: str, fields: ChangeFieldsList, adAttr, inspectRequestMsg, nccAdId, userLock) -> AdObject:
         change_fields_list = ",".join(fields)
         query = {'fields': change_fields_list}
         data = jsonpickle.encode(UpdateAdObject(adAttr=adAttr, inspectRequestMsg=inspectRequestMsg, nccAdId=nccAdId, userLock=userLock), unpicklable=False)
@@ -129,25 +101,13 @@ class Ad:
         data_str = data
         data_str = json.dumps(data_str)
         result = self.conn.put('/ncc/ads/' + adId, data_str, query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
     def delete(self, adId: str):
         self.conn.delete('/ncc/ads/' + adId)
         return True
 
-    def copy(self, adId: str, targetAdGroupId: str, userLock: bool, format=True) -> AdObject:
+    def copy(self, adId: str, targetAdGroupId: str, userLock: bool) -> AdObject:
         query = {'ids': adId, 'targetAdgroupId': targetAdGroupId, 'userLock': userLock}
         result = self.conn.put('/ncc/ads', None, query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = AdObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result

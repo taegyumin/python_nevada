@@ -58,40 +58,22 @@ class Stat:
     StatIdList = List[str]
 
     def get_by_id(self, id: str, fields: str, timeRange: str, dataPreset: str = None, timeIncrement: str = None,
-                       breakdown: str = None, format=True) -> StatObject:
+                       breakdown: str = None) -> StatObject:
         query = {'id': id, 'fields': fields, 'timeRange': timeRange, 'dataPreset': dataPreset,
                  'timeIncrement': timeIncrement, 'breakdown': breakdown}
         result = self.conn.get('/stats', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = StatObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
 
     def get_by_ids(self, ids: StatIdList, fields: str, timeRange: str, dataPreset: str = None,
-                        timeIncrement: str = None, breakdown: str = None, format=True) -> StatObject:
+                        timeIncrement: str = None, breakdown: str = None) -> StatObject:
         query = {'ids': ids, 'fields': fields, 'timeRange': timeRange, 'dataPreset': dataPreset,
                  'timeIncrement': timeIncrement, 'breakdown': breakdown}
         result = self.conn.get('/stats', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = StatObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
 
 
-    def get_by_stat_type(self, id: str, statType: str, format=True) -> StatTypeObject:
+    def get_by_stat_type(self, id: str, statType: str) -> StatTypeObject:
         query = {'id': id, 'statType': statType}
         result = self.conn.get('/stats', query)
-        if format in [False, 'json']:
-            return result
-        elif format in [True, 'object', 'list']:
-            result = StatTypeObject(result)
-            return result
-        else:
-            print(CommonFunctions.error_message('001'))
+        return result
