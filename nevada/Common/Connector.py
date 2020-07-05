@@ -54,6 +54,7 @@ class CommonFunctions:
         type_list = [type(value) for value in primitive_values]
 
         print_all_attr_copy(obj, 0)
+        print()
 
     @staticmethod
     def dropna(input_dict):
