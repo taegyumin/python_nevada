@@ -74,7 +74,10 @@ class EstimatePerformanceObject:
         self.clicks = None if 'clicks' not in s else s['clicks']
         self.cost = None if 'cost' not in s else s['cost']
         self.impressions = None if 'impressions' not in s else s['impressions']
-        self.cost_per_click = int(self.cost / self.clicks)
+        try:
+            self.cost_per_click = int(self.cost / self.clicks)
+        except ZeroDivisionError:
+            self.cost_per_click = -1
 
 class EstimatePerformanceBulkObject:
     def __init__(self, device, keywordplus, keyword, bid, clicks, impressions, cost):
@@ -85,7 +88,10 @@ class EstimatePerformanceBulkObject:
         self.clicks = clicks
         self.impressions = impressions
         self.cost = cost
-        self.cost_per_click = int(self.cost / self.clicks)
+        try:
+            self.cost_per_click = int(self.cost / self.clicks)
+        except ZeroDivisionError:
+            self.cost_per_click = -1
 
 class Estimate:
     def __init__(self, base_url: str, api_key: str, secret_key: str, customer_id: int):
