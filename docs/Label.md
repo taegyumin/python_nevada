@@ -62,3 +62,4 @@
 #### 변수 설명
     color : 즐겨찾기의 색, customer_id : 고객 ID, name : 즐겨찾기의 이름
     nccLabelId : 즐겨찾기의 ID, regTm : 즐겨찾기가 생성 된 시간, editTm : 즐겨찾기가 수정 된 시간
+    

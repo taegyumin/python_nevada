@@ -45,3 +45,4 @@
 	 L  isSellProhibit : False
 	 L  keyword : 종이빨대
 	 L  regTm : 2016-03-07T18:34:30.000Z
+	 

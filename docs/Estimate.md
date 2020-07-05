@@ -108,3 +108,4 @@
     clicks : 예상 클릭수
     cost : 예상 비용
     cost_per_click: 예상 평균클릭비용 (만약 click이 0이라면 -1을 반환합니다)
+    
