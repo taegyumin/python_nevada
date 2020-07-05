@@ -14,9 +14,10 @@
 ### 키워드 정보 조회하기
 #### 코드 예시
     keywords = ['스테인레스빨대', '종이빨대']
-    result_list = mk.list_by_keywords(keywords, format=True)
-    for result in result_list:
-        CommonFunctions.print_all_attr(result)
+    result_json = mk.list_by_keywords(keywords)
+    result_obj = CommonFunctions.json_to_object(result_json, ManagedKeywordObject)
+    for i in result_obj:
+        CommonFunctions.print_all_attr(i)
 
 #### 결과 예시
 	keyword : 스테인레스빨대

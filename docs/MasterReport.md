@@ -14,9 +14,11 @@
 
 ### 전체 보고서 조회하기
 #### 코드 예시
-    result_list = mr.list(format=True)
-    for result in result_list:
-        CommonFunctions.print_all_attr(result)
+    result_json = mr.list()
+    result_obj = CommonFunctions.json_to_object(result_json, MasterReportObject)
+    for i in result_obj:
+        CommonFunctions.print_all_attr(i)
+    
 #### 결과 예시
 	clientCustomerId : 1810030
 	downloadUrl : https://api.naver.com/report-download?authtoken=%2BqBt0DaxMbSCE70atv7huhbX7uVKpcq7YouDZyoGTR1bBZpsHVKhw9sEb8vHbg%2Bu4c%2F6s1ccsBJzoNijefHAxHEW6jv1WoYUqY9ZuXlvZ5k%3D
@@ -71,8 +73,10 @@
 
 ### 보고서 생성하기
 #### 코드 예시
-    result = mr.create(item='Adgroup', fromTime="2020-01-15", format=True)
-    CommonFunctions.print_all_attr(result)
+    result_json = mr.create(item='Adgroup', fromTime="2020-01-15")
+    result_obj = CommonFunctions.json_to_object(result_json, MasterReportObject)
+    CommonFunctions.print_all_attr(result_obj)
+
 #### 결과 예시
 	clientCustomerId : 1810030
 	downloadUrl : 

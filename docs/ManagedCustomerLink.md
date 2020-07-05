@@ -14,16 +14,20 @@
 
 ### Customer 정보 조회하기: Clients
 #### 코드 예시
-    result = mcl.list(rel_type='MYCLIENTS', format=True)
-    CommonFunctions.print_all_attr(result)
+    result_json = mcl.list(rel_type='MYCLIENTS')
+    result_obj = CommonFunctions.json_to_object(result_json, ManagedCustomerLinkObject)
+    for i in result_obj:
+        CommonFunctions.print_all_attr(result_obj)
 
 #### 결과 예시
 	생략
 	
 ### Customer 정보 조회하기: Managers
 #### 코드 예시
-    result = mcl.list(rel_type='MYMANAGERS', format=True)
-    CommonFunctions.print_all_attr(result)
+    result_json = mcl.list(rel_type='MYMANAGERS')
+    result_obj = CommonFunctions.json_to_object(result_json, ManagedCustomerLinkObject)
+    for i in result_obj:
+        CommonFunctions.print_all_attr(result_obj)
 
 #### 결과 예시
 	생략

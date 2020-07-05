@@ -13,7 +13,8 @@
 
 ### nccAdId로 소재 정보 조회하기
 #### 코드 예시
-    CommonFunctions.print_all_attr(ad.get('nad-a001-03-000000086038948', format=True))
+    result_obj = CommonFunctions.json_to_object(ad.get('nad-a001-03-000000086038948'), AdObject)
+    CommonFunctions.print_all_attr(result_obj) // ?
 
 #### 결과 예시
 	ad : 
@@ -39,9 +40,10 @@
 
 ### nccAdGroupId으로 해당 Adgroup에 속한 소재 정보 조회하기
 #### 코드 예시
-    result_list = ad.list_by_adgroup_id(nccAdGroupId='grp-a001-01-000000014208744',format=True)
-    for result in result_list:
-        CommonFunctions.print_all_attr(result)
+    result_json = ad.list_by_adgroup_id(nccAdGroupId='grp-a001-01-000000014208744')
+    result_obj = CommonFunctions.json_to_object(result_json, AdObject)
+    for i in result_obj:
+        CommonFunctions.print_all_attr(i) // ?
 
 #### 결과 예시
 	ad : 
@@ -66,9 +68,10 @@
 	
 ### nccAdId의 list로 여러 소재 정보 조회하기
 #### 코드 예시
-    result_list = ad.list(['nad-a001-01-000000086037429','nad-a001-03-000000086038948'], format=True)
-    for result in result_list:
-        CommonFunctions.print_all_attr(result)
+    result_json = ad.list(['nad-a001-01-000000086037429', 'nad-a001-03-000000086038948'])
+    result_obj = CommonFunctions.json_to_object(result_json, AdObject)
+    for i in result_obj:
+        CommonFunctions.print_all_attr(i) // ?
        
 #### 결과 예시
 	ad : 

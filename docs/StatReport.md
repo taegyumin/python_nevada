@@ -15,11 +15,14 @@
 
 ### 보고서 생성하기
 #### 코드 예시
-    result = sr.create(reportTp='AD',statDt='2020-01-23T02:00:00Z', format=True)
-    CommonFunctions.print_all_attr(result)
-
-    sr.create(reportTp='AD', statDt='20200123', format=True)
-    CommonFunctions.print_all_attr(result)
+    result_json = sr.create(reportTp='AD',statDt='2020-01-23T02:00:00Z')
+    result_obj = CommonFunctions.json_to_object(result_json, StatReportObject)
+    CommonFunctions.print_all_attr(result_obj)
+    
+    result_json = sr.create(reportTp='AD', statDt='20200123')
+    result_obj = CommonFunctions.json_to_object(result_json, StatReportObject)
+    CommonFunctions.print_all_attr(result_obj)
+    
 #### 결과 예시
 	downloadUrl : 
 	loginId : mtg0821:naver
@@ -42,9 +45,12 @@
 
 ### 전체 보고서 조회하기
 #### 코드 예시
-    result_list = sr.list(format=True)
-    for result in result_list:
-        CommonFunctions.print_all_attr(result)
+    result_json = sr.list()
+    result_obj = CommonFunctions.json_to_object(result_json, StatReportObject)
+    
+    for i in result_obj:
+        CommonFunctions.print_all_attr(i)
+        
 #### 결과 예시
 	downloadUrl : 
 	loginId : mtg0821:naver
@@ -67,8 +73,10 @@
 
 ### 특정 Id에 대한 보고서 조회하기
 #### 코드 예시
-    result = sr.get(reportJobId='803874623', format=True)
-    CommonFunctions.print_all_attr(result)
+    result_json = sr.get(reportJobId='803874623')
+    result_obj = CommonFunctions.json_to_object(result_json, StatReportObject)
+    CommonFunctions.print_all_attr(result_obj) // ?
+
 #### 결과 예시
 	downloadUrl : 
 	loginId : mtg0821:naver
