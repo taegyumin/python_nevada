@@ -11,7 +11,7 @@
 	customer_id = "Naver-search_AD_CUSTOMER_ID" #변경하세요.
 	
 	relKwdStat = RelKwdStat(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
-x
+
 ### 연관키워드, 월간검색수(PC/모바일), 월평균클릭수(PC/모바일) 등 구하기
 #### 코드 예시
     result_json = rel_kwd_stat.list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')
