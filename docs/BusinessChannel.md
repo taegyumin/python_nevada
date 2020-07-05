@@ -125,9 +125,9 @@
 
 ### id로 특정 비즈니스 채널 삭제하기
 #### 코드 예시
-    print(len(bc.get()))
+    print(len(bc.list()))
     bc.delete('bsn-a001-00-000000003333742')
-    print(len(bc.get())) // ?
+    print(len(bc.list())) // ?
 
 #### 결과 예시
     4
@@ -136,10 +136,10 @@
     
 ### ids로 여러 비즈니스 채널 삭제하기
 #### 코드 예시
-    print(len(bc.get()))
+    print(len(bc.list()))
     ids = ['bsn-a001-00-000000003333743', 'bsn-a001-00-000000003333745']
     bc.delete_by_ids(ids)
-    print(len(bc.get()))  // ?
+    print(len(bc.list()))  // ?
     
 #### 결과 예시
     3
