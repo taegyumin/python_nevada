@@ -44,3 +44,4 @@ editTm과 regTm은 input값으로 주지 않아도 무방하다. <br>
 	refId : nad-a001-01-000000086037429
 	refTp : AD
 	enable : False
+	

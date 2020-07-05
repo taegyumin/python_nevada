@@ -129,3 +129,4 @@ ipFilterId가 6777029인 ip, 6776978인 ip를 각각 삭제하였으므로, <br>
     memo : IP에 대한 메모 
     regTm : 등록 된 시간,
     userId : 사용자 ID
+    
