@@ -11,12 +11,14 @@
 	customer_id = "Naver-search_AD_CUSTOMER_ID" #변경하세요.
 	
 	relKwdStat = RelKwdStat(base_url=base_url, api_key=api_key, secret_key=secret_key, customer_id=customer_id)
-
+x
 ### 연관키워드, 월간검색수(PC/모바일), 월평균클릭수(PC/모바일) 등 구하기
 #### 코드 예시
-    result_list = rel_kwd_stat.list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1', format=True)    
-    for result in result_list:
-        CommonFunctions.print_all_attr(result) # from nevada.Common.Connector import * 를 해줘야 함.
+    result_json = rel_kwd_stat.list(siteId=None, biztpId=None, hintKeywords='스테인레스빨대', event=None, month=None, showDetail='1')
+    result_obj = CommonFunctions.json_to_object(result_json, RelKwdStatObject)
+    
+    for i in result_obj:
+        CommonFunctions.print_all_attr(i)
 
 #### 결과 예시
     relKeyword : 스테인레스빨대

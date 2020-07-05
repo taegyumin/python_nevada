@@ -18,8 +18,9 @@
 **enable을 True로 설정하면 '추가하기'가 되고, False로 설정하면 삭제하기'가 된다.** <br>
 editTm과 regTm은 input값으로 주지 않아도 무방하다. <br>
 
-    result = lr.update(editTm='2020-02-10T03:14:52.000Z', customerId=1810030, enable=True, nccLabelId='lbl-a001-00-000000000106050',refId='nad-a001-01-000000086037429', refTp='AD', regTm='2020-02-10T02:48:38.000Z', format=True)
-    for i in result:
+    result_json = lr.update(editTm='2020-02-10T03:14:52.000Z', customerId=1810030, enable=True, nccLabelId='lbl-a001-00-000000000106050',refId='nad-a001-01-000000086037429', refTp='AD', regTm='2020-02-10T02:48:38.000Z')
+    result_obj = CommonFunctions.json_to_object(result_json, LabelRefObject)
+    for i in result_obj:
         CommonFunctions.print_all_attr(i)
 
 #### 결과 예시
@@ -31,8 +32,9 @@ editTm과 regTm은 input값으로 주지 않아도 무방하다. <br>
 	
 ### 광고그룹, 소재, 키워드, 확장 소재 등을 즐겨찾기 목록에서 삭제하기
 #### 코드 예시
-    result = lr.update(editTm='2020-02-10T03:14:52.000Z', customerId=1810030, enable=False, nccLabelId='lbl-a001-00-000000000106050',refId='nad-a001-01-000000086037429', refTp='AD', regTm='2020-02-10T02:48:38.000Z', format=True)
-    for i in result:
+    result_json = lr.update(editTm='2020-02-10T03:14:52.000Z', customerId=1810030, enable=True, nccLabelId='lbl-a001-00-000000000106050',refId='nad-a001-01-000000086037429', refTp='AD', regTm='2020-02-10T02:48:38.000Z')
+    result_obj = CommonFunctions.json_to_object(result_json, LabelRefObject)
+    for i in result_obj:
         CommonFunctions.print_all_attr(i)
 
 

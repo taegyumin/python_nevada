@@ -14,21 +14,17 @@
     
 ### 비즈머니 잔액 조회하기
 #### 코드 예시
-	result = bizmoney.get(format=True)
-	CommonFunctions.get_all_attr(result)
+	result = bizmoney.get()
+    result_obj = CommonFunctions.json_to_object(result, BizmoneyObject)
+
+    CommonFunctions.print_all_attr(result_obj)
 	
 #### 결과 예시
-	customerId : 1810030
 	bizmoney : 1000
-	budgetLock : False
-	refundLock : False
+    budgetLock : False
+    customerId : 1839303
+    refundLock : False
 	
-### 비즈머니 소진 내역 조회하기
-#### 코드 예시
-    result = bizmoney.get_cost(statDt='20200118', format=True) # 'yyyymmdd'
-        
-#### 결과 예시
-	추가 예정
 
 #### 변수 설명
     customerId : 고객의 고유 ID, bizmoney : 가지고 있는 비즈머니 잔액
