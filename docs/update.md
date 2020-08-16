@@ -49,3 +49,7 @@
 - Connector.print_all_attr() 객체 간 구분을 쉽게 하기 위해 함수 수정
 - CommonFunctions와 API에 맞게 docs 수정
 
+## Thank you
+
+- python nevada는 더 이상 업데이트되지 않습니다.
+- Python nevada can no longer be updated.
